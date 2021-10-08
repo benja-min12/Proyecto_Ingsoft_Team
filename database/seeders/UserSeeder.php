@@ -18,9 +18,18 @@ class UserSeeder extends Seeder
             'name' => 'Pablo Herrera (Admin)',
             'rut' => '204149763',
             'status' => 1,
-            'tipo_usuario' => 1,
+            'tipo_usuario' => 'Administrador',
             'email'=> 'admin@admin.com',
             'password' => bcrypt('admin')
+        ]);
+
+        User::create([
+            'name' => 'Alvaro Castillo (Alumno)',
+            'rut' => '189725965',
+            'status' => 0,
+            'tipo_usuario' => 'Alumno',
+            'email'=> 'alumno@alumno.com',
+            'password' => bcrypt('alumno')
         ]);
     }
 }
