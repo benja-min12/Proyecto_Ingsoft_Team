@@ -67,6 +67,7 @@
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
                                     </form>
+                                    <a href="{{ route('cambiarContrasenia') }}" class="dropdown-item" > Cambiar Contraseña</a>
                                 </div>
                             </li>
                         @endguest
