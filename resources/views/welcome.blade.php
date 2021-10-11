@@ -2,7 +2,7 @@
 
 @section('content')
 
-<body class="container-fluid" style="height: 100%; background-color:#005783">
+<body class="container-fluid" style="height: 100%; background-color:white">
     <div class="row">
         <div class="col-12">
             <div class="Bienvenida text-center mt-5" style="color:#ffff" >

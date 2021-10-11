@@ -9,7 +9,10 @@
                 <i class="fas fa-chalkboard-teacher"></i>
             </div>
             <div class="col-lg-12 login-title">
-                CREAR CARRERA
+                <h2 class="text-center mb-4">
+                    <font face="Comic Sans MS">Crear Carreras</font>
+                </h2>
+
             </div>
 
             <div class="col-lg-12 login-form">
@@ -17,7 +20,7 @@
                     <form id="formulario" method="POST" action="{{ route('carrera.store') }}">
                         @csrf
                         <div class="form-group">
-                            <label class="form-control-label">CÓDIGO</label>
+                            <label class="form-control-label mb-4">CÓDIGO</label>
                             <input id="codigo" type="text" class="form-control @error('codigo') is-invalid @enderror"
                                 name="codigo" value="{{ old('codigo') }}" required autocomplete="codigo" autofocus>
 
@@ -28,10 +31,9 @@
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label class="form-control-label">NOMBRE</label>
+                            <label class="form-control-label mb-4">NOMBRE</label>
                             <input id="nombre" type="text" class="form-control @error('nombre') is-invalid @enderror"
                                 name="nombre" value="{{ old('nombre') }}" required autocomplete="nombre" autofocus>
-
                             @error('nombre')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -51,10 +53,10 @@
         </div>
     </div>
 
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11">
+    <script>
         const button = document.getElementById('boton');
         const form = document.getElementById('formulario')
-        button.addEventListener('click', function(e)){
+        button.addEventListener('click', function(e){
             e.preventDefault();
             Swal.fire({
                 title: 'Confirme para crear la carrera',
@@ -66,17 +68,14 @@
                 confirmButtonText: 'Si, Confirmo'
             }).then((result) => {
                 if (result.isConfirmed) {
-                 Swal.fire(
-                 'Carrera creada'
-                else => {
-                  Swal.fire(
-                    'carrera no creada'
-                  )
-                }
-
+                Swal.fire(
+                    'Carrera creada'
                 )
-            }
+                form.submit();
+                }else{
+
+                }
             })
-        }
+        })
     </script>
 @endsection

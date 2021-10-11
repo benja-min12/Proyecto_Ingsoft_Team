@@ -16,11 +16,11 @@ class CarreraController extends Controller
     public function index(Request $request)
     {
         if ($request->search == null) {
-            $carreras = carrera::simplePaginate(5);
+            $carreras = Carrera::simplePaginate(7);
             return view('carrera.index')->with('carreras',$carreras);
         }else {
-            $carreras = carrera::where('codigo', $request->search)->simplePaginate(1);
-            return view('carrera.index')->with('carreras',$carreras);
+            $carreras = Carrera::where('codigo', $request->search)->simplePaginate(1);
+            return view('carrera.index');
         }
     }
 
@@ -74,6 +74,7 @@ class CarreraController extends Controller
      */
     public function edit(Carrera $carrera)
     {
+        dd($carrera);
         return view('carrera.edit')->with('carrera',$carrera);
     }
 

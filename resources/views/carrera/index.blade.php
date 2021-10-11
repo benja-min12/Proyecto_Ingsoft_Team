@@ -6,18 +6,18 @@
     <div class="row mb-3">
         <div class="col col-2">
             <form method="GET" action="{{ route('carrera.index') }}">
-                <input type="text" name="search" id="search" placeholder="Buscar por codigo">
-                <button class="btn btn-success">buscar</button>
+                <input class="mb-2" type="text" name="search" id="search" placeholder="Buscar por codigo">
+                <button class="btn btn-outline-primary mb-2">Buscar</button>
             </form>
         </div>
         <div class="col col-8">
-            <p class="text-center" style="font-size: x-large">Gestión de carreras</p>
+            <h1 class="text-center" style="font-size: x-large">Gestión de carreras</h1>
         </div>
         <div class="col col-2">
-            <a class="btn btn-success btn-block" href="carrera/create"> <i class="fas fa-plus"></i> Carrera</a>
+            <a class="btn btn-outline-primary" href="carrera/create"> Carrera +</a>
         </div>
     </div>
-    <table class="table table-dark">
+    <table class="table table-striped">
         <thead>
             <tr>
                 <th style="width: 10%" scope="col">Código</th>
@@ -28,9 +28,9 @@
         <tbody>
             @foreach ($carreras as $carrera)
             <tr>
-                <th scope="row">{{$carrera->codigo}}</th>
-                <td>{{$carrera->nombre}}</td>
-                
+                <td scope="row">{{$carrera->codigo}}</td>
+                <td style="font-size: 20px">{{$carrera->nombre}}</td>
+                <td><a class="btn btn-outline-secondary" href="{{ route('carrera.edit') }}">Editar</a></td>
             </tr>
             @endforeach
         </tbody>
