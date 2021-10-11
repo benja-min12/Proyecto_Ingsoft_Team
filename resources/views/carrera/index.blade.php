@@ -30,7 +30,7 @@
             <tr>
                 <td scope="row">{{$carrera->codigo}}</td>
                 <td style="font-size: 20px">{{$carrera->nombre}}</td>
-                <td><a class="btn btn-outline-secondary" href="{{ route('carrera.edit') }}">Editar</a></td>
+                <td><a class="btn btn-outline-secondary" href="{{ route('carrera.edit',$carrera) }}">Editar</a></td>
             </tr>
             @endforeach
         </tbody>
