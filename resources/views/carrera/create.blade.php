@@ -68,9 +68,6 @@
                 confirmButtonText: 'Si, Confirmo'
             }).then((result) => {
                 if (result.isConfirmed) {
-                Swal.fire(
-                    'Carrera creada'
-                )
                 form.submit();
                 }else{
 

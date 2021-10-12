@@ -68,7 +68,7 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         dd($data);
-        if($data['status'] == 'on'){
+        if ($data['status'] == 'on') {
             return User::create([
                 'name' => $data['name'],
                 'email' => $data['email'],
@@ -77,7 +77,7 @@ class RegisterController extends Controller
                 'status' => 1
 
             ]);
-        }else{
+        } else {
             return User::create([
                 'name' => $data['name'],
                 'email' => $data['email'],
@@ -87,6 +87,5 @@ class RegisterController extends Controller
 
             ]);
         }
-
     }
 }

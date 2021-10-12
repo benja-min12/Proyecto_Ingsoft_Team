@@ -15,10 +15,7 @@
                             <label for="email" class="col-md-4 col-form-label text-md-right">RUT: </label>
 
                             <div class="col-md-6">
-
                                 <input id="rut" type="text" readonly class="form-control" name="rut" value="{{ $user->rut }}" required autofocus>
-
-
                             </div>
                         </div>
 

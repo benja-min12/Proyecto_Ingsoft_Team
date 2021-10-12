@@ -50,7 +50,6 @@
                             @endif
                         @else
                             <li class="nav-item dropdown">
-                                <a href="/carrera" class="btn btn-info btn-block">IR</a>
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}
                                 </a>
@@ -65,6 +64,7 @@
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
                                     </form>
+
                                 <a href="{{ route('cambiarContrasenia') }}" class="dropdown-item" > Cambiar Contraseña</a>
                                 </div>
                             </li>

@@ -1,7 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
-
+@if (session('success'))
+    <script>
+        Swal.fire(
+            '{{ session('success') }}'
+        )
+    </script>
+@endif
 <div class="container">
     <div class="row mb-3">
         <div class="col col-2">
