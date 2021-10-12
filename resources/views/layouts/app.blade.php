@@ -19,13 +19,14 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/Estilos.css') }}" rel="stylesheet">
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-dark bg-primary">
+        <nav class="navbar navbar-expand-lg navbar-light bg-primary">
             <div class="container text-center">
                 <img class="img-fluid mr-5" src="http://www.ucn.cl/wp-content/uploads/2018/05/Escudo-UCN-Full-Color.png"
-                    style="width: 6%;" alt="">
+                    style="width: 6%;" alt="insignia">
                 <a class="navbar-brand"  href="{{ url('/home') }}">
                     {{__('Gestión de Solicitudes') }}
                 </a>

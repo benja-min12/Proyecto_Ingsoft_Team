@@ -21,7 +21,7 @@ class CheckUser
             Auth::logout();
             $request->session()->invalidate();
             $request->session()->regenerateToken();
-            return redirect()->route('login')->with('error', 'Usted no está autorizado para acceder al sistema. Contacte al administrador');
+            return redirect()->route('login')->with('error', 'Usted no está autorizado para acceder al sistema.');
         }
         return $next($request);
     }

@@ -3,39 +3,51 @@
 @section('content')
 
 @if (request()->session()->get('password') == 'updated')
-    <div class="container">
-        <div class="alert alert-success d-flex align-items-center" role="alert">
-            <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
-        <div>
-            Contraseña actualizada con exito
-    </div>
-</div>
-    </div>
+    <script>
+        Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'Contraseña actualizada con exito',
+        showConfirmButton: false,
+        timer: 1500
+        })
+    </script>
 @endif
-
+@if (Auth::user()->tipo_usuario == "Administrador")
+    <header class=" text-center mb-5 mt-5">
+        <h1>
+            <font face="Comic Sans MS">Bienvenido {{Auth::user()->name }}</font>
+        </h1>
+    </header>
+@endif
 <div class="container">
     <div class="row justify-content-center">
         @if (Auth::user()->tipo_usuario == "Administrador")
-        <div class="card-deck">
-            <div class="card">
+        <div class="card-deck mt-5">
+            <div class="card border-primary" style="max-width: 600px">
                 <i class="fas fa-users fa-10x text-center"></i>
                 <div class="card-body">
-                    <h5 class="card-title text-center">Administrar usuarios</h5>
-                    <img src="" alt="">
-                    <small class="text-muted">Permite o crear/editar/deshabilitar usuarios del sistema.</small>
+                    <h4 class="card-title text-center">Administrar usuarios</h4>
+                    <div class="text-center">
+                        <img class="img-fluid" style="height: 200px" src="{{asset('images/Usuarios.png')}}" alt="Usuarios">
+                    </div>
+                    <p class="text-muted">Permite o crear/editar/deshabilitar usuarios del sistema.</p>
                 </div>
                 <div class="card-footer">
-                    <a href="/usuario" class="btn btn-info btn-block">IR</a>
+                    <a href="/usuario" class="btn btn-block btn-outline-primary">IR</a>
                 </div>
             </div>
-            <div class="card">
+            <div class="card border-primary">
                 <i class="fas fa-graduation-cap fa-10x text-center"></i>
                 <div class="card-body">
-                    <h5 class="card-title text-center">Administrar Carreras</h5>
-                    <small class="text-muted">Permite crear y/o editar carreras en el sistema.</small>
+                    <h4 class="card-title text-center">Administrar Carreras</h4>
+                    <div class="text-center">
+                        <img style="height: 200px" src="{{asset('images/Carreras.png')}}" alt="Carreras">
+                    </div>
+                    <p class="text-muted">Permite crear y/o editar carreras en el sistema.</p>
                 </div>
                 <div class="card-footer">
-                    <a href="/carrera" class="btn btn-info btn-block">IR</a>
+                    <a href="/carrera" class="btn btn-block btn-outline-primary">IR</a>
                 </div>
             </div>
         </div>

@@ -3,13 +3,17 @@
 @section('content')
 @if (session('success'))
     <script>
-        Swal.fire(
-            '{{ session('success') }}'
-        )
+        Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: '{{ session('success') }}',
+        showConfirmButton: false,
+        timer: 1500
+        })
     </script>
 @endif
 <div class="container">
-    <div class="row mb-3">
+    <div class="row mb-4">
         <div class="col col-2">
             <form method="GET" action="{{ route('carrera.index') }}">
                 <input class="mb-2" type="text" name="search" id="search" placeholder="Buscar por codigo">
@@ -23,7 +27,7 @@
             <a class="btn btn-outline-primary" href="carrera/create"> Carrera +</a>
         </div>
     </div>
-    <table class="table table-striped">
+    <table class=" table table-primary table-striped table-bordered border-primary ">
         <thead>
             <tr>
                 <th style="width: 10%" scope="col">Código</th>
@@ -34,8 +38,8 @@
         <tbody>
             @foreach ($carreras as $carrera)
             <tr>
-                <td scope="row">{{$carrera->codigo}}</td>
-                <td style="font-size: 20px">{{$carrera->nombre}}</td>
+                <td  scope="row">{{$carrera->codigo}}</td>
+                <td  style="font-size: 20px">{{$carrera->nombre}}</td>
                 <td><a class="btn btn-outline-secondary" href="{{ route('carrera.edit',$carrera) }}">Editar</a></td>
             </tr>
             @endforeach

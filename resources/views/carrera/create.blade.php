@@ -14,44 +14,51 @@
                 </h2>
 
             </div>
-
-            <div class="col-lg-12 login-form">
+            <div >
                 <div class="col-lg-12 login-form">
-                    <form id="formulario" method="POST" action="{{ route('carrera.store') }}">
-                        @csrf
-                        <div class="form-group">
-                            <label class="form-control-label mb-4">CÓDIGO</label>
-                            <input id="codigo" type="text" class="form-control @error('codigo') is-invalid @enderror"
-                                name="codigo" value="{{ old('codigo') }}" required autocomplete="codigo" autofocus>
+                    <div class="col-lg-12 login-form ">
+                        <div class="card border-primary">
+                            <div class="card-body">
+                                <form id="formulario" method="POST" action="{{ route('carrera.store') }}">
+                                    @csrf
+                                    <div class="form-group">
+                                        <label class="form-control-label mb-4">CÓDIGO</label>
+                                        <input id="codigo" type="text" class="form-control @error('codigo') is-invalid @enderror"
+                                            name="codigo" value="{{ old('codigo') }}" required autocomplete="codigo" autofocus>
 
-                            @error('codigo')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
-                        </div>
-                        <div class="form-group">
-                            <label class="form-control-label mb-4">NOMBRE</label>
-                            <input id="nombre" type="text" class="form-control @error('nombre') is-invalid @enderror"
-                                name="nombre" value="{{ old('nombre') }}" required autocomplete="nombre" autofocus>
-                            @error('nombre')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
-                        </div>
+                                        @error('codigo')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-control-label mb-4">NOMBRE</label>
+                                        <input id="nombre" type="text" class="form-control @error('nombre') is-invalid @enderror"
+                                            name="nombre" value="{{ old('nombre') }}" required autocomplete="nombre" autofocus>
+                                        @error('nombre')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
+                                    </div>
 
-                        <div class="col-lg-12 py-3">
-                            <div class="col-lg-12 text-center">
-                                <button id="boton" class="btn btn-outline-primary">{{ __('Agregar') }}</button>
+                                    <div class="col-lg-12 py-3">
+                                        <div class="col-lg-12 text-center">
+                                            <button id="boton" class="btn btn-outline-primary">{{ __('Agregar') }}</button>
+                                        </div>
+                                    </div>
+                                </form>
                             </div>
                         </div>
-                    </form>
-                </div>
+                        <div class="col-lg-3 col-md-2"></div>
+                    </div>
             </div>
-            <div class="col-lg-3 col-md-2"></div>
         </div>
     </div>
+            </div>
+
+
 
     <script>
         const button = document.getElementById('boton');
@@ -63,14 +70,12 @@
                 text: "No podra eliminar la carrera ",
                 icon: 'warning',
                 showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: 'Cancelar',
+                confirmButtonColor: '#64FF00',
+                cancelButtonColor: 'CE2424',
                 confirmButtonText: 'Si, Confirmo'
             }).then((result) => {
                 if (result.isConfirmed) {
                 form.submit();
-                }else{
-
                 }
             })
         })

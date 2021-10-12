@@ -60,13 +60,18 @@
                                     {{ __('Login') }}
                                 </button>
 
-                                
+
                             </div>
                         </div>
                     </form>
                     @if (session('error'))
                     <script>
-                        Swal.fire('{{session('error')}}')
+                        Swal.fire({
+                        icon: 'error',
+                        title: '{{session('error')}}',
+                        text: 'contacte con el administrador',
+                        confirmButtonColor: '#CE2424',
+                        })
                     </script>
                     @endif
                 </div>
