@@ -23,10 +23,10 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-lg navbar-light bg-primary">
-            <div class="container text-center">
-                <img class="img-fluid mr-5" src="http://www.ucn.cl/wp-content/uploads/2018/05/Escudo-UCN-Full-Color.png"
-                    style="width: 6%;" alt="insignia">
+        <nav class="navbar navbar-expand-lg navbar-light" style="background-color:#7E9BC0 ">
+            <div class="container">
+                <img class="img-fluid mr-5" src="http://www.ucn.cl/wp-content/uploads/2016/03/Isologo-UCN-2018.png"
+                    style="width: 25%;" alt="insignia">
                 <a class="navbar-brand"  href="{{ url('/home') }}">
                     {{__('Gestión de Solicitudes') }}
                 </a>

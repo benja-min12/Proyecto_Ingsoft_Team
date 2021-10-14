@@ -70,8 +70,8 @@
                 text: "No podra eliminar la carrera ",
                 icon: 'warning',
                 showCancelButton: true,
-                confirmButtonColor: '#64FF00',
-                cancelButtonColor: 'CE2424',
+                confirmButtonColor: '#48A24C',
+                cancelButtonColor: '#C4312C',
                 confirmButtonText: 'Si, Confirmo'
             }).then((result) => {
                 if (result.isConfirmed) {
