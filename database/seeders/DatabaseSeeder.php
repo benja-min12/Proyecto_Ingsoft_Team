@@ -29,5 +29,13 @@ class DatabaseSeeder extends Seeder
             'email'=> 'alumno@alumno.com',
             'password' => bcrypt('alumno')
         ]);
+        \App\Models\User::create([
+            'name' => 'Benjamin Millas (Alumno)',
+            'rut' => '234567890',
+            'status' => 1,
+            'tipo_usuario' => 'Jefe Carrera',
+            'email'=> 'JefeCarrera@gmail.com',
+            'password' => bcrypt('Jefecarrera')
+        ]);
     }
 }

@@ -10,7 +10,7 @@
             </div>
             <div class="col-lg-12 login-title">
                 <h2 class="text-center mb-4">
-                    <font face="Comic Sans MS">Crear Carreras</font>
+                    Crear Carreras
                 </h2>
 
             </div>

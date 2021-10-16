@@ -13,13 +13,14 @@
         })
     </script>
 @endif
-@if (Auth::user()->tipo_usuario == "Administrador")
+
     <header class=" text-center mb-5 mt-5">
         <h1>
-            <font face="Comic Sans MS">Bienvenido {{Auth::user()->name }}</font>
+            Bienvenido {{Auth::user()->name }}
         </h1>
     </header>
-@endif
+
+
 <div class="container">
     <div class="row justify-content-center">
         @if (Auth::user()->tipo_usuario == "Administrador")
@@ -53,7 +54,7 @@
         </div>
         @elseif (Auth::user()->tipo_usuario == "Jefe Carrera")
         <div class="card-deck">
-            <div class="card">
+            <div class="card border-primary">
                 <i class="fas fa-users fa-10x text-center"></i>
                 <div class="card-body">
                     <h5 class="card-title text-center">Carga masiva de estudiantes</h5>
@@ -63,7 +64,7 @@
                     <a href="" class="btn btn-info btn-block">IR</a>
                 </div>
             </div>
-            <div class="card">
+            <div class="card border-primary">
                 <i class="fas fa-search fa-10x text-center"></i>
                 <div class="card-body">
                     <h5 class="card-title text-center">Buscar estudiante</h5>
@@ -73,7 +74,7 @@
                     <a href="" class="btn btn-info btn-block">IR</a>
                 </div>
             </div>
-            <div class="card">
+            <div class="card border-primary">
                 <i class="fas fa-check-double fa-10x text-center"></i>
                 <div class="card-body">
                     <h5 class="card-title text-center">Resolver solicitudes</h5>
@@ -84,7 +85,7 @@
                 </div>
             </div>
 
-            <div class="card">
+            <div class="card border-primary">
                 <i class="fas fa-info fa-10x text-center"></i>
                 <div class="card-body">
                     <h5 class="card-title text-center">Estadísticas del sistema</h5>
@@ -111,5 +112,6 @@
         @endif
     </div>
 </div>
+
 @endsection
 

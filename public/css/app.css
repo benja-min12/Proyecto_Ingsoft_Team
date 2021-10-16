@@ -77,11 +77,13 @@ hr {
 h1, h2, h3, h4, h5, h6 {
   margin-top: 0;
   margin-bottom: 0.5rem;
+  font-family:Myriad Pro Semibold ;
 }
 
 p {
   margin-top: 0;
   margin-bottom: 1rem;
+  font-family: Source Sans;
 }
 
 abbr[title],
@@ -157,6 +159,8 @@ a {
   color: #3490dc;
   text-decoration: none;
   background-color: transparent;
+
+
 }
 a:hover {
   color: #1d68a7;
@@ -221,6 +225,7 @@ th {
 label {
   display: inline-block;
   margin-bottom: 0.5rem;
+  font-family:Source Sans Pro regular 400 ;
 }
 
 button {
@@ -2678,6 +2683,7 @@ fieldset:disabled a.btn {
 .btn-outline-primary {
   color: #90B8E4;
   border-color: #90B8E4;
+  font-family: Source Sans Pro regular 400;
 }
 .btn-outline-primary:hover {
   color: #fff;
@@ -9868,6 +9874,7 @@ a.text-dark:hover, a.text-dark:focus {
 
 .text-muted {
   color: #6c757d !important;
+  font-family: Source Sans Pro Extra-light 200;
 }
 
 .text-black-50 {
@@ -9979,6 +9986,7 @@ h3 {
   .table td,
 .table th {
     background-color: #fff !important;
+    font-family: Source Sans Pro Light 300
   }
 
   .table-bordered th,
