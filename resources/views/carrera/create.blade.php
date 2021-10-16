@@ -9,7 +9,7 @@
                 <i class="fas fa-chalkboard-teacher"></i>
             </div>
             <div class="col-lg-12 login-title">
-                <h2 class="text-center mb-4">
+                <h2 class="text-center mb-5">
                     Crear Carreras
                 </h2>
 
@@ -45,7 +45,7 @@
 
                                     <div class="col-lg-12 py-3">
                                         <div class="col-lg-12 text-center">
-                                            <button id="boton" class="btn btn-outline-primary">{{ __('Agregar') }}</button>
+                                            <button id="boton" class="btn btn-outline-secondary">{{ __('Agregar') }}</button>
                                         </div>
                                     </div>
                                 </form>

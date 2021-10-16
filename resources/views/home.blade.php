@@ -35,7 +35,7 @@
                     <p class="text-muted">Permite o crear/editar/deshabilitar usuarios del sistema.</p>
                 </div>
                 <div class="card-footer">
-                    <a href="/usuario" class="btn btn-block btn-outline-primary">IR</a>
+                    <a href="/usuario" class="btn btn-block btn-outline-secondary">IR</a>
                 </div>
             </div>
             <div class="card border-primary">
@@ -48,7 +48,7 @@
                     <p class="text-muted">Permite crear y/o editar carreras en el sistema.</p>
                 </div>
                 <div class="card-footer">
-                    <a href="/carrera" class="btn btn-block btn-outline-primary">IR</a>
+                    <a href="/carrera" class="btn btn-block btn-outline-secondary">IR</a>
                 </div>
             </div>
         </div>
@@ -61,7 +61,7 @@
                     <small class="text-muted">Permite realizar una carga masiva de estudiantes al sistema.</small>
                 </div>
                 <div class="card-footer">
-                    <a href="" class="btn btn-info btn-block">IR</a>
+                    <a href="" class="btn btn-block btn-outline-secondary">IR</a>
                 </div>
             </div>
             <div class="card border-primary">
@@ -71,7 +71,7 @@
                     <small class="text-muted">Permite buscar un estudiante mediante su RUT.</small>
                 </div>
                 <div class="card-footer">
-                    <a href="" class="btn btn-info btn-block">IR</a>
+                    <a href="" class="btn btn-block btn-outline-secondary">IR</a>
                 </div>
             </div>
             <div class="card border-primary">
@@ -81,7 +81,7 @@
                     <small class="text-muted">Permite visualizar todas las solicitudes recibidas con estado "Pendiente".</small>
                 </div>
                 <div class="card-footer">
-                    <a href="" class="btn btn-info btn-block">IR</a>
+                    <a href="" class="btn btn-block btn-outline-secondary">IR</a>
                 </div>
             </div>
 
@@ -92,20 +92,20 @@
                     <small class="text-muted">Permite visualizar mediante gráficos las distintas solicitudes del sistema.</small>
                 </div>
                 <div class="card-footer">
-                    <a href="" class="btn btn-info btn-block">IR</a>
+                    <a href="" class="btn btn-block btn-outline-secondary">IR</a>
                 </div>
             </div>
         </div>
         @elseif (Auth::user()->tipo_usuario == "Alumno")
         <div class="card-deck">
-            <div class="card">
+            <div class="card border-primary">
                 <i class="fas fa-tasks fa-10x text-center"></i>
                 <div class="card-body">
                     <h5 class="card-title text-center">Gestión de solicitudes</h5>
                     <small class="text-muted">Permite o crear/editar o anular solicitudes especiales.</small>
                 </div>
                 <div class="card-footer">
-                    <a href="" class="btn btn-info btn-block">IR</a>
+                    <a href="" class="btn btn-block btn-outline-secondary">IR</a>
                 </div>
             </div>
         </div>

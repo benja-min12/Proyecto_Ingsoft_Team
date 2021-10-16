@@ -9,10 +9,11 @@
             <div class="col-lg-12 login-key">
                 <i class="fas fa-chalkboard-teacher"></i>
             </div>
+            <div class="text-center mb-5">
+                <h2>EDITAR CARRERA</h2>
+            </div>
             <div class="card border-primary">
-                <div class="card-header">
-                    EDITAR CARRERA
-                </div>
+
                 <div class="card-body">
                     <div class="col-lg-12 login-form">
                         <div class="col-lg-12 login-form">
@@ -35,7 +36,7 @@
                                 </div>
                                 <div class="col-lg-12 py-3">
                                     <div class="col-lg-12 text-center">
-                                        <button type="submit" class="btn btn-outline-primary">{{ __('Editar') }}</button>
+                                        <button type="submit" class="btn btn-outline-secondary">{{ __('Editar') }}</button>
                                     </div>
                                 </div>
                             </form>

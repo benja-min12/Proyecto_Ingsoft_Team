@@ -21,7 +21,7 @@
             </form>
         </div>
         <div class="col col-8">
-            <h1 class="text-center" style="font-size: x-large">Gestión de carreras</h1>
+            <h1 class="text-center">Gestión de carreras</h1>
         </div>
         <div class="col col-2">
             <a class="btn btn-outline-secondary" href="carrera/create"> Agregar Carrera</a>

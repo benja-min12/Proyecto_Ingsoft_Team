@@ -7,8 +7,11 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
+            <div class="text-center mb-5">
+                <h2>{{ __('Login') }}</h2>
+            </div>
             <div class="card border-primary">
-                <div class="card-header">{{ __('Login') }}</div>
+
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('login') }}">
@@ -56,7 +59,7 @@
 
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-outline-primary mb-4">
+                                <button type="submit" class="btn btn-outline-secondary mb-4">
                                     {{ __('Login') }}
                                 </button>
 

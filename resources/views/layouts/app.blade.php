@@ -25,7 +25,7 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-lg navbar-light" style="background-color:#90B8E4">
+        <nav class="navbar navbar-expand-lg navbar-light" style="background-color:#23415b">
             <div class="container">
                 <img class="img-fluid mr-5" src="http://www.ucn.cl/wp-content/uploads/2016/03/Isologo-UCN-2018-Blanco.png"
                     style="width: 25%;" alt="insignia">
