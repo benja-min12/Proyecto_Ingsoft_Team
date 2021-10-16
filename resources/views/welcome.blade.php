@@ -16,7 +16,7 @@
                 <div class="card text-center" style="height: 480px">
                     <div class="card-header" style="height: 100px">
                         <h5 class="mt-3">
-                            <font face="Comic Sans MS">Sistema desarrollado para la gestión de solicitudes especiales relacionadas con: asignaturas, la carrera y otros trámites adicionales.</font>
+                            <font face="MyriadPro">Sistema desarrollado para la gestión de solicitudes especiales relacionadas con: asignaturas, la carrera y otros trámites adicionales.</font>
                         </h5>
                     </div>
                     <div class="card-body">
