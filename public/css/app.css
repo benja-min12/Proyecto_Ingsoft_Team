@@ -1,5 +1,4 @@
 @import url(https://fonts.googleapis.com/css?family=Nunito);
-@charset "UTF-8";
 /*!
  * Bootstrap v4.6.0 (https://getbootstrap.com/)
  * Copyright 2011-2021 The Bootstrap Authors
@@ -20,7 +19,7 @@
   --white: #fff;
   --gray: #6c757d;
   --gray-dark: #343a40;
-  --primary: #3490dc;
+  --primary: #90B8E4;
   --secondary: #6c757d;
   --success: #38c172;
   --info: #6cb2eb;
@@ -78,11 +77,13 @@ hr {
 h1, h2, h3, h4, h5, h6 {
   margin-top: 0;
   margin-bottom: 0.5rem;
+  font-family:Myriad Pro Semibold ;
 }
 
 p {
   margin-top: 0;
   margin-bottom: 1rem;
+  font-family: Source Sans;
 }
 
 abbr[title],
@@ -158,6 +159,8 @@ a {
   color: #3490dc;
   text-decoration: none;
   background-color: transparent;
+
+
 }
 a:hover {
   color: #1d68a7;
@@ -222,6 +225,7 @@ th {
 label {
   display: inline-block;
   margin-bottom: 0.5rem;
+  font-family:Source Sans Pro regular 400 ;
 }
 
 button {
@@ -1711,11 +1715,11 @@ pre code {
 }
 
 .table-hover .table-primary:hover {
-  background-color: #b0d4f1;
+  background-color: #95c5ed;
 }
 .table-hover .table-primary:hover > td,
 .table-hover .table-primary:hover > th {
-  background-color: #b0d4f1;
+  background-color: #95c5ed;
 }
 
 .table-secondary,
@@ -2677,50 +2681,51 @@ fieldset:disabled a.btn {
 }
 
 .btn-outline-primary {
-  color: #3490dc;
-  border-color: #3490dc;
+  color: #90B8E4;
+  border-color: #90B8E4;
+  font-family: Source Sans Pro regular 400;
 }
 .btn-outline-primary:hover {
   color: #fff;
-  background-color: #3490dc;
-  border-color: #3490dc;
+  background-color: #90B8E4;
+  border-color: #90B8E4;
 }
 .btn-outline-primary:focus, .btn-outline-primary.focus {
   box-shadow: 0 0 0 0.2rem rgba(52, 144, 220, 0.5);
 }
 .btn-outline-primary.disabled, .btn-outline-primary:disabled {
-  color: #3490dc;
+  color: #90B8E4;
   background-color: transparent;
 }
 .btn-outline-primary:not(:disabled):not(.disabled):active, .btn-outline-primary:not(:disabled):not(.disabled).active, .show > .btn-outline-primary.dropdown-toggle {
   color: #fff;
-  background-color: #3490dc;
-  border-color: #3490dc;
+  background-color: #90B8E4;
+  border-color: #90B8E4;
 }
 .btn-outline-primary:not(:disabled):not(.disabled):active:focus, .btn-outline-primary:not(:disabled):not(.disabled).active:focus, .show > .btn-outline-primary.dropdown-toggle:focus {
   box-shadow: 0 0 0 0.2rem rgba(52, 144, 220, 0.5);
 }
 
 .btn-outline-secondary {
-  color: #6c757d;
-  border-color: #6c757d;
+  color: #ECAB3B;
+  border-color: #ECAB3B;
 }
 .btn-outline-secondary:hover {
   color: #fff;
-  background-color: #6c757d;
-  border-color: #6c757d;
+  background-color: #ECAB3B;
+  border-color: #ECAB3B;
 }
 .btn-outline-secondary:focus, .btn-outline-secondary.focus {
   box-shadow: 0 0 0 0.2rem rgba(108, 117, 125, 0.5);
 }
 .btn-outline-secondary.disabled, .btn-outline-secondary:disabled {
-  color: #6c757d;
+  color: #ECAB3B;
   background-color: transparent;
 }
 .btn-outline-secondary:not(:disabled):not(.disabled):active, .btn-outline-secondary:not(:disabled):not(.disabled).active, .show > .btn-outline-secondary.dropdown-toggle {
   color: #fff;
-  background-color: #6c757d;
-  border-color: #6c757d;
+  background-color: #ECAB3B;
+  border-color: #ECAB3B;
 }
 .btn-outline-secondary:not(:disabled):not(.disabled):active:focus, .btn-outline-secondary:not(:disabled):not(.disabled).active:focus, .show > .btn-outline-secondary.dropdown-toggle:focus {
   box-shadow: 0 0 0 0.2rem rgba(108, 117, 125, 0.5);
@@ -6229,11 +6234,11 @@ button.bg-dark:focus {
 }
 
 .border-primary {
-  border-color: #3490dc !important;
+  border-color: #90B8E4 !important;
 }
 
 .border-secondary {
-  border-color: #6c757d !important;
+  border-color: #ECAB3B !important;
 }
 
 .border-success {
@@ -9869,6 +9874,7 @@ a.text-dark:hover, a.text-dark:focus {
 
 .text-muted {
   color: #6c757d !important;
+  font-family: Source Sans Pro Extra-light 200;
 }
 
 .text-black-50 {
@@ -9980,6 +9986,7 @@ h3 {
   .table td,
 .table th {
     background-color: #fff !important;
+    font-family: Source Sans Pro Light 300
   }
 
   .table-bordered th,

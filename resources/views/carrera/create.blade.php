@@ -10,7 +10,7 @@
             </div>
             <div class="col-lg-12 login-title">
                 <h2 class="text-center mb-4">
-                    <font face="Comic Sans MS">Crear Carreras</font>
+                    Crear Carreras
                 </h2>
 
             </div>
@@ -70,8 +70,8 @@
                 text: "No podra eliminar la carrera ",
                 icon: 'warning',
                 showCancelButton: true,
-                confirmButtonColor: '#64FF00',
-                cancelButtonColor: 'CE2424',
+                confirmButtonColor: '#48A24C',
+                cancelButtonColor: '#C4312C',
                 confirmButtonText: 'Si, Confirmo'
             }).then((result) => {
                 if (result.isConfirmed) {

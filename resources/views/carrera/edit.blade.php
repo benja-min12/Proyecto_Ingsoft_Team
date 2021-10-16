@@ -9,7 +9,7 @@
             <div class="col-lg-12 login-key">
                 <i class="fas fa-chalkboard-teacher"></i>
             </div>
-            <div class="card border-secondary">
+            <div class="card border-primary">
                 <div class="card-header">
                     EDITAR CARRERA
                 </div>

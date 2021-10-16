@@ -16,21 +16,24 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-
+    <link rel="stylesheet" href="https://fonts.adobe.com/fonts/myriad#fonts-section">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700;1,900&display=swap" rel="stylesheet">
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/Estilos.css') }}" rel="stylesheet">
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-lg navbar-light bg-primary">
-            <div class="container text-center">
-                <img class="img-fluid mr-5" src="http://www.ucn.cl/wp-content/uploads/2018/05/Escudo-UCN-Full-Color.png"
-                    style="width: 6%;" alt="insignia">
-                <a class="navbar-brand"  href="{{ url('/home') }}">
+        <nav class="navbar navbar-expand-lg navbar-light" style="background-color:#90B8E4">
+            <div class="container">
+                <img class="img-fluid mr-5" src="http://www.ucn.cl/wp-content/uploads/2016/03/Isologo-UCN-2018-Blanco.png"
+                    style="width: 25%;" alt="insignia">
+                <a style="color: white; font-size:25px ;font-family: Myriad Pro;" class="navbar-brand ml-5"  href="{{ url('/home') }}">
                     {{__('Gestión de Solicitudes') }}
                 </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+                <button style="color: white" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
@@ -46,12 +49,12 @@
                         @guest
                             @if (Route::has('login'))
                                 <li class="nav-item">
-                                    <a class="nav-link" style="color: black" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                    <a class="nav-link" style="color:white; font-size:15px" href="{{ route('login') }}">{{ __('Login') }}</a>
                                 </li>
                             @endif
                         @else
                             <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" style="color: white;font-size:15px"   href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}
                                 </a>
 
@@ -80,4 +83,18 @@
         </main>
     </div>
 </body>
+<!-- Footer -->
+<div>
+    <footer class="page-footer font-small blue">
+
+        <!-- Copyright -->
+        <div class="footer-copyright text-center py-3">© 2021 Copyright:
+            <a href="https://www.ucn.cl/home/"> ucn.cl</a>
+        </div>
+        <!-- Copyright -->
+
+    </footer>
+    <!-- Footer -->
+</div>
+
 </html>
