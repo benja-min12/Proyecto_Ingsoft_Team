@@ -22,12 +22,12 @@
                                 @method('PUT')
                                 <div class="form-group">
                                     <label class="form-control-label">CÓDIGO</label>
-                                    <input value={{$carrera->codigo}} id="codigo" type="text" readonly class="form-control" name="codigo" required autofocus>
+                                    <input value={{$carrera->codigo}} id="codigo" type="text" readonly class="form-control" name="codigo" required>
                                 </div>
                                 <div class="form-group">
                                     <label class="form-control-label">NOMBRE</label>
                                     <input value="{{$carrera->nombre}}" id="nombre" type="text" class="form-control @error('nombre') is-invalid @enderror"
-                                        name="nombre" required>
+                                        name="nombre" required autofocus>
                                     @error('nombre')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

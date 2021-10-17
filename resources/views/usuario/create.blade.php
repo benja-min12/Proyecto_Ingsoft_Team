@@ -1,9 +1,8 @@
-
 @extends('layouts.app')
 
 @section('content')
 
-@if (Auth::user()->rol == 'Administrador')
+@if (Auth::user()->tipo_usuario == 'Administrador')
 <div class="container">
     <div class="row">
         <div class="col-lg-3 col-md-2"></div>
@@ -12,7 +11,7 @@
                 <i class="fas fa-user-plus"></i>
             </div>
             <div class="col-lg-12 login-title">
-                CREAR USUARIO
+                <h2>CREAR USUARIO</h2>
             </div>
 
             <div class="col-lg-12 login-form">
@@ -20,7 +19,7 @@
                     <form method="POST" action="{{ route('usuario.store') }}">
                         @csrf
                         <div class="form-group">
-                            <label class="form-control-label">NOMBRE</label>
+                            <label class="form-control-label">Nombre</label>
                             <input id="name" type="text" class="form-control @error('name') is-invalid @enderror"
                                 name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
 
@@ -31,7 +30,7 @@
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label class="form-control-label">EMAIL</label>
+                            <label class="form-control-label">Email</label>
                             <input id="email" type="text" class="form-control @error('email') is-invalid @enderror"
                                 name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
 
@@ -54,16 +53,16 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="form-control-label" style="color: white">Rol</label>
-                            <select class="form-control" name="rol" id="rol">
-                                <option value="Jefe Carrera">Jefe de carrera</option>
+                            <label for="form-control-label">Tipo_usuario</label>
+                            <select class="form-control" name="tipo_usuario" id="tipo_usuario">
+                                <option value="Jefe Carrera">Jefe de Carrera</option>
                                 <option value="Alumno">Alumno</option>
                             </select>
                         </div>
 
                         <div class="form-group">
-                            <label for="form-control-label" style="color: white">Carrera</label>
-                            <select class="form-control" name="carrera" id="carrera" disabled>
+                            <label for="form-control-label" >Carrera</label>
+                            <select class="form-control" name="carrera" id="carrera" >
                                 <option value={{null}}>Seleccione carrera</option>
                                 @foreach ($carreras as $carrera)
                                 <option value={{$carrera->id}}>{{$carrera->nombre}}</option>
@@ -87,7 +86,7 @@
         const carreraSelect = document.getElementById('carrera')
         //variable de carreras desde el controlador de carreras
         const listaCarreras = {!! json_encode($carreras) !!}
-        if (listaCarreras.length === 2) {
+        if (listaCarreras.length === 0) {
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
