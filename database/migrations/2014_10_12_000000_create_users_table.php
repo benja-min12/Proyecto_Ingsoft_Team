@@ -17,10 +17,15 @@ class CreateUsersTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
+            $table->string('rut')->unique();
+            $table->enum('tipo_usuario',['Administrador', 'Jefe Carrera', 'Alumno']);
+            $table->tinyInteger('status'); //0: deshabilitado; 1: habilitado
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
+            $table->unsignedBigInteger('carrera_id')->nullable();
+            $table->foreign('carrera_id')->references('id')->on('carreras');
         });
     }
 
@@ -34,3 +39,4 @@ class CreateUsersTable extends Migration
         Schema::dropIfExists('users');
     }
 }
+

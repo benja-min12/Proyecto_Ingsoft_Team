@@ -1,0 +1,10 @@
+@font-face {
+    font-family: MyriadPro;
+    src: url(Myriad_Pro_Regular.ttf);
+}
+.bg-primary {
+    background-color: #23415b !important;
+  }
+#logo{
+	margin: 18px 0px;
+}
