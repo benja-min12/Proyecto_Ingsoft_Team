@@ -1,6 +1,8 @@
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
+    <title>Gestion de solicitudes</title>
+    <link rel="shortcut icon" href="https://www.ucn.cl/wp-content/themes/ucn-central/favicon.ico">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 

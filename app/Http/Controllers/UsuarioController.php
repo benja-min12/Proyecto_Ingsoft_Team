@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Carrera;
 use App\Models\User;
+use App\Rules\ValidadorRut;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+
 
 class UsuarioController extends Controller
 {
@@ -16,12 +18,14 @@ class UsuarioController extends Controller
      */
     public function index(Request $request)
     {
+        $carreras = Carrera::all();
         if ($request->search == null) {
-            $usuarios = User::simplePaginate(4);
-            return view('usuario.index')->with('usuarios',$usuarios);
+            $usuarios = User::simplePaginate(7);
+
+            return view('usuario.index')->with('usuarios',$usuarios)->with('carreras',$carreras);
         }else {
             $usuarios = User::where('rut', $request->search)->simplePaginate(1);
-            return view('usuario.index')->with('usuarios',$usuarios);
+            return view('usuario.index')->with('usuarios',$usuarios)->with('carreras',$carreras);
         }
         //
     }
@@ -49,14 +53,13 @@ class UsuarioController extends Controller
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'rut' => ['required', 'string', 'unique:users'],
+            'rut' => ['required', 'string', 'unique:users', new ValidadorRut()],
             'tipo_usuario' => ['string','required', 'in:Jefe Carrera,Alumno'],
-            'carrera'=>['exists:App\Models\Carrera,id']
+            'carrera'=>['exists:App\Models\Carrera,id','required']
         ]);
 
-        //Logica para recortar el rut a 6 digitos:
 
-        $defaultPassword = 123456;
+        $defaultPassword = substr($request->rut,0,6);
 
         $newUser = User::create([
             'name' => $request->name,
@@ -105,21 +108,13 @@ class UsuarioController extends Controller
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255'],
-            'rut' => ['required', 'string', 'unique:users'],
-            'tipo_usuario' => ['string','required', 'in:Jefe Carrera,Alumno'],
             'carrera'=>['exists:App\Models\Carrera,id']
         ]);
 
-        $usuario->name = $request->name;
-        $usuario->email = $request->email;
-        $usuario->rut = $request->rut;
-        $usuario->tipo_usuario = $request->tipo_usuario;
-        $usuario->carrera_id = $request->carrera;
-        $usuario->save();
-        return redirect('/usuario');
-    }
-    public function resetpassword(){
-        return view('usuario/resetpassword');
+        $usuario->update(['name'=> $request->name]);
+        $usuario->update(['email'=> $request->email]);
+        $usuario->update(['carrera_id'=> $request->carrera]);
+        return redirect('/usuario')->with('edit','Se edito correctamente');
     }
     /**
      * Remove the specified resource from storage.

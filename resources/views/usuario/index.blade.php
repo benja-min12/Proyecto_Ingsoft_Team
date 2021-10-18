@@ -1,7 +1,39 @@
 @extends('layouts.app')
 
 @section('content')
-
+@if (session()->has('resetPassword'))
+    <script>
+        Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: '{{ session()->get('resetPassword') }}',
+        showConfirmButton: false,
+        timer: 1500
+        })
+    </script>
+@endif
+@if (session()->has('edit'))
+    <script>
+        Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: '{{ session()->get('edit') }}',
+        showConfirmButton: false,
+        timer: 1500
+        })
+    </script>
+@endif
+@if (session()->has('error'))
+    <script>
+        Swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: '{{ session()->get('error') }}',
+        showConfirmButton: false,
+        timer: 1500
+        })
+    </script>
+@endif
 @if (Auth::user()->tipo_usuario == 'Administrador')
 <div class="container">
     <div class="row mb-3">
@@ -16,7 +48,7 @@
         </div>
         <div class="col col-2">
             <a class="btn btn-outline-secondary mb-4" href={{ route('usuario.create') }}> <i class="fas fa-plus"></i> Crear usuario</a>
-            <a class="btn btn-outline-secondary mb-2" href="usuario\resetpassword"> Reiniciar contraseña</a>
+            <a class="btn btn-outline-secondary mb-2" href={{ route('ResetContrasenia') }}> Reiniciar contraseña</a>
         </div>
     </div>
     <table class="table table-bordered">
@@ -26,6 +58,7 @@
                 <th class="border-primary" style="width: 25%" scope="col">Nombre</th>
                 <th class="border-primary" style="width: 25%" scope="col">Email</th>
                 <th class="border-primary" style="width: 20%" scope="col">Rol</th>
+                <th class="border-primary" style="width: 20%" scope="col">Carrera</th>
                 <th class="border-primary" style="width: 20%" scope="col" colspan="3">Accion</th>
             </tr>
         </thead>
@@ -36,13 +69,25 @@
                 <td>{{$usuario->name}}</td>
                 <td>{{$usuario->email}}</td>
                 <td>{{$usuario->tipo_usuario}}</td>
-                <td><a class="btn btn-outline-secondary" href={{ route('usuario.edit', [$usuario]) }}>editar</a></td>
+                @if ($usuario->tipo_usuario !== 'Administrador')
+                @foreach ($carreras as $carrera )
+                    @if ($usuario->carrera_id===$carrera->id)
+                        <td>{{$carrera->nombre}}</td>
+                    @endif
+                @endforeach
+                @else
+                <td class="text-center">-</td>
+                @endif
                 @if ($usuario->tipo_usuario !== 'Administrador')
                     @if ($usuario->status === 1)
                         <td><a class="btn btn-outline-warning" href={{ route('changeStatus', ['id' => $usuario]) }}>deshabilitar</a></td>
                     @else
                         <td><a class="btn btn-outline-primary" href={{ route('changeStatus', ['id' => $usuario]) }}>habilitar</a></td>
                     @endif
+                    <td><a class="btn btn-outline-secondary" href={{ route('usuario.edit', [$usuario]) }}>editar</a></td>
+                @else
+                    <td class="text-center">-</td>
+                    <td><a class="btn btn-outline-secondary" href={{ route('usuario.edit', [$usuario]) }}>editar</a></td>
                 @endif
             </tr>
             @endforeach

@@ -33,4 +33,6 @@ Route::resource('usuario', UsuarioController::class,['middleware' => 'auth']);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::post('/changePassword', [App\Http\Controllers\ChangePasswordController::class, 'changePassword'])->name('changePassword');
 Route::get('/cambiarContrasenia',[App\Http\Controllers\ChangePasswordController::class, 'cambiarContrasenia'])->name('cambiarContrasenia');
+Route::get('/ResetContrasenia',[App\Http\Controllers\ChangePasswordController::class, 'ResetContrasenia'])->name('ResetContrasenia');
+Route::post('/ResetPassword', [App\Http\Controllers\ChangePasswordController::class, 'ResetPassword'])->name('ResetPassword');
 Route::get('/status-user-change', [DisabledUserController::class, 'disabledUser'])->name('changeStatus');

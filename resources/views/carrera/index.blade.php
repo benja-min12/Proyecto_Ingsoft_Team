@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@if (Auth::user()->tipo_usuario == 'Administrador')
 @section('content')
 @if (session('success'))
     <script>
@@ -25,7 +25,7 @@
         </div>
         <div class="col col-2">
             <a class="btn btn-outline-secondary" href="carrera/create"> Agregar Carrera</a>
-            
+
         </div>
     </div>
     <table class=" table table-bordered">
@@ -53,5 +53,6 @@
     @endif
 
 </div>
+@endif
 
 @endsection

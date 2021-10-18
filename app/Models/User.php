@@ -23,6 +23,8 @@ class User extends Authenticatable
         'password',
         'rut',
         'status',
+        'tipo_usuario',
+        'carrera_id'
     ];
 
     /**

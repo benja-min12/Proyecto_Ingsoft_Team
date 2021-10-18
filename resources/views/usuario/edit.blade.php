@@ -18,9 +18,9 @@
                 <div class="col-lg-12 login-form">
                     <div class="card border-primary">
                         <div class="card-body">
-                            <form method="POST" action={{ route('usuario.update', [$usuario]) }}>
-                                @method('PUT')
+                            <form method="POST" action={{ route('usuario.update',[$usuario]) }}>
                                 @csrf
+                                @method('PUT')
                                 <div class="form-group">
                                     <label class="form-control-label">Nombre</label>
                                     <input id="name" type="text" class="form-control @error('name') is-invalid @enderror"
@@ -55,18 +55,20 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="form-control-label" >Tipo usuario</label>
-                                    <input id="tipo"type="text"readonly class="form-control"name="tipo" value="{{ $usuario->tipo_usuario }}" >
+                                    <input id="tipo_usuario"type="text"readonly class="form-control"name="tipo_usuario" value="{{ $usuario->tipo_usuario }}" >
                                 </div>
+                                @if($usuario->tipo_usuario !='Administrador')
+                                    <div class="form-group">
 
-                                <div class="form-group">
-                                    <label for="form-control-label" >Carrera</label>
-                                    <select class="form-control" name="carrera" id="carrera" >
-                                        <option value={{$usuario->carrera_id}}>Seleccione carrera</option>
-                                        @foreach ($carreras as $carrera)
-                                        <option value={{$carrera->id}}>{{$carrera->nombre}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
+                                        <label for="form-control-label" >Carrera</label>
+                                        <select class="form-control" name="carrera" id="carrera" >
+                                            <option value={{$usuario->carrera_id}}>Seleccione carrera</option>
+                                            @foreach ($carreras as $carrera)
+                                            <option value={{$carrera->id}}>{{$carrera->nombre}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                @endif
                                 <div class="col-lg-12 py-3">
                                     <div class="col-lg-12 text-center">
                                         <button type="submit" class="btn btn-outline-secondary">{{ __('Actualizar') }}</button>
@@ -82,18 +84,7 @@
             <div class="col-lg-3 col-md-2"></div>
         </div>
     </div>
-    <script>
-        const rolSelect = document.getElementById('rol');
-        const carreraSelect = document.getElementById('carrera');
-        rolSelect.value = {!! json_encode($usuario->rol) !!}
-        carreraSelect.value = {!! json_encode($usuario->carrera_id)!!}
-        if (rolSelect.value === "Jefe Carrera") {
-            carreraSelect.value = null;
-            carreraSelect.disabled = true;
-        }else{
-            carreraSelect.disabled = false;
-        }
-    </script>
+
 
     @else
     @php
