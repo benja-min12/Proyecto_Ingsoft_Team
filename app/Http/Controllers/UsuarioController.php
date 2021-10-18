@@ -38,7 +38,7 @@ class UsuarioController extends Controller
      */
     public function create()
     {
-        $carreras = Carrera::all();
+        $carreras = Carrera::with('users')->get();
         return view('usuario.create')->with('carreras', $carreras);
     }
 
@@ -58,7 +58,7 @@ class UsuarioController extends Controller
             'carrera'=>['exists:App\Models\Carrera,id','required']
         ]);
 
-
+        
         $defaultPassword = substr($request->rut,0,6);
 
         $newUser = User::create([

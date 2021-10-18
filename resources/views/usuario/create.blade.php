@@ -18,7 +18,7 @@
                 <div class="col-lg-12 login-form">
                     <div class="card border-primary">
                         <div class="card-body">
-                            <form method="POST" action="{{ route('usuario.store') }}">
+                            <form id="formulario" method="POST" action="{{ route('usuario.store') }}">
                                 @csrf
                                 <div class="form-group">
                                     <label class="form-control-label">Nombre</label>
@@ -57,9 +57,9 @@
                                 <div class="form-group">
                                     <label for="form-control-label">Tipo usuario</label>
                                     <select class="form-control @error('tipo_usuario') is-invalid @enderror" name="tipo_usuario" id="tipo_usuario"required>
-                                        <option value={{null}}>Seleccione tipo de usuario</option>
-                                        <option value="Jefe Carrera">Jefe de Carrera</option>
-                                        <option value="Alumno">Alumno</option>
+                                        <option  value={{null}}>Seleccione tipo de usuario</option>
+                                        <option  value="Jefe Carrera">Jefe de Carrera</option>
+                                        <option  value="Alumno">Alumno</option>
                                     </select>
                                     @error('tipo_usuario')
                                     <span class="invalid-feedback" role="alert">
@@ -71,7 +71,7 @@
                                 <div class="form-group">
                                     <label for="form-control-label" >Carrera</label>
                                     <select class="form-control @error('carrera') is-invalid @enderror" name="carrera" id="carrera"required >
-                                        <option value={{null}}>Seleccione carrera</option>
+                                        <option  value={{null}}>Seleccione carrera</option>
                                         @foreach ($carreras as $carrera)
                                         <option value={{$carrera->id}}>{{$carrera->nombre}}</option>
                                         @endforeach
@@ -80,7 +80,7 @@
 
                                 <div class="col-lg-12 py-3">
                                     <div class="col-lg-12 text-center">
-                                        <button type="submit" class="btn btn-outline-secondary">{{ __('Register') }}</button>
+                                        <button id="boton" class="btn btn-outline-secondary">{{ __('Register') }}</button>
                                     </div>
                                 </div>
                             </form>
@@ -94,10 +94,13 @@
         </div>
     </div>
     <script>
-        const rolSelect = document.getElementById('rol');
+        const rolSelect = document.getElementById('tipo_usuario');
+        const button = document.getElementById('boton');
         const carreraSelect = document.getElementById('carrera')
-        //variable de carreras desde el controlador de carreras
+        const form = document.getElementById('formulario');
+        const optionSelect = document.getElementById('tipo_usuario');
         const listaCarreras = {!! json_encode($carreras) !!}
+        //variable de carreras desde el controlador de carreras
         if (listaCarreras.length === 0) {
             Swal.fire({
                 icon: 'error',
@@ -109,6 +112,26 @@
                 window.location.href = '/usuario'
             })
         }
+        button.addEventListener('click', function(e){
+            e.preventDefault();
+            listaCarreras.forEach(function(carrera) {
+                carrera.users.forEach(function(usuario) {
+                    if(carreraSelect.value==carrera.id){
+                        if(usuario.tipo_usuario=="Jefe Carrera"&& optionSelect.value=="Jefe Carrera"){
+                            Swal.fire({
+                                position: 'center',
+                                icon: 'error',
+                                title: 'Ya existe un jefe de carrera para esta carrera',
+                                showConfirmButton: false,
+                                timer: 1500
+                            })
+                        }else{
+                            form.submit();
+                        }
+                    }
+                });
+            });
+        })
     </script>
 
     @else

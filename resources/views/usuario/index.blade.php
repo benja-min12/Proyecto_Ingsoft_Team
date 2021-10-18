@@ -98,9 +98,7 @@
             {!! $usuarios->links() !!}
         </div>
     @endif
-
 </div>
-
 @else
 @php
 header("Location: /home" );

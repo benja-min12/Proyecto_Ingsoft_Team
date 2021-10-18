@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+@if (Auth::user()->tipo_usuario == 'Administrador')
 <div class="container">
     <div class="row">
         <div class="col-lg-3 col-md-2"></div>
@@ -62,7 +63,7 @@
 
     <script>
         const button = document.getElementById('boton');
-        const form = document.getElementById('formulario')
+        const form = document.getElementById('formulario');
         button.addEventListener('click', function(e){
             e.preventDefault();
             Swal.fire({
@@ -80,4 +81,11 @@
             })
         })
     </script>
+
+@else
+@php
+header("Location: /home" );
+exit();
+@endphp
+@endif
 @endsection
