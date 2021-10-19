@@ -3,6 +3,17 @@
 @section('content')
 
 @if (Auth::user()->tipo_usuario == 'Administrador')
+@if (session('Error'))
+    <script>
+        Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: '{{ session('Error') }}',
+        showConfirmButton: false,
+        timer: 1500
+        })
+    </script>
+@endif
 <div class="container">
     <div class="row">
         <div class="col-lg-3 col-md-2"></div>
@@ -10,7 +21,7 @@
             <div class="col-lg-12 login-key">
                 <i class="fas fa-user-plus"></i>
             </div>
-            <div class="col-lg-12 login-title">
+            <div class="col-lg-12 login-title text-center">
                 <h2>CREAR USUARIO</h2>
             </div>
 
@@ -18,7 +29,7 @@
                 <div class="col-lg-12 login-form">
                     <div class="card border-primary">
                         <div class="card-body">
-                            <form id="formulario" method="POST" action="{{ route('usuario.store') }}">
+                            <form id="formulario" method="POST" action="{{ route('usuario.store',['id'=>$carreras]) }}">
                                 @csrf
                                 <div class="form-group">
                                     <label class="form-control-label">Nombre</label>
@@ -71,11 +82,16 @@
                                 <div class="form-group">
                                     <label for="form-control-label" >Carrera</label>
                                     <select class="form-control @error('carrera') is-invalid @enderror" name="carrera" id="carrera"required >
-                                        <option  value={{null}}>Seleccione carrera</option>
+                                        <option  value="Nada">Seleccione carrera</option>
                                         @foreach ($carreras as $carrera)
                                         <option value={{$carrera->id}}>{{$carrera->nombre}}</option>
                                         @endforeach
                                     </select>
+                                    @error('carrera')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
                                 </div>
 
                                 <div class="col-lg-12 py-3">
@@ -96,10 +112,10 @@
     <script>
         const rolSelect = document.getElementById('tipo_usuario');
         const button = document.getElementById('boton');
-        const carreraSelect = document.getElementById('carrera')
+        const carreraSelect = document.getElementById('carrera');
         const form = document.getElementById('formulario');
-        const optionSelect = document.getElementById('tipo_usuario');
-        const listaCarreras = {!! json_encode($carreras) !!}
+        const optionSelect = document.getElementById('tipo_usuario').getElementsByTagName('option');
+        const listaCarreras = {!! json_encode($carreras) !!};
         //variable de carreras desde el controlador de carreras
         if (listaCarreras.length === 0) {
             Swal.fire({
@@ -112,12 +128,12 @@
                 window.location.href = '/usuario'
             })
         }
-        button.addEventListener('click', function(e){
+        rolSelect.addEventListener('change', function(e){
             e.preventDefault();
             listaCarreras.forEach(function(carrera) {
                 carrera.users.forEach(function(usuario) {
                     if(carreraSelect.value==carrera.id){
-                        if(usuario.tipo_usuario=="Jefe Carrera"&& optionSelect.value=="Jefe Carrera"){
+                        if(usuario.tipo_usuario=="Jefe Carrera"&& rolSelect.value=="Jefe Carrera"){
                             Swal.fire({
                                 position: 'center',
                                 icon: 'error',
@@ -125,20 +141,32 @@
                                 showConfirmButton: false,
                                 timer: 1500
                             })
-                        }else{
-                            form.submit();
+                            rolSelect.disabled=true;
+                        }
+                    }
+                });
+            });
+        })
+        carreraSelect.addEventListener('change', function(e){
+            e.preventDefault();
+            listaCarreras.forEach(function(carrera) {
+                carrera.users.forEach(function(usuario) {
+                    console.log(carrera);
+                    if(carreraSelect.value==carrera.id){
+                        if(usuario.tipo_usuario=="Jefe Carrera"&& rolSelect.value=="Jefe Carrera"){
+                            Swal.fire({
+                                position: 'center',
+                                icon: 'error',
+                                title: 'Ya existe un jefe de carrera para esta carrera',
+                                showConfirmButton: false,
+                                timer: 1500
+                            })
+                            rolSelect.disabled=true;
                         }
                     }
                 });
             });
         })
     </script>
-
-    @else
-    @php
-    header("Location: /home" );
-    exit();
-    @endphp
-    @endif
-
-    @endsection
+@endif
+@endsection

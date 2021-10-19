@@ -48,7 +48,7 @@ class UsuarioController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Carrera $carreras )
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
@@ -58,7 +58,6 @@ class UsuarioController extends Controller
             'carrera'=>['exists:App\Models\Carrera,id','required']
         ]);
 
-        
         $defaultPassword = substr($request->rut,0,6);
 
         $newUser = User::create([
