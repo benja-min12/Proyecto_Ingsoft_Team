@@ -96,7 +96,7 @@
 
                                 <div class="col-lg-12 py-3">
                                     <div class="col-lg-12 text-center">
-                                        <button id="boton" class="btn btn-outline-secondary">{{ __('Register') }}</button>
+                                        <button id="boton" class="btn btn-primary">{{ __('Register') }}</button>
                                     </div>
                                 </div>
                             </form>
@@ -122,7 +122,7 @@
                 icon: 'error',
                 title: 'Error',
                 confirmButtonColor: '#48A24C',
-                text: 'No puede crear usuarios sin tener carreras en el sistema!',
+                text: '¡No puede crear usuarios sin tener carreras en el sistema!',
                 footer: 'Para crear carreras has&nbsp;<a href="/carrera/create">click aca</a>'
             }).then((result) => {
                 window.location.href = '/usuario'

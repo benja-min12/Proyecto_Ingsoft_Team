@@ -17,14 +17,14 @@
         <div class="col col-2">
             <form method="GET" action="{{ route('carrera.index') }}">
                 <input class="border-primary mb-2" type="text" name="search" id="search" placeholder="Buscar por codigo">
-                <button class="btn btn-outline-secondary mb-2">Buscar</button>
+                <button class="btn btn-primary mb-2">Buscar</button>
             </form>
         </div>
         <div class="col col-8">
             <h1 class="text-center">Gestión de carreras</h1>
         </div>
         <div class="col col-2">
-            <a class="btn btn-outline-secondary" href="carrera/create"> Agregar Carrera</a>
+            <a class="btn btn-primary" href="carrera/create"> Agregar Carrera</a>
 
         </div>
     </div>
@@ -41,7 +41,7 @@
             <tr>
                 <td class="border-primary" scope="row">{{$carrera->codigo}}</td>
                 <td class="border-primary" style="font-size:20px">{{$carrera->nombre}}</td>
-                <td class="border-primary"><a class="btn btn-outline-secondary" href="{{ route('carrera.edit',$carrera) }}">Editar</a></td>
+                <td class="border-primary"><a class="btn btn-primary" href="{{ route('carrera.edit',$carrera) }}">Editar</a></td>
             </tr>
             @endforeach
         </tbody>

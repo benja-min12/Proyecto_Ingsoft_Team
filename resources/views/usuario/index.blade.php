@@ -40,15 +40,15 @@
         <div class="col col-2">
             <form method="GET" action="{{ route('usuario.index') }}">
                 <input class="mb-2" type="text" name="search" id="search" placeholder="Buscar por Rut">
-                <button class="btn btn-outline-secondary mb-2">Buscar</button>
+                <button class="btn btn-primary mb-2">Buscar</button>
             </form>
         </div>
         <div class="col col-8">
             <h1 class="text-center" >Gestión de Usuarios</h1>
         </div>
         <div class="col col-2">
-            <a class="btn btn-outline-secondary mb-4" href={{ route('usuario.create') }}> <i class="fas fa-plus"></i> Crear usuario</a>
-            <a class="btn btn-outline-secondary mb-2" href={{ route('ResetContrasenia') }}> Reiniciar contraseña</a>
+            <a class="btn btn-primary mb-4" href={{ route('usuario.create') }}> <i class="fas fa-plus"></i> Crear usuario</a>
+            <a class="btn btn-primary mb-2" href={{ route('ResetContrasenia') }}> Reiniciar contraseña</a>
         </div>
     </div>
     <table class="table table-bordered">
@@ -80,14 +80,14 @@
                 @endif
                 @if ($usuario->tipo_usuario !== 'Administrador')
                     @if ($usuario->status === 1)
-                        <td><a class="btn btn-outline-warning" href={{ route('changeStatus', ['id' => $usuario]) }}>deshabilitar</a></td>
+                        <td><a class="btn btn-warning" href={{ route('changeStatus', ['id' => $usuario]) }}>deshabilitar</a></td>
                     @else
-                        <td><a class="btn btn-outline-primary" href={{ route('changeStatus', ['id' => $usuario]) }}>habilitar</a></td>
+                        <td><a class="btn btn-info" href={{ route('changeStatus', ['id' => $usuario]) }}>habilitar</a></td>
                     @endif
-                    <td><a class="btn btn-outline-secondary" href={{ route('usuario.edit', [$usuario]) }}>editar</a></td>
+                    <td><a class="btn btn-primary" href={{ route('usuario.edit', [$usuario]) }}>editar</a></td>
                 @else
                     <td class="text-center">-</td>
-                    <td><a class="btn btn-outline-secondary" href={{ route('usuario.edit', [$usuario]) }}>editar</a></td>
+                    <td><a class="btn btn-primary" href={{ route('usuario.edit', [$usuario]) }}>editar</a></td>
                 @endif
             </tr>
             @endforeach
