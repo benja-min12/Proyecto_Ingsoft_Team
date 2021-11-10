@@ -27,7 +27,7 @@
                         </div>
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <button id="boton" type="submit" class="btn btn-outline-secondary">
+                                <button id="boton" type="submit" class="btn btn-primary">
                                     Restablecer contraseña
                                 </button>
                             </div>

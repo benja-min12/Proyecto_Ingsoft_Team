@@ -91,7 +91,7 @@ class UsuarioController extends Controller
      */
     public function edit(User $usuario)
     {
-        $carreras = Carrera::all();
+        $carreras = Carrera::with('users')->get();
         return view('usuario.edit')->with('usuario',$usuario)->with('carreras',$carreras);
     }
 
@@ -107,11 +107,13 @@ class UsuarioController extends Controller
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255'],
+            'tipo_usuario' => ['string','required', 'in:Jefe Carrera,Alumno'],
             'carrera'=>['exists:App\Models\Carrera,id']
         ]);
 
         $usuario->update(['name'=> $request->name]);
         $usuario->update(['email'=> $request->email]);
+        $usuario->update(['tipo_usuario'=> $request->tipo_usuario]);
         $usuario->update(['carrera_id'=> $request->carrera]);
         return redirect('/usuario')->with('edit','Se edito correctamente');
     }

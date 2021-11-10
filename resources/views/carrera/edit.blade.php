@@ -36,7 +36,7 @@
                                 </div>
                                 <div class="col-lg-12 py-3">
                                     <div class="col-lg-12 text-center">
-                                        <button type="submit" class="btn btn-outline-secondary">{{ __('Editar') }}</button>
+                                        <button type="submit" class="btn btn-primary">{{ __('Editar') }}</button>
                                     </div>
                                 </div>
                             </form>

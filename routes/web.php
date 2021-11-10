@@ -18,7 +18,7 @@ use App\Http\Controllers\DisabledUserController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth/login');
 });
 Route::middleware(['auth'])->group(function () {
     Route::get('/perfil', function (){

@@ -22,12 +22,17 @@ class ChangePasswordController extends Controller
     public function changePassword(Request $request)
     {
         //dd($request);
-        $findUser = User::where('id', $request->id);
-
+        $findUser = User::where('id', $request->id)->first();
         $request->validate([
             'password' => ['confirmed', 'min:6', 'required'],
         ]);
         $findUser->update(['password' => Hash::make($request->password)]);
+        if($findUser->tipo_usuario == 'Administrador'){
+            Auth::logout();
+            $request->session()->invalidate();
+            $request->session()->regenerateToken();
+            return redirect(route('login'))->with('resetPassword','contraseña restablecida correctamente');
+        }
         return redirect(route('home'))->with('password', 'updated');
     }
 
@@ -57,7 +62,9 @@ class ChangePasswordController extends Controller
             $findUser->update(['password' => Hash::make($defaultPassword)]);
 
             Auth::logout();
-            return redirect(route('login'));
+            $request->session()->invalidate();
+            $request->session()->regenerateToken();
+            return redirect(route('login'))->with('resetPassword','contraseña restablecida correctamente');
         } else {
             $defaultPassword = substr($request->rut, 0, 6);
             $findUser->update(['password' => Hash::make($defaultPassword)]);
