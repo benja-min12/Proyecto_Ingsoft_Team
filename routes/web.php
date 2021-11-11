@@ -5,7 +5,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\DisabledUserController;
-
+use App\Http\Controllers\SolicitudController;
+use App\Models\Solicitud;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -27,7 +28,7 @@ Route::middleware(['auth'])->group(function () {
     });
 });
 Route::resource('carrera', CarreraController::class, ['middleware' => 'auth']);
-
+Route::resource('solicitud', SolicitudController::class);
 Auth::routes();
 Route::resource('usuario', UsuarioController::class,['middleware' => 'auth']);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

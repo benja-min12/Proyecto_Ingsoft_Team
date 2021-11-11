@@ -1,9 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\User;
 use App\Models\Solicitud;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use SebastianBergmann\Environment\Console;
 
 class SolicitudController extends Controller
 {
@@ -14,7 +16,8 @@ class SolicitudController extends Controller
      */
     public function index()
     {
-        //
+        $solicitudesAlumno = Auth::user()->solicitudes;
+        return view('solicitud.index')->with('solicitudes', $solicitudesAlumno);
     }
 
     /**
@@ -24,7 +27,7 @@ class SolicitudController extends Controller
      */
     public function create()
     {
-        //
+        return view('solicitud.create');
     }
 
     /**
@@ -35,7 +38,137 @@ class SolicitudController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        switch ($request->tipo) {
+            case '1':
+                $request->validate([
+                    'telefono' => ['regex:/[0-9]*/','required'],
+                    'nrc' => ['required'],
+                    'nombre' => ['required'],
+                    'detalle' => ['required']
+                ]);
+
+                $findUser = User::find($request->user);
+
+                $findUser->solicitudes()->attach($request->tipo, [
+                    'telefono' => $request->telefono,
+                    'NRC' => $request->nrc,
+                    'nombre_asignatura' => $request->nombre,
+                    'detalles' => $request->detalle
+                ]);
+                return redirect('/solicitud');
+                break;
+            case '2':
+                $request->validate([
+                    'telefono' => ['regex:/[0-9]*/','required'],
+                    'nrc' => ['required'],
+                    'nombre' => ['required'],
+                    'detalle' => ['required']
+                ]);
+
+                $findUser = User::find($request->user);
+
+                $findUser->solicitudes()->attach($request->tipo, [
+                    'telefono' => $request->telefono,
+                    'NRC' => $request->nrc,
+                    'nombre_asignatura' => $request->nombre,
+                    'detalles' => $request->detalle
+                ]);
+                return redirect('/solicitud');
+                break;
+            case '3':
+                $request->validate([
+                    'telefono' => ['regex:/[0-9]*/','required'],
+                    'nrc' => ['required'],
+                    'nombre' => ['required'],
+                    'detalle' => ['required']
+                ]);
+
+                $findUser = User::find($request->user);
+
+                $findUser->solicitudes()->attach($request->tipo, [
+                    'telefono' => $request->telefono,
+                    'NRC' => $request->nrc,
+                    'nombre_asignatura' => $request->nombre,
+                    'detalles' => $request->detalle
+                ]);
+                return redirect('/solicitud');
+                break;
+            case '4':
+                $request->validate([
+                    'telefono' => ['regex:/[0-9]*/','required'],
+                    'nrc' => ['required'],
+                    'nombre' => ['required'],
+                    'detalle' => ['required']
+                ]);
+
+                $findUser = User::find($request->user);
+
+                $findUser->solicitudes()->attach($request->tipo, [
+                    'telefono' => $request->telefono,
+                    'NRC' => $request->nrc,
+                    'nombre_asignatura' => $request->nombre,
+                    'detalles' => $request->detalle
+                ]);
+                return redirect('/solicitud');
+                break;
+            case '5':
+
+                $request->validate([
+                    'telefono' => ['regex:/[0-9]*/','required'],
+                    'nombre' => ['required'],
+                    'detalle' => ['required'],
+                    'calificacion'=>['required','numeric','between:4.0,7.0'],
+                    'cantidad'=>['regex:/[0-9]*/','required']
+                ]);
+
+                $findUser = User::find($request->user);
+
+                $findUser->solicitudes()->attach($request->tipo, [
+                    'telefono' => $request->telefono,
+                    'nombre_asignatura' => $request->nombre,
+                    'detalles' => $request->detalle,
+                    'calificacion_aprob'=>$request->calificacion,
+                    'cant_ayudantias'=>$request->cantidad
+                ]);
+                return redirect('/solicitud');
+                break;
+            case '6':
+                $request->validate([
+                    'telefono' => ['regex:/[0-9]*/','required'],
+                    'nombre' => ['required'],
+                    'detalle' => ['required'],
+                    'facilidad' => ['required'],
+                    'profesor' => ['required'],
+                    'adjunto.*' => ['mimes:pdf,jpg,jpeg,doc,docx'],
+                ]);
+
+                $findUser = User::find($request->user);
+
+                $aux = 0;
+
+                foreach ($request->adjunto as $file) {
+
+                    $name = $aux.time().'-'.$findUser->name.'.pdf';
+                    $file->move(public_path('\storage\docs'), $name);
+                    $datos[] = $name;
+                    $aux++;
+                }
+
+                $findUser->solicitudes()->attach($request->tipo, [
+                    'telefono' => $request->telefono,
+                    'nombre_asignatura' => $request->nombre,
+                    'detalles' => $request->detalle,
+                    'tipo_facilidad' => $request->facilidad,
+                    'nombre_profesor' => $request->profesor,
+                    'archivos' => json_encode($datos),
+                ]);
+                return redirect('/solicitud');
+                break;
+
+            default:
+                # code...
+                break;
+        }
     }
 
     /**
