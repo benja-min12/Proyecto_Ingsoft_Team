@@ -24,8 +24,6 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
-            $table->unsignedBigInteger('carrera_id')->nullable();
-            $table->foreign('carrera_id')->references('id')->on('carreras');
         });
     }
 
@@ -39,4 +37,3 @@ class CreateUsersTable extends Migration
         Schema::dropIfExists('users');
     }
 }
-

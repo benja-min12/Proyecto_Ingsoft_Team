@@ -1,4 +1,3 @@
-
 @extends('layouts.app')
 
 @section('content')
@@ -73,7 +72,7 @@
 
                         <div class="col-lg-12 py-3">
                             <div class="col-lg-12 text-center">
-                                <button type="submit" class="btn btn-primary">{{ __('Register') }}</button>
+                                <button type="submit" class="btn btn-outline-primary">{{ __('Register') }}</button>
                             </div>
                         </div>
                     </form>
@@ -97,6 +96,14 @@
                 window.location.href = '/usuario'
             })
         }
+        rolSelect.addEventListener('change', function(e){
+            if (rolSelect.value === 'Jefe Carrera') {
+            carreraSelect.value = null;
+            carreraSelect.disabled = true;
+            }else{
+                carreraSelect.disabled = false;
+            }
+        })
     </script>
 
     @else
