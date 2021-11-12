@@ -8,15 +8,15 @@
         icon: 'success',
         title: '{{ session('success') }}',
         showConfirmButton: false,
-        timer: 1500
+        timer: 3000
         })
     </script>
 @endif
 <div class="container">
     <div class="row mb-4">
-        <div class="col col-2">
+        <div class="col col-2 ">
             <form method="GET" action="{{ route('carrera.index') }}">
-                <input class="border-primary mb-2" type="text" name="search" id="search" placeholder="Buscar por codigo">
+                <input class="border-primary mr-sm-2 mb-2" type="text" name="search" id="search" placeholder="Buscar por codigo">
                 <button class="btn btn-primary mb-2">Buscar</button>
             </form>
         </div>

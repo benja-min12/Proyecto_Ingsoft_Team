@@ -5,6 +5,7 @@ use App\Models\User;
 use App\Models\Solicitud;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use SebastianBergmann\Environment\Console;
 
 class SolicitudController extends Controller
@@ -55,7 +56,9 @@ class SolicitudController extends Controller
                     'nombre_asignatura' => $request->nombre,
                     'detalles' => $request->detalle
                 ]);
-                return redirect('/solicitud');
+                $findSolicitud=  DB::table('solicitud_user')->orderBy('id', 'desc')->first();
+                $Mensaje="Se ha registrado la solicitud número ". $findSolicitud->id . " con fecha ". $findSolicitud->created_at;
+                return redirect('/solicitud')->with('Crear',$Mensaje);
                 break;
             case '2':
                 $request->validate([
@@ -73,7 +76,9 @@ class SolicitudController extends Controller
                     'nombre_asignatura' => $request->nombre,
                     'detalles' => $request->detalle
                 ]);
-                return redirect('/solicitud');
+                $findSolicitud=  DB::table('solicitud_user')->orderBy('id', 'desc')->first();
+                $Mensaje="Se ha registrado la solicitud número ". $findSolicitud->id . " con fecha ". $findSolicitud->created_at;
+                return redirect('/solicitud')->with('Crear',$Mensaje);
                 break;
             case '3':
                 $request->validate([
@@ -91,7 +96,9 @@ class SolicitudController extends Controller
                     'nombre_asignatura' => $request->nombre,
                     'detalles' => $request->detalle
                 ]);
-                return redirect('/solicitud');
+                $findSolicitud=  DB::table('solicitud_user')->orderBy('id', 'desc')->first();
+                $Mensaje="Se ha registrado la solicitud número ". $findSolicitud->id . " con fecha ". $findSolicitud->created_at;
+                return redirect('/solicitud')->with('Crear',$Mensaje);
                 break;
             case '4':
                 $request->validate([
@@ -109,7 +116,9 @@ class SolicitudController extends Controller
                     'nombre_asignatura' => $request->nombre,
                     'detalles' => $request->detalle
                 ]);
-                return redirect('/solicitud');
+                $findSolicitud=  DB::table('solicitud_user')->orderBy('id', 'desc')->first();
+                $Mensaje="Se ha registrado la solicitud número ". $findSolicitud->id . " con fecha ". $findSolicitud->created_at;
+                return redirect('/solicitud')->with('Crear',$Mensaje);
                 break;
             case '5':
 
@@ -130,7 +139,9 @@ class SolicitudController extends Controller
                     'calificacion_aprob'=>$request->calificacion,
                     'cant_ayudantias'=>$request->cantidad
                 ]);
-                return redirect('/solicitud');
+                $findSolicitud=  DB::table('solicitud_user')->orderBy('id', 'desc')->first();
+                $Mensaje="Se ha registrado la solicitud número ". $findSolicitud->id . " con fecha ". $findSolicitud->created_at;
+                return redirect('/solicitud')->with('Crear',$Mensaje);
                 break;
             case '6':
                 $request->validate([
@@ -162,11 +173,13 @@ class SolicitudController extends Controller
                     'nombre_profesor' => $request->profesor,
                     'archivos' => json_encode($datos),
                 ]);
-                return redirect('/solicitud');
+                $findSolicitud=  DB::table('solicitud_user')->orderBy('id', 'desc')->first();
+                $Mensaje="Se ha registrado la solicitud número ". $findSolicitud->id . " con fecha ". $findSolicitud->created_at;
+                return redirect('/solicitud')->with('Crear',$Mensaje);
                 break;
 
             default:
-                # code...
+                return redirect('/solicitud')->with('Error',"No se pudo crear la solicitud");
                 break;
         }
     }

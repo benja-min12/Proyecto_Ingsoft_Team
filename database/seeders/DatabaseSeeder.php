@@ -14,7 +14,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         \App\Models\User::create([
-            'name' => 'Admin',
+            'name' => 'Administrador',
             'rut' => '207303690',
             'status' => 1,
             'tipo_usuario' => 'Administrador',
@@ -26,7 +26,6 @@ class DatabaseSeeder extends Seeder
             'codigo' => 1234,
             'nombre' => 'Carrera Prueba 1',
         ]);
-
         \App\Models\Solicitud::create([
             'tipo' => 'Sobrecupo'
         ]);

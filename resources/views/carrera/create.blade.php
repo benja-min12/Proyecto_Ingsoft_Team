@@ -68,7 +68,7 @@
             e.preventDefault();
             Swal.fire({
                 title: 'Confirme para crear la carrera',
-                text: "No podra eliminar la carrera ",
+                text: "No podrá eliminar la carrera ",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#48A24C',

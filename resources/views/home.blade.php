@@ -101,8 +101,12 @@
             <div class="card border-primary">
                 <i class="fas fa-tasks fa-10x text-center"></i>
                 <div class="card-body">
-                    <h5 class="card-title text-center">Gestión de solicitudes</h5>
+                    <h4 class="card-title text-center">Gestión de solicitudes</h4>
+                    <div class="text-center">
+                        <img style="height: 200px" src="{{asset('images/Solicitud.png')}}" alt="Carreras">
+                    </div>
                     <small class="text-muted">Permite o crear/editar o anular solicitudes especiales.</small>
+
                 </div>
                 <div class="card-footer">
                     <a href="/solicitud" class="btn btn-block btn-primary">IR</a>
