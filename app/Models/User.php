@@ -23,8 +23,6 @@ class User extends Authenticatable
         'password',
         'rut',
         'status',
-        'tipo_usuario',
-        'carrera_id'
     ];
 
     /**
@@ -45,14 +43,4 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-    public function carrera(){
-        return $this->belongsTo(Carrera::class);
-    }
-    public function solicitudes(){
-        return $this->belongsToMany(Solcitud::class)->withTimestamps()->withPivot('id','telefono' ,'estado', 'NRC', 'nombre_asignatura', 'detalles', 'calificacion_aprob', 'cant_ayudantias', 'tipo_facilidad', 'nombre_profesor', 'archivos');
-    }
-
-    public function getSolicitudId(String $id){
-        return $this->solicitudes()->wherePivot('id', $id)->get();
-    }
 }

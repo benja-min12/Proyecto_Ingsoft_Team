@@ -4,11 +4,8 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="text-center mb-5">
-                <h2>{{ __('Reset Password') }}</h2>
-            </div>
-            <div class="card border-primary">
-
+            <div class="card">
+                <div class="card-header">{{ __('Reset Password') }}</div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('changePassword') }}">
@@ -18,7 +15,7 @@
                             <label for="email" class="col-md-4 col-form-label text-md-right">RUT: </label>
 
                             <div class="col-md-6">
-                                <input id="rut" type="text" readonly class="border-primary form-control" name="rut" value="{{ $user->rut }}" required autofocus>
+                                <input id="rut" type="text" readonly class="form-control" name="rut" value="{{ $user->rut }}" required autofocus>
                             </div>
                         </div>
 
@@ -26,7 +23,7 @@
                             <label for="password" class="col-md-4 col-form-label text-md-right">Nueva Contraseña</label>
 
                             <div class="col-md-6">
-                                <input id="password" type="password" class="border-primary form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
 
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
@@ -40,7 +37,7 @@
                             <label for="password-confirm" class="col-md-4 col-form-label text-md-right">Confirmar Nueva Contraseña</label>
 
                             <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="border-primary form-control" name="password_confirmation" required autocomplete="new-password">
+                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
                             </div>
                         </div>
 

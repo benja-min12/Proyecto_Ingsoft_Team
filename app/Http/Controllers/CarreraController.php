@@ -91,7 +91,7 @@ class CarreraController extends Controller
             'nombre' => 'regex:/[A-z]/'
         ]);
         $carrera->update(['nombre'=> $request->nombre]);
-        return redirect('/carrera')->with('success','Carrera editada correctamente');
+        return redirect('/carrera')->with('success','Carrera editada correctamente');;
     }
 
     /**

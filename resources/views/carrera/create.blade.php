@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-@if (Auth::user()->tipo_usuario == 'Administrador')
 <div class="container">
     <div class="row">
         <div class="col-lg-3 col-md-2"></div>
@@ -10,8 +9,8 @@
                 <i class="fas fa-chalkboard-teacher"></i>
             </div>
             <div class="col-lg-12 login-title">
-                <h2 class="text-center mb-5">
-                    Crear Carreras
+                <h2 class="text-center mb-4">
+                    <font face="Comic Sans MS">Crear Carreras</font>
                 </h2>
 
             </div>
@@ -46,7 +45,7 @@
 
                                     <div class="col-lg-12 py-3">
                                         <div class="col-lg-12 text-center">
-                                            <button id="boton" class="btn btn-primary">{{ __('Agregar') }}</button>
+                                            <button id="boton" class="btn btn-outline-primary">{{ __('Agregar') }}</button>
                                         </div>
                                     </div>
                                 </form>
@@ -63,7 +62,7 @@
 
     <script>
         const button = document.getElementById('boton');
-        const form = document.getElementById('formulario');
+        const form = document.getElementById('formulario')
         button.addEventListener('click', function(e){
             e.preventDefault();
             Swal.fire({
@@ -71,8 +70,8 @@
                 text: "No podra eliminar la carrera ",
                 icon: 'warning',
                 showCancelButton: true,
-                confirmButtonColor: '#48A24C',
-                cancelButtonColor: '#C4312C',
+                confirmButtonColor: '#64FF00',
+                cancelButtonColor: 'CE2424',
                 confirmButtonText: 'Si, Confirmo'
             }).then((result) => {
                 if (result.isConfirmed) {
@@ -81,11 +80,4 @@
             })
         })
     </script>
-
-@else
-@php
-header("Location: /home" );
-exit();
-@endphp
-@endif
 @endsection
