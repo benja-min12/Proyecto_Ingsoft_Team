@@ -7,8 +7,11 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Login') }}</div>
+            <div class="text-center mb-5">
+                <h2>{{ __('Login') }}</h2>
+            </div>
+            <div class="card border-primary">
+
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('login') }}">
@@ -18,7 +21,7 @@
                             <label for="rut" class="col-md-4 col-form-label text-md-right">{{ __('Rut usuario') }}</label>
 
                             <div class="col-md-6">
-                                <input id="rut" type="text" class="form-control @error('rut') is-invalid @enderror" name="rut" value="{{ old('rut') }}" required autocomplete="rut" autofocus>
+                                <input id="rut" type="text" class="border-primary form-control @error('rut') is-invalid @enderror" name="rut" value="{{ old('rut') }}" required autocomplete="rut" autofocus>
 
                                 @error('rut')
                                     <span class="invalid-feedback" role="alert">
@@ -32,8 +35,7 @@
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
 
                             <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
-
+                                <input id="password" type="password" class="border-primary form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -70,7 +72,7 @@
                         icon: 'error',
                         title: '{{session('error')}}',
                         text: 'contacte con el administrador',
-                        confirmButtonColor: '#CE2424',
+                        confirmButtonColor: '#48A24C',
                         })
                     </script>
                     @endif
