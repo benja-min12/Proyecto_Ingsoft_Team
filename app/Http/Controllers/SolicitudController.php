@@ -201,9 +201,22 @@ class SolicitudController extends Controller
      * @param  \App\Models\Solicitud  $solicitud
      * @return \Illuminate\Http\Response
      */
-    public function edit(Solicitud $solicitud)
+    public function edit(int $id)
     {
-        //
+
+        echo($id);
+        $solicitudesAlumno = Auth::user()->solicitudes;
+        foreach ($solicitudesAlumno as $solicitud){
+            if ($solicitud->getOriginal()['pivot_id'] == $id){
+                $solicitudGuardada = $solicitud;
+            }
+
+        }
+
+
+
+
+        return view('solicitud.edit')->with('solicitud',$solicitudGuardada);
     }
 
     /**
@@ -213,9 +226,32 @@ class SolicitudController extends Controller
      * @param  \App\Models\Solicitud  $solicitud
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Solicitud $solicitud)
+    public function update(Request $request,Solicitud $solicitud)
     {
-        //
+        $solicitudesAlumno = Auth::user()->solicitudes;
+        foreach ($solicitudesAlumno as $solicitud){
+
+            if ($solicitud->getOriginal()['pivot_id'] == $request->id_solicitud){
+                if($request->id == '1' or $request->id == '2' or $request->id == '3' or $request->id == '4'){
+
+                    $request->validate([
+                        'telefono' => ['regex:/[0-9]*/','required'],
+                        'nrc' => ['required'],
+                        'nombre' => ['required'],
+                        'detalle' => ['required']
+                    ]);
+
+                    $solicitud->pivot->telefono = $request->telefono;
+                    $solicitud->pivot->NRC = $request->nrc;
+                    $solicitud->pivot->nombre_asignatura = $request->nombre;
+                    $solicitud->pivot->detalles = $request->detalle;
+                    $solicitud->pivot->save();
+
+                }
+            }
+        }
+
+        return redirect('/solicitud')->with('success','Solicitud editada correctamente');
     }
 
     /**
@@ -227,5 +263,17 @@ class SolicitudController extends Controller
     public function destroy(Solicitud $solicitud)
     {
         //
+    }
+    public function anular(Request $request)
+    {
+        $solicitudesAlumno = Auth::user()->solicitudes;
+        foreach ($solicitudesAlumno as $solicitud){
+            if ($solicitud->getOriginal()['pivot_id'] == $request->id_solicitud){
+
+                $solicitud->pivot->estado = 4;
+
+            }
+        }
+        return view('solicitud.index');
     }
 }

@@ -41,7 +41,7 @@
             <tr>
                 <td class="border-primary" scope="row">{{$carrera->codigo}}</td>
                 <td class="border-primary" style="font-size:20px">{{$carrera->nombre}}</td>
-                <td class="border-primary"><a class="btn btn-primary" href="{{ route('carrera.edit',$carrera) }}">Editar</a></td>
+                <td class="border-primary"><a class="btn btn-primary" href="{{ route('carrera.edit',$carrera->id) }}">Editar</a></td>
             </tr>
             @endforeach
         </tbody>

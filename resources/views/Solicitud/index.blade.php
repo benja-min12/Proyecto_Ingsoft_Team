@@ -39,6 +39,7 @@
                 <th class="border-primary" style="width: 20% ; font-size:18px" scope="col">Tipo Solicitud</th>
                 <th class="border-primary" style="width: 10% ; font-size:18px" scope="col">Estado</th>
                 <th class="border-primary" style="width: 10% ; font-size:18px" scope="col">Editar</th>
+                <th class="border-primary" style="width: 10% ; font-size:18px" scope="col">Anular</th>
             </tr>
         </thead>
         <tbody>
@@ -93,7 +94,7 @@
 
                 @endswitch
                 <td class="border-primary"><a class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="editar" href={{
-                        route('solicitud.edit', [$solicitud]) }}>Editar/Anular</a></td>
+                        route('solicitud.edit',$solicitud->getOriginal() ['pivot_id']) }}>Editar/Anular</a></td>
             </tr>
             @empty
             <tr>
