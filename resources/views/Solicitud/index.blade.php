@@ -93,8 +93,19 @@
                 @default
 
                 @endswitch
+                @if ($solicitud->getOriginal() ['pivot_estado'] === 0)
                 <td class="border-primary"><a class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="editar" href={{
-                        route('solicitud.edit',$solicitud->getOriginal() ['pivot_id']) }}>Editar/Anular</a></td>
+                        route('solicitud.edit',$solicitud->getOriginal() ['pivot_id']) }}>Editar</a></td>
+            @else
+                <td class="border-primary"><a class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="editar">Editar</a></td>
+            @endif
+
+                @if ($solicitud->getOriginal() ['pivot_estado'] === 0)
+                <td><a class="btn btn-warning" href={{ route('changeStatusSolicitud', ['id' => $solicitud->getOriginal() ['pivot_id']]) }}>anular</a></td>
+            @else
+                <td><a class="btn btn-secondary" href={{ route('changeStatusSolicitud', ['id' => $solicitud->getOriginal() ['pivot_id']]) }}>anulado</a></td>
+            @endif
+
             </tr>
             @empty
             <tr>

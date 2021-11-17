@@ -6,6 +6,7 @@ use App\Models\Solicitud;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use PhpParser\Node\Stmt\ElseIf_;
 use SebastianBergmann\Environment\Console;
 
 class SolicitudController extends Controller
@@ -248,7 +249,45 @@ class SolicitudController extends Controller
                     $solicitud->pivot->save();
 
                 }
+                if($request->id == '5'){
+
+                    $request->validate([
+                        'telefono' => ['regex:/[0-9]*/','required'],
+                        'nombre' => ['required'],
+                        'detalle' => ['required'],
+                        'calificacion'=>['required','numeric','between:4.0,7.0'],
+                        'cantidad'=>['regex:/[0-9]*/','required']
+                    ]);
+
+                    $solicitud->pivot->telefono = $request->telefono;
+                    $solicitud->pivot->nombre_asignatura = $request->nombre;
+                    $solicitud->pivot->detalles = $request->detalle;
+                    $solicitud->pivot->calificacion_aprob = $request->calificacion;
+                    $solicitud->pivot->cant_ayudantias= $request->cantidad;
+                    $solicitud->pivot->save();
+
+                }
+                if($request->id == '6'){
+
+                    $request->validate([
+                        'telefono' => ['regex:/[0-9]*/','required'],
+                        'nombre' => ['required'],
+                        'detalle' => ['required'],
+                        'facilidad' => ['required'],
+                        'profesor' => ['required'],
+                        'adjunto.*' => ['mimes:pdf,jpg,jpeg,doc,docx'],
+                    ]);
+
+                    $solicitud->pivot->telefono = $request->telefono;
+                    $solicitud->pivot->nombre_asignatura = $request->nombre;
+                    $solicitud->pivot->detalles = $request->detalle;
+                    $solicitud->pivot->tipo_facilidad = $request->facilidad;
+                    $solicitud->pivot->nombre_profesor = $request->profesor;
+                    $solicitud->pivot->archivos = $request->adjunto;
+                    $solicitud->pivot->save();
+                }
             }
+
         }
 
         return redirect('/solicitud')->with('success','Solicitud editada correctamente');
