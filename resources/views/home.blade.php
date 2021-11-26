@@ -39,6 +39,19 @@
                 </div>
             </div>
             <div class="card border-primary">
+                <i class="fas fa-users fa-10x text-center"></i>
+                <div class="card-body">
+                    <h5 class="card-title text-center">Carga masiva de estudiantes</h5>
+                    <div class="text-center">
+                        <img class="img-fluid" style="height: 200px" src="{{asset('images/CargaMasiva.png')}}" alt="CargaMasiva">
+                    </div>
+                    <small class="text-muted">Permite realizar una carga masiva de estudiantes al sistema.</small>
+                </div>
+                <div class="card-footer">
+                    <a href="users/import" class="btn btn-block btn-primary">IR</a>
+                </div>
+            </div>
+            <div class="card border-primary">
                 <i class="fas fa-graduation-cap fa-10x text-center"></i>
                 <div class="card-body">
                     <h4 class="card-title text-center">Administrar Carreras</h4>
@@ -54,16 +67,7 @@
         </div>
         @elseif (Auth::user()->tipo_usuario == "Jefe Carrera")
         <div class="card-deck">
-            <div class="card border-primary">
-                <i class="fas fa-users fa-10x text-center"></i>
-                <div class="card-body">
-                    <h5 class="card-title text-center">Carga masiva de estudiantes</h5>
-                    <small class="text-muted">Permite realizar una carga masiva de estudiantes al sistema.</small>
-                </div>
-                <div class="card-footer">
-                    <a href="" class="btn btn-block btn-primary">IR</a>
-                </div>
-            </div>
+
             <div class="card border-primary">
                 <i class="fas fa-search fa-10x text-center"></i>
                 <div class="card-body">
