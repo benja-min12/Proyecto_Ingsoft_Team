@@ -237,7 +237,7 @@
                 button.hidden = false
                 break;
             case "5":
-                label.innerHTML="MOTIVOS PARA SER AYUDANTE";
+                label.innerHTML="MOTIVOS PARA SER AYUDANTIA";
                 inputTelefono.hidden = false;
                 inputNrc.hidden = true;
                 inputNombre.hidden = false;
