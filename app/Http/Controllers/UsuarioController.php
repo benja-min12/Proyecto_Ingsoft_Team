@@ -18,6 +18,7 @@ class UsuarioController extends Controller
      */
     public function index(Request $request)
     {
+        
         $carreras = Carrera::all();
         if ($request->search == null) {
             $usuarios = User::simplePaginate(7);

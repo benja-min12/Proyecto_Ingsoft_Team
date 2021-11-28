@@ -23,6 +23,9 @@
                             @csrf
                             <input type="text" name="user" id="user" value={{Auth::user()->id}} hidden>
                             <div class="form-group">
+                                <div class="alert alert-warning d-flex align-items-center border-warning" role="alert">
+                                    El tipo de solicitud no se puede editar posteriormente. Si deseas editar el campo "tipo de solicitud" posteriormente deberás anular la solicitud y enviarla nuevamente
+                                </div>
                                 <label for="form-control-label" >Tipo Solicitud</label>
                                 <select class="form-control" name="tipo" id="tipo">
                                     <option value={{ null }}>Seleccione..</option>
@@ -39,7 +42,9 @@
                                 <label class="form-control-label">TELEFONO CONTACTO</label>
                                 <input id="telefono" type="text"
                                     class="form-control @error('telefono') is-invalid @enderror" name="telefono"
-                                    value="{{ old('telefono') }}" autocomplete="telefono" autofocus>
+                                    value="{{ old('telefono') }}"
+                                    placeholder="Ej. 21436578"
+                                    autocomplete="telefono" autofocus>
 
                                 @error('telefono')
                                 <span class="invalid-feedback" role="alert">
@@ -50,7 +55,7 @@
                             <div class="form-group" id="groupNrc" hidden>
                                 <label class="form-control-label">NRC ASIGNATURA</label>
                                 <input id="nrc" type="text" class="form-control @error('nrc') is-invalid @enderror"
-                                    name="nrc" value="{{ old('nrc') }}" autocomplete="nrc" autofocus>
+                                    name="nrc" value="{{ old('nrc') }}" placeholder="Ej.1234" autocomplete="nrc" autofocus>
 
                                 @error('nrc')
                                 <span class="invalid-feedback" role="alert">
@@ -62,7 +67,7 @@
                             <div class="form-group" id="groupNombre" hidden>
                                 <label class="form-control-label">NOMBRE ASIGNATURA</label>
                                 <input id="nombre" type="text" class="form-control @error('nombre') is-invalid @enderror"
-                                    name="nombre" value="{{ old('nombre') }}" autocomplete="nombre" autofocus>
+                                    name="nombre" value="{{ old('nombre') }}" autocomplete="nombre" placeholder="Ej. Calculo 2" autofocus>
 
                                 @error('nombre')
                                 <span class="invalid-feedback" role="alert">
@@ -138,7 +143,7 @@
                                 @enderror
                             </div>
                             <div class="form-group" id="groupDetalles" hidden>
-                                <label class="form-control-label">DETALLES DE LA SOLICITUD</label>
+                                <label id=labelCambio class="form-control-label">DETALLES DE LA SOLICITUD</label>
                                 <textarea id="detalle" type="text"
                                     class="form-control @error('detalle') is-invalid @enderror" name="detalle"
                                     value="{{ old('detalle') }}" autocomplete="detalle" autofocus></textarea>
@@ -167,7 +172,11 @@
         </div>
     </div>
 </div>
+
+
+
 <script type="text/javascript">
+    const label=document.getElementById('labelCambio');
     const form = document.getElementById('formulario');
     const selectSolicitud = document.getElementById('tipo');
     const inputTelefono = document.getElementById('groupTelefono');
@@ -231,6 +240,7 @@
                 button.hidden = false
                 break;
             case "5":
+                label.innerHTML="MOTIVOS PARA SER AYUDANTE";
                 inputTelefono.hidden = false;
                 inputNrc.hidden = true;
                 inputNombre.hidden = false;
@@ -267,17 +277,16 @@
                 button.hidden = true
                 break;
         }
-
     })
     button.addEventListener('click', function(e){
             e.preventDefault();
             Swal.fire({
-                title: 'Confirme para crear la solicitud',
+                title: 'La solicitud será enviada al Jefe de Carrera ¿deseas continuar? Recuerda que no podrás editar posteriormente el tipo de solicitud',
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#48A24C',
                 cancelButtonColor: '#C4312C',
-                confirmButtonText: 'Si, Confirmo'
+                confirmButtonText: 'Si, deseo continuar'
             }).then((result) => {
                 if (result.isConfirmed) {
                 form.submit();

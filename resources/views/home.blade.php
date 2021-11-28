@@ -42,6 +42,12 @@
                 <i class="fas fa-users fa-10x text-center"></i>
                 <div class="card-body">
                     <h5 class="card-title text-center">Carga masiva de estudiantes</h5>
+
+                    <small class="text-muted">Permite realizar una carga masiva de estudiantes al sistema.</small>
+                </div>
+                <div class="card-footer">
+                    <a href="" class="btn btn-block btn-primary">IR</a>
+
                     <div class="text-center">
                         <img class="img-fluid" style="height: 200px" src="{{asset('images/CargaMasiva.png')}}" alt="CargaMasiva">
                     </div>
@@ -49,6 +55,7 @@
                 </div>
                 <div class="card-footer">
                     <a href="users/import" class="btn btn-block btn-primary">IR</a>
+
                 </div>
             </div>
             <div class="card border-primary">
