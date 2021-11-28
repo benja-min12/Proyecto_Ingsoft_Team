@@ -6,7 +6,10 @@ use App\Models\Solicitud;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use PhpParser\Node\Stmt\ElseIf_;
 use SebastianBergmann\Environment\Console;
+use Illuminate\Support\Facades\Storage;
+use PhpParser\Builder\Use_;
 
 class SolicitudController extends Controller
 {
@@ -15,12 +18,14 @@ class SolicitudController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //solicitudes de la tabla pivot de userSolicitud
+        
         $solicitudesAlumno = Auth::user()->solicitudes;
 
+
         return view('solicitud.index')->with('solicitudes', $solicitudesAlumno);
+      
     }
 
     /**
@@ -203,9 +208,17 @@ class SolicitudController extends Controller
      * @param  \App\Models\Solicitud  $solicitud
      * @return \Illuminate\Http\Response
      */
-    public function edit(Solicitud $solicitud)
+    public function edit(int $id)
     {
-        //
+        //echo($id);
+        $solicitudesAlumno = Auth::user()->solicitudes;
+        foreach ($solicitudesAlumno as $solicitud){
+            if ($solicitud->getOriginal()['pivot_id'] == $id){
+                $solicitudGuardada = $solicitud;
+            }
+
+        }
+        return view('solicitud.edit')->with('solicitud',$solicitudGuardada);
     }
 
     /**
@@ -215,9 +228,90 @@ class SolicitudController extends Controller
      * @param  \App\Models\Solicitud  $solicitud
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Solicitud $solicitud)
+    public function update(Request $request,Solicitud $solicitud)
     {
-        //
+        $solicitudesAlumno = Auth::user()->solicitudes;
+        foreach ($solicitudesAlumno as $solicitud){
+
+            if ($solicitud->getOriginal()['pivot_id'] == $request->id_solicitud){
+                //echo($request->id);
+                if($request->id == '1' or $request->id == '2' or $request->id == '3' or $request->id == '4'){
+
+                    $request->validate([
+                        'telefono' => ['regex:/[0-9]*/','required'],
+                        'nrc' => ['required'],
+                        'nombre' => ['required'],
+                        'detalle' => ['required']
+                    ]);
+
+                    $solicitud->pivot->telefono = $request->telefono;
+                    $solicitud->pivot->NRC = $request->nrc;
+                    $solicitud->pivot->nombre_asignatura = $request->nombre;
+                    $solicitud->pivot->detalles = $request->detalle;
+                    $solicitud->pivot->save();
+
+                }
+                if($request->id == '5'){
+
+                    $request->validate([
+                        'telefono' => ['regex:/[0-9]*/','required'],
+                        'nombre' => ['required'],
+                        'detalle' => ['required'],
+                        'calificacion'=>['required','numeric','between:4.0,7.0'],
+                        'cantidad'=>['regex:/[0-9]*/','required']
+                    ]);
+
+                    $solicitud->pivot->telefono = $request->telefono;
+                    $solicitud->pivot->nombre_asignatura = $request->nombre;
+                    $solicitud->pivot->detalles = $request->detalle;
+                    $solicitud->pivot->calificacion_aprob = $request->calificacion;
+                    $solicitud->pivot->cant_ayudantias= $request->cantidad;
+                    $solicitud->pivot->save();
+
+                }
+                if($request->id == '6'){
+
+                    $findUser = Auth::user()->name;
+
+                    $aux=0;
+
+
+
+                    foreach (json_decode($solicitud->pivot->archivos) as $file){
+                        //dd($file);
+                        unlink(public_path('storage/docs/').$file);
+                        Storage::delete(public_path('storage/docs/').$file);
+                        dd($file);
+                        dd($solicitud->pivot->nombre_asignatura);
+                        //dd($solicitud->pivot->archivos);
+
+                    }
+
+                    /*foreach ($request->adjunto as $file) {
+
+                        $name = $aux.time().'-'.$findUser->name.'.pdf';
+                        $file->move(public_path('\storage\docs'), $name);
+                        $datos[] = $name;
+                        $aux++;
+                    }*/
+
+
+                    $solicitud->pivot->telefono = $request->telefono;
+                    $solicitud->pivot->nombre_asignatura = $request->nombre;
+                    $solicitud->pivot->detalles = $request->detalle;
+                    $solicitud->pivot->tipo_facilidad = $request->facilidad;
+                    $solicitud->pivot->nombre_profesor = $request->profesor;
+                    $solicitud->pivot->archivos;
+
+                    $solicitud->pivot->save();
+
+                }
+
+            }
+
+        }
+
+        return redirect('/solicitud')->with('success','Solicitud editada correctamente');
     }
 
     /**
@@ -229,5 +323,17 @@ class SolicitudController extends Controller
     public function destroy(Solicitud $solicitud)
     {
         //
+    }
+    public function anular(Request $request)
+    {
+        $solicitudesAlumno = Auth::user()->solicitudes;
+        foreach ($solicitudesAlumno as $solicitud){
+            if ($solicitud->getOriginal()['pivot_id'] == $request->id_solicitud){
+
+                $solicitud->pivot->estado = 4;
+
+            }
+        }
+        return view('solicitud.index');
     }
 }

@@ -17,11 +17,6 @@
 <div class="container">
     <div class="row mb-4">
         <div class="col col-3">
-            <form class="form-inline my-2 my-lg-0" method="GET" action="{{ route('carrera.index') }}">
-                <input class="form-control mr-sm-2 border-primary mb-2" name="search" id="search" type="search"
-                    placeholder="Buscar por código" aria-label="Search">
-                    <button class="btn btn-primary mb-1">Buscar</button>
-            </form>
         </div>
         <div class="col col-7">
             <p class="text-center" style="font-size: x-large">Mis Solicitudes</p>
@@ -39,6 +34,7 @@
                 <th class="border-primary" style="width: 20% ; font-size:18px" scope="col">Tipo Solicitud</th>
                 <th class="border-primary" style="width: 10% ; font-size:18px" scope="col">Estado</th>
                 <th class="border-primary" style="width: 10% ; font-size:18px" scope="col">Editar</th>
+                <th class="border-primary" style="width: 10% ; font-size:18px" scope="col">Anular</th>
             </tr>
         </thead>
         <tbody>
@@ -92,8 +88,19 @@
                 @default
 
                 @endswitch
+                @if ($solicitud->getOriginal() ['pivot_estado'] === 0)
                 <td class="border-primary"><a class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="editar" href={{
-                        route('solicitud.edit', [$solicitud]) }}>Editar/Anular</a></td>
+                        route('solicitud.edit',$solicitud->getOriginal() ['pivot_id']) }}>Editar</a></td>
+            @else
+                <td class="border-primary"><a class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="editar">Editar</a></td>
+            @endif
+
+                @if ($solicitud->getOriginal() ['pivot_estado'] === 0)
+                <td><a class="btn btn-warning" href={{ route('changeStatusSolicitud', ['id' => $solicitud->getOriginal() ['pivot_id']]) }}>anular</a></td>
+            @else
+                <td class="border-primary"><a class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="anular">Anular</a></td>
+            @endif
+
             </tr>
             @empty
             <tr>
