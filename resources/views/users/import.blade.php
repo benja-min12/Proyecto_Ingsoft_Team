@@ -4,8 +4,8 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">Importar Excel</div>
+            <div class="card border-primary">
+                <div class="card-header border-primary">Importar Excel</div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -16,14 +16,14 @@
 
                     @if (isset($errors) && $errors->any())
                 <div class="alert alert-danger">
-                   <ul>
-                       @foreach ($errors->all() as $e )
-                       <li>
-                           {{$e}}
-                       </li>
-                       @endforeach
+                    <ul>
+                        @foreach ($errors->all() as $e )
+                        <li>
+                            {{$e}}
+                        </li>
+                        @endforeach
 
-                   </ul>
+                    </ul>
 
                 </div>
                     @endif
@@ -104,7 +104,7 @@
                         @csrf
 
                         <div class="form-group">
-                            <input type="file" name="file" required/>
+                            <input  type="file" name="file" required accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" />
 
                             <button type="submit" class="btn btn-primary">Importar</button>
                         </div>

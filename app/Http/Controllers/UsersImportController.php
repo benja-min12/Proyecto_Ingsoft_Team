@@ -11,20 +11,20 @@ class UsersImportController extends Controller
 {
     public function show()
     {
-        
+
         return view('users.import');
     }
 
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'file' => 'required|mimes:xls,xlsx'
+        ]);
         $file = $request->file('file')->store('import');
 
         $import = new UsersImport;
         $import->import($file);
-        //if($import->failures()->isNotEmpty()) {
-            //return back()->withFailures($import->failures());
-        //}
-
+        
         return back()->withStatus('El archivo Excel fue importado correctamente');
     }
 }

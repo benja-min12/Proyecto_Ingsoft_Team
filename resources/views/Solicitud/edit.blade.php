@@ -16,7 +16,8 @@
                 <div class="card-body">
                     <div class="col-lg-12 login-form">
                         <div class="col-lg-12 login-form">
-                            <form method="POST" action="{{ route('solicitud.update',$solicitud) }}">
+                            <form method="POST" action="{{ route('solicitud.update',$solicitud) }}"
+                            enctype="multipart/form-data">
                                 @csrf
                                 @method('PUT')
                                 <div class="form-group">

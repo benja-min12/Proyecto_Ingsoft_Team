@@ -85,7 +85,7 @@ class UsersImport implements
                 $index="email";
                 array_push($hasFailure, $this->generateDetail($key, $index, $msj, $row[$index]));
                 continue;
-              }
+            }
             $validaterut=User::where("rut", $row["rut"])->get();
             if(sizeof($validaterut)>0){
                 $msj="El rut esta en uso";
@@ -108,11 +108,13 @@ class UsersImport implements
                 array_push($hasFailure, $this->generateDetail($key, $index, $msj, $row[$index]));
                 continue;
             }
+            
+            $carrera=Carrera::where("codigo", $row["id_carrera"])->first();
 
 
             $defaultPassword = substr($row["rut"],0,6);
             User::create([
-                'carrera_id'=> NULL,//$row['id_carrera'],
+                'carrera_id'=> $carrera->id,
                 'rut'=> $row['rut'],
                 'name'=> $row['name'],
                 'email'=> $row['email'],

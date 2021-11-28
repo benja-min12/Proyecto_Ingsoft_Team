@@ -13,6 +13,17 @@
         })
     </script>
 @endif
+@if (session('Error'))
+    <script>
+        Swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: '{{ session('Error') }}',
+        showConfirmButton: false,
+        timer: 1500
+        })
+    </script>
+@endif
 
 <div class="container">
     <div class="row mb-4">
@@ -88,7 +99,7 @@
                 @default
 
                 @endswitch
-                @if ($solicitud->getOriginal() ['pivot_estado'] === 0)
+            @if ($solicitud->getOriginal() ['pivot_estado'] === 0)
                 <td class="border-primary"><a class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="editar" href={{
                         route('solicitud.edit',$solicitud->getOriginal() ['pivot_id']) }}>Editar</a></td>
             @else
@@ -96,7 +107,7 @@
             @endif
 
                 @if ($solicitud->getOriginal() ['pivot_estado'] === 0)
-                <td><a class="btn btn-warning" href={{ route('changeStatusSolicitud', ['id' => $solicitud->getOriginal() ['pivot_id']]) }}>anular</a></td>
+                <td class="border-primary"><a class="btn btn-warning" href={{ route('changeStatusSolicitud', ['id' => $solicitud->getOriginal() ['pivot_id']]) }}>Anular</a></td>
             @else
                 <td class="border-primary"><a class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="anular">Anular</a></td>
             @endif

@@ -20,12 +20,8 @@ class SolicitudController extends Controller
      */
     public function index(Request $request)
     {
-        
         $solicitudesAlumno = Auth::user()->solicitudes;
-
-
         return view('solicitud.index')->with('solicitudes', $solicitudesAlumno);
-      
     }
 
     /**
@@ -49,7 +45,7 @@ class SolicitudController extends Controller
         switch ($request->tipo) {
             case '1':
                 $request->validate([
-                    'telefono' => ['regex:/[0-9]*/','required','min:8','max:8'],
+                    'telefono' => ['required','regex:/[0-9]*/','min:8','max:8'],
                     'nrc' => ['required','regex:/[0-9]/','regex:/(^[1-9])/'],
                     'nombre' => ['required','regex:/[a-zA-Z]/'],
                     'detalle' => ['required']
@@ -69,7 +65,7 @@ class SolicitudController extends Controller
                 break;
             case '2':
                 $request->validate([
-                    'telefono' => ['regex:/[0-9]*/','required','min:8','max:8'],
+                    'telefono' => ['required','regex:/[0-9]*/','min:8','max:8'],
                     'nrc' => ['required','regex:/[0-9]/','regex:/(^[1-9])/'],
                     'nombre' => ['required','regex:/[a-zA-Z]/'],
                     'detalle' => ['required']
@@ -89,7 +85,7 @@ class SolicitudController extends Controller
                 break;
             case '3':
                 $request->validate([
-                    'telefono' => ['regex:/[0-9]*/','required','min:8','max:8'],
+                    'telefono' => ['required','regex:/[0-9]*/','min:8','max:8'],
                     'nrc' => ['required','regex:/[0-9]/','regex:/(^[1-9])/'],
                     'nombre' => ['required','regex:/[a-zA-Z]/'],
                     'detalle' => ['required']
@@ -109,7 +105,7 @@ class SolicitudController extends Controller
                 break;
             case '4':
                 $request->validate([
-                    'telefono' => ['regex:/[0-9]*/','required','min:8','max:8'],
+                    'telefono' => ['required','regex:/[0-9]*/','min:8','max:8'],
                     'nrc' => ['required','regex:/[0-9]/','regex:/(^[1-9])/'],
                     'nombre' => ['required','regex:/[a-zA-Z]/'],
                     'detalle' => ['required']
@@ -130,11 +126,11 @@ class SolicitudController extends Controller
             case '5':
 
                 $request->validate([
-                    'telefono' => ['regex:/[0-9]*/','required','min:8','max:8'],
+                    'telefono' => ['required','regex:/[0-9]*/','min:8','max:8'],
                     'nombre' => ['required','regex:/[a-zA-Z]/'],
                     'detalle' => ['required'],
                     'calificacion'=>['required','numeric','between:4.0,7.0'],
-                    'cantidad'=>['regex:/[0-9]*/','required']
+                    'cantidad'=>['required','regex:/[0-9]*/']
                 ]);
 
                 $findUser = User::find($request->user);
@@ -163,26 +159,35 @@ class SolicitudController extends Controller
                 $findUser = User::find($request->user);
 
                 $aux = 0;
+                //validar archivos adjuntos
+                if($request->hasFile('adjunto')){
+                    foreach ($request->adjunto as $file) {
+                        $name = $aux.time().'-'.$findUser->name.'.pdf';
+                        $file->move(public_path('\storage\docs'), $name);
+                        $datos[] = $name;
+                        $aux++;
+                    }
+                    $findUser->solicitudes()->attach($request->tipo, [
+                        'telefono' => $request->telefono,
+                        'nombre_asignatura' => $request->nombre,
+                        'detalles' => $request->detalle,
+                        'tipo_facilidad' => $request->facilidad,
+                        'nombre_profesor' => $request->profesor,
+                        'archivos' => json_encode($datos),
+                    ]);
+                    $findSolicitud=  DB::table('solicitud_user')->orderBy('id', 'desc')->first();
+                    $Mensaje="Se ha registrado la solicitud número ". $findSolicitud->id . " con fecha ". $findSolicitud->created_at;
+                    return redirect('/solicitud')->with('Crear',$Mensaje);
+                }else{
+                    //error
+                    $Error="No se ha adjuntado ningun archivo";
+                    return redirect('/solicitud')->with('Error',$Error);
 
-                foreach ($request->adjunto as $file) {
-
-                    $name = $aux.time().'-'.$findUser->name.'.pdf';
-                    $file->move(public_path('\storage\docs'), $name);
-                    $datos[] = $name;
-                    $aux++;
                 }
 
-                $findUser->solicitudes()->attach($request->tipo, [
-                    'telefono' => $request->telefono,
-                    'nombre_asignatura' => $request->nombre,
-                    'detalles' => $request->detalle,
-                    'tipo_facilidad' => $request->facilidad,
-                    'nombre_profesor' => $request->profesor,
-                    'archivos' => json_encode($datos),
-                ]);
-                $findSolicitud=  DB::table('solicitud_user')->orderBy('id', 'desc')->first();
-                $Mensaje="Se ha registrado la solicitud número ". $findSolicitud->id . " con fecha ". $findSolicitud->created_at;
-                return redirect('/solicitud')->with('Crear',$Mensaje);
+
+
+
                 break;
 
             default:
@@ -271,29 +276,17 @@ class SolicitudController extends Controller
                 }
                 if($request->id == '6'){
 
-                    $findUser = Auth::user()->name;
+                    $findUser = Auth::user();
 
                     $aux=0;
 
-
-
-                    foreach (json_decode($solicitud->pivot->archivos) as $file){
-                        //dd($file);
-                        unlink(public_path('storage/docs/').$file);
-                        Storage::delete(public_path('storage/docs/').$file);
-                        dd($file);
-                        dd($solicitud->pivot->nombre_asignatura);
-                        //dd($solicitud->pivot->archivos);
-
-                    }
-
-                    /*foreach ($request->adjunto as $file) {
+                    foreach ($request->adjunto as $file) {
 
                         $name = $aux.time().'-'.$findUser->name.'.pdf';
                         $file->move(public_path('\storage\docs'), $name);
                         $datos[] = $name;
                         $aux++;
-                    }*/
+                    }
 
 
                     $solicitud->pivot->telefono = $request->telefono;
@@ -301,7 +294,7 @@ class SolicitudController extends Controller
                     $solicitud->pivot->detalles = $request->detalle;
                     $solicitud->pivot->tipo_facilidad = $request->facilidad;
                     $solicitud->pivot->nombre_profesor = $request->profesor;
-                    $solicitud->pivot->archivos;
+                    $solicitud->pivot->archivos= json_encode($datos);
 
                     $solicitud->pivot->save();
 
