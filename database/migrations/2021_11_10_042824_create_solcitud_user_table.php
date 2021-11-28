@@ -13,7 +13,7 @@ class CreateSolcitudUserTable extends Migration
      */
     public function up()
     {
-        Schema::create('solcitud_user', function (Blueprint $table) {
+        Schema::create('solicitud_user', function (Blueprint $table) {
             $table->id();
             $table->string('telefono');
             $table->tinyInteger('estado')->default(0); //0: Pendiente, 1:Aceptada, 2:Aceptada con obs, 3:Rechazada
@@ -36,8 +36,8 @@ class CreateSolcitudUserTable extends Migration
             $table->unsignedBigInteger('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users');
 
-            $table->unsignedBigInteger('solcitud_id')->nullable();
-            $table->foreign('solcitud_id')->references('id')->on('Solicituds');
+            $table->unsignedBigInteger('solicitud_id')->nullable();
+            $table->foreign('solicitud_id')->references('id')->on('Solicituds');
 
             $table->timestamps();
         });
@@ -50,6 +50,6 @@ class CreateSolcitudUserTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('solcitud_user');
+        Schema::dropIfExists('solicitud_user');
     }
 }

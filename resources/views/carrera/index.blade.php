@@ -8,15 +8,16 @@
         icon: 'success',
         title: '{{ session('success') }}',
         showConfirmButton: false,
-        timer: 1500
+        timer: 3000
         })
     </script>
 @endif
 <div class="container">
     <div class="row mb-4">
-        <div class="col col-2">
+        <div class="col col-2 ">
             <form method="GET" action="{{ route('carrera.index') }}">
-                <input class="border-primary mb-2" type="text" name="search" id="search" placeholder="Buscar por codigo">
+                <input class="border-primary mr-sm-2 mb-2" type="text" name="search" id="search"
+                placeholder="Buscar por codigo">
                 <button class="btn btn-primary mb-2">Buscar</button>
             </form>
         </div>
@@ -41,7 +42,7 @@
             <tr>
                 <td class="border-primary" scope="row">{{$carrera->codigo}}</td>
                 <td class="border-primary" style="font-size:20px">{{$carrera->nombre}}</td>
-                <td class="border-primary"><a class="btn btn-primary" href="{{ route('carrera.edit',$carrera) }}">Editar</a></td>
+                <td class="border-primary"><a class="btn btn-primary" href="{{ route('carrera.edit',$carrera->id) }}">Editar</a></td>
             </tr>
             @endforeach
         </tbody>

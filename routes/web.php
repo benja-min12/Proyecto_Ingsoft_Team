@@ -6,7 +6,10 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\DisabledUserController;
+use App\Http\Controllers\SolicitudController;
+use App\Http\Controllers\DisabledSolicitudController;
 
+use App\Models\Solicitud;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -28,7 +31,7 @@ Route::middleware(['auth'])->group(function () {
     });
 });
 Route::resource('carrera', CarreraController::class, ['middleware' => 'auth']);
-
+Route::resource('solicitud', SolicitudController::class);
 Auth::routes();
 Route::resource('usuario', UsuarioController::class,['middleware' => 'auth']);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -37,7 +40,8 @@ Route::get('/cambiarContrasenia',[App\Http\Controllers\ChangePasswordController:
 Route::get('/ResetContrasenia',[App\Http\Controllers\ChangePasswordController::class, 'ResetContrasenia'])->name('ResetContrasenia');
 Route::post('/ResetPassword', [App\Http\Controllers\ChangePasswordController::class, 'ResetPassword'])->name('ResetPassword');
 Route::get('/status-user-change', [DisabledUserController::class, 'disabledUser'])->name('changeStatus');
-
+Route::get('/status-solicitud-change', [DisabledSolicitudController::class, 'disabledSolicitud'])->name('changeStatusSolicitud');
 Route::get('users/import', [UsersImportController::class, 'show']);
 Route::post('users/import', [UsersImportController::class, 'store']);
+
 
