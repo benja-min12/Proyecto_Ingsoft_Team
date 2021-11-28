@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CarreraController;
+use App\Http\Controllers\UsersImportController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UsuarioController;
@@ -40,3 +41,7 @@ Route::get('/ResetContrasenia',[App\Http\Controllers\ChangePasswordController::c
 Route::post('/ResetPassword', [App\Http\Controllers\ChangePasswordController::class, 'ResetPassword'])->name('ResetPassword');
 Route::get('/status-user-change', [DisabledUserController::class, 'disabledUser'])->name('changeStatus');
 Route::get('/status-solicitud-change', [DisabledSolicitudController::class, 'disabledSolicitud'])->name('changeStatusSolicitud');
+Route::get('users/import', [UsersImportController::class, 'show']);
+Route::post('users/import', [UsersImportController::class, 'store']);
+
+
