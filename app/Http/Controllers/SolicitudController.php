@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use PhpParser\Node\Stmt\ElseIf_;
 use SebastianBergmann\Environment\Console;
+use Illuminate\Support\Facades\Storage;
+use PhpParser\Builder\Use_;
 
 class SolicitudController extends Controller
 {
@@ -16,10 +18,45 @@ class SolicitudController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $solicitudesAlumno = Auth::user()->solicitudes;
-        return view('solicitud.index')->with('solicitudes', $solicitudesAlumno);
+        return view('solicitud.index')->with('solicitudes',$solicitudesAlumno);
+        /*$category = Solicitud::with('solicituds')->where('id',1)->find(1);
+
+        if ($request->search == null) {
+            //$solicitudesAlumno = Solicitud::simplePaginate(7);
+            $solicitudesAlumno = Auth::user()->solicitudes;
+            return view('solicitud.index')->with('solicitudes',$solicitudesAlumno);
+        }
+
+        else{
+            $user = Auth::user();
+            $solicitudesAlumno = Auth::wherePivot('id', $request->search)->simplePaginate(1);
+            return view('solicitud.index')->with('solicitudes',$solicitudesAlumno);
+            foreach ($solicitudesAlumno as $solicitud){
+                if ($solicitud->getOriginal()['pivot_id'] == $request->search){
+                    $solicitudGuardada = $solicitud;
+                    return view('solicitud.index')->with('solicitudes',$solicitudGuardada);
+                }
+
+        }
+
+
+
+        }
+
+        /*if ($request->search == null) {
+            //$solicitudesAlumno = Solicitud::simplePaginate(7);
+            $solicitudesAlumno = Auth::user()->solicitudes;
+            return view('solicitud.index')->with('solicitudes',$solicitudesAlumno);
+        }
+        else {
+            $solicitudesAlumno = Auth::were('name', $request->search)->simplePaginate(1);
+            return view('solicitud.index')->with('solicitudes',$solicitudesAlumno);
+        }
+        /*$solicitudesAlumno = Auth::user()->solicitudes;
+        return view('solicitud.index')->with('solicitudes', $solicitudesAlumno);*/
     }
 
     /**
@@ -204,8 +241,7 @@ class SolicitudController extends Controller
      */
     public function edit(int $id)
     {
-
-        echo($id);
+        //echo($id);
         $solicitudesAlumno = Auth::user()->solicitudes;
         foreach ($solicitudesAlumno as $solicitud){
             if ($solicitud->getOriginal()['pivot_id'] == $id){
@@ -213,10 +249,6 @@ class SolicitudController extends Controller
             }
 
         }
-
-
-
-
         return view('solicitud.edit')->with('solicitud',$solicitudGuardada);
     }
 
@@ -233,6 +265,7 @@ class SolicitudController extends Controller
         foreach ($solicitudesAlumno as $solicitud){
 
             if ($solicitud->getOriginal()['pivot_id'] == $request->id_solicitud){
+                //echo($request->id);
                 if($request->id == '1' or $request->id == '2' or $request->id == '3' or $request->id == '4'){
 
                     $request->validate([
@@ -269,23 +302,42 @@ class SolicitudController extends Controller
                 }
                 if($request->id == '6'){
 
-                    $request->validate([
-                        'telefono' => ['regex:/[0-9]*/','required'],
-                        'nombre' => ['required'],
-                        'detalle' => ['required'],
-                        'facilidad' => ['required'],
-                        'profesor' => ['required'],
-                        'adjunto.*' => ['mimes:pdf,jpg,jpeg,doc,docx'],
-                    ]);
+                    $findUser = Auth::user()->name;
+
+                    $aux=0;
+
+
+
+                    foreach (json_decode($solicitud->pivot->archivos) as $file){
+                        //dd($file);
+                        unlink(public_path('storage/docs/').$file);
+                        Storage::delete(public_path('storage/docs/').$file);
+                        dd($file);
+                        dd($solicitud->pivot->nombre_asignatura);
+                        //dd($solicitud->pivot->archivos);
+
+                    }
+
+                    /*foreach ($request->adjunto as $file) {
+
+                        $name = $aux.time().'-'.$findUser->name.'.pdf';
+                        $file->move(public_path('\storage\docs'), $name);
+                        $datos[] = $name;
+                        $aux++;
+                    }*/
+
 
                     $solicitud->pivot->telefono = $request->telefono;
                     $solicitud->pivot->nombre_asignatura = $request->nombre;
                     $solicitud->pivot->detalles = $request->detalle;
                     $solicitud->pivot->tipo_facilidad = $request->facilidad;
                     $solicitud->pivot->nombre_profesor = $request->profesor;
-                    $solicitud->pivot->archivos = $request->adjunto;
+                    $solicitud->pivot->archivos;
+
                     $solicitud->pivot->save();
+
                 }
+
             }
 
         }

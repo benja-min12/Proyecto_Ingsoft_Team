@@ -17,11 +17,6 @@
 <div class="container">
     <div class="row mb-4">
         <div class="col col-3">
-            <form class="form-inline my-2 my-lg-0" method="GET" action="{{ route('carrera.index') }}">
-                <input class="form-control mr-sm-2 border-primary mb-2" name="search" id="search" type="search"
-                    placeholder="Buscar por código" aria-label="Search">
-                    <button class="btn btn-primary mb-1">Buscar</button>
-            </form>
         </div>
         <div class="col col-7">
             <p class="text-center" style="font-size: x-large">Mis Solicitudes</p>
@@ -103,7 +98,7 @@
                 @if ($solicitud->getOriginal() ['pivot_estado'] === 0)
                 <td><a class="btn btn-warning" href={{ route('changeStatusSolicitud', ['id' => $solicitud->getOriginal() ['pivot_id']]) }}>anular</a></td>
             @else
-                <td><a class="btn btn-secondary" href={{ route('changeStatusSolicitud', ['id' => $solicitud->getOriginal() ['pivot_id']]) }}>anulado</a></td>
+                <td class="border-primary"><a class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="anular">Anular</a></td>
             @endif
 
             </tr>

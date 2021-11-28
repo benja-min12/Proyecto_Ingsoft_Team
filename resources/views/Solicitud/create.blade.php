@@ -15,6 +15,9 @@
                 <div class="col-lg-12 login-form">
                     <div class="card border-primary">
                         <div class="card-body">
+                            <div class="alert alert-primary" role="alert">
+                                El tipo de solicitud no se puede editar posteriormente. Si deseas editar el campo "tipo de solicitud" posteriormente deberás anular la solicitud y enviarla nuevamente.
+                            </div>
                         <form id="formulario" method="POST" action="{{ route('solicitud.store') }}"
                             enctype="multipart/form-data">
                             @csrf
