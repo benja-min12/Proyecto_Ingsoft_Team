@@ -17,7 +17,9 @@ class SolicitudController extends Controller
      */
     public function index()
     {
+        //solicitudes de la tabla pivot de userSolicitud
         $solicitudesAlumno = Auth::user()->solicitudes;
+
         return view('solicitud.index')->with('solicitudes', $solicitudesAlumno);
     }
 
@@ -42,9 +44,9 @@ class SolicitudController extends Controller
         switch ($request->tipo) {
             case '1':
                 $request->validate([
-                    'telefono' => ['regex:/[0-9]*/','required'],
-                    'nrc' => ['required'],
-                    'nombre' => ['required'],
+                    'telefono' => ['regex:/[0-9]*/','required','min:8','max:8'],
+                    'nrc' => ['required','regex:/[0-9]/','regex:/(^[1-9])/'],
+                    'nombre' => ['required','regex:/[a-zA-Z]/'],
                     'detalle' => ['required']
                 ]);
 
@@ -62,9 +64,9 @@ class SolicitudController extends Controller
                 break;
             case '2':
                 $request->validate([
-                    'telefono' => ['regex:/[0-9]*/','required'],
-                    'nrc' => ['required'],
-                    'nombre' => ['required'],
+                    'telefono' => ['regex:/[0-9]*/','required','min:8','max:8'],
+                    'nrc' => ['required','regex:/[0-9]/','regex:/(^[1-9])/'],
+                    'nombre' => ['required','regex:/[a-zA-Z]/'],
                     'detalle' => ['required']
                 ]);
 
@@ -82,9 +84,9 @@ class SolicitudController extends Controller
                 break;
             case '3':
                 $request->validate([
-                    'telefono' => ['regex:/[0-9]*/','required'],
-                    'nrc' => ['required'],
-                    'nombre' => ['required'],
+                    'telefono' => ['regex:/[0-9]*/','required','min:8','max:8'],
+                    'nrc' => ['required','regex:/[0-9]/','regex:/(^[1-9])/'],
+                    'nombre' => ['required','regex:/[a-zA-Z]/'],
                     'detalle' => ['required']
                 ]);
 
@@ -102,9 +104,9 @@ class SolicitudController extends Controller
                 break;
             case '4':
                 $request->validate([
-                    'telefono' => ['regex:/[0-9]*/','required'],
-                    'nrc' => ['required'],
-                    'nombre' => ['required'],
+                    'telefono' => ['regex:/[0-9]*/','required','min:8','max:8'],
+                    'nrc' => ['required','regex:/[0-9]/','regex:/(^[1-9])/'],
+                    'nombre' => ['required','regex:/[a-zA-Z]/'],
                     'detalle' => ['required']
                 ]);
 
@@ -123,8 +125,8 @@ class SolicitudController extends Controller
             case '5':
 
                 $request->validate([
-                    'telefono' => ['regex:/[0-9]*/','required'],
-                    'nombre' => ['required'],
+                    'telefono' => ['regex:/[0-9]*/','required','min:8','max:8'],
+                    'nombre' => ['required','regex:/[a-zA-Z]/'],
                     'detalle' => ['required'],
                     'calificacion'=>['required','numeric','between:4.0,7.0'],
                     'cantidad'=>['regex:/[0-9]*/','required']
@@ -145,11 +147,11 @@ class SolicitudController extends Controller
                 break;
             case '6':
                 $request->validate([
-                    'telefono' => ['regex:/[0-9]*/','required'],
-                    'nombre' => ['required'],
+                    'telefono' => ['regex:/[0-9]*/','required','min:8','max:8'],
+                    'nombre' => ['required','regex:/[a-zA-Z]*/'],
                     'detalle' => ['required'],
                     'facilidad' => ['required'],
-                    'profesor' => ['required'],
+                    'profesor' => ['required','regex:/[a-zA-Z]*/'],
                     'adjunto.*' => ['mimes:pdf,jpg,jpeg,doc,docx'],
                 ]);
 
