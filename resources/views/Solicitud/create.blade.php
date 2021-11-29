@@ -23,7 +23,7 @@
                                 <div class="alert alert-warning d-flex align-items-center border-warning" role="alert">
                                     El tipo de solicitud no se puede editar posteriormente. Si deseas editar el campo "tipo de solicitud" posteriormente deberás anular la solicitud y enviarla nuevamente
                                 </div>
-                                <label for="form-control-label" >Tipo Solicitud</label>
+                                <label for="form-control-label" >TIPO SOLICITUD</label>
                                 <select class="form-control" name="tipo" id="tipo">
                                     <option value={{ null }}>Seleccione..</option>
                                     <option value="1">Solicitud de Sobrecupo</option>
@@ -95,7 +95,7 @@
                                     autocomplete="cantidad" autofocus>
 
                                 @error('cantidad')
-                                <span class="invalid-feedback" role="alert">
+                                <span id="Error" class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                                 @enderror
@@ -104,7 +104,7 @@
 
 
                             <div class="form-group" id="groupTipoFacilidad" hidden>
-                                <label for="form-control-label" style="color: white">TIPO DE FACILIDAD</label>
+                                <label for="form-control-label" >TIPO DE FACILIDAD</label>
                                 <select class="form-control" name="facilidad" id="facilidad">
                                     <option value={{ null }}>Seleccione..</option>
                                     <option value="Licencia">Licencia Médica o Certificado Médico</option>
@@ -140,7 +140,7 @@
                                 @enderror
                             </div>
                             <div class="form-group" id="groupDetalles" hidden>
-                                <label id=labelCambio class="form-control-label">DETALLES DE LA SOLICITUD</label>
+                                <label id="labelCambio" class="form-control-label">DETALLES DE LA SOLICITUD</label>
                                 <textarea id="detalle" type="text"
                                     class="form-control @error('detalle') is-invalid @enderror" name="detalle"
                                     value="{{ old('detalle') }}" autocomplete="detalle" autofocus></textarea>
@@ -151,12 +151,9 @@
                                 </span>
                                 @enderror
                             </div>
-
-
-                            <div hidden id="groupButton" class="col-lg-12 py-3">
-                                <div class="col-lg-12 text-center">
-                                    <button id="boton" class="btn btn-primary">{{ __('Agregar')
-                                        }}</button>
+                            <div hidden id="groupButton" class="col-lg-12 ">
+                                <div class="text-center">
+                                    <button id="boton" class="btn btn-primary">{{ __('Agregar')}}</button>
                                 </div>
                             </div>
                         </div>
@@ -165,7 +162,6 @@
                 </div>
             </div>
             <div class="col-lg-3 col-md-2"></div>
-
         </div>
     </div>
 </div>
@@ -173,7 +169,7 @@
 
 
 <script type="text/javascript">
-    const label=document.getElementById('labelCambio');
+    const label = document.getElementById('labelCambio');
     const form = document.getElementById('formulario');
     const selectSolicitud = document.getElementById('tipo');
     const inputTelefono = document.getElementById('groupTelefono');
@@ -237,7 +233,7 @@
                 button.hidden = false
                 break;
             case "5":
-                label.innerHTML="MOTIVOS PARA SER AYUDANTIA";
+                label.innerHTML = "MOTIVOS PARA SER AYUDANTE";
                 inputTelefono.hidden = false;
                 inputNrc.hidden = true;
                 inputNombre.hidden = false;

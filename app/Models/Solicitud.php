@@ -13,6 +13,6 @@ class Solicitud extends Model
     ];
 
     public function users(){
-        return $this->belongsToMany(User::class)->withTimestamps()->withPivot('id','telefono' ,'estado', 'NRC', 'nombre_asignatura', 'detalles', 'calificacion_aprob', 'cant_ayudantias', 'tipo_facilidad', 'created_at', 'nombre_profesor', 'archivos');;
+        return $this->belongsToMany(User::class)->withTimestamps()->withPivot('id','telefono' ,'estado', 'NRC', 'nombre_asignatura', 'detalles', 'calificacion_aprob', 'cant_ayudantias', 'tipo_facilidad', 'created_at','updated_at', 'nombre_profesor', 'archivos');
     }
 }
