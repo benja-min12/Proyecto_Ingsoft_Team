@@ -26,8 +26,10 @@
 @endif
 
 <div class="container">
+
     <div class="row mb-4">
-        <div class="col col-3">
+        <div class="col col-2 ">
+            
         </div>
         <div class="col col-7">
             <p class="text-center" style="font-size: x-large">Mis Solicitudes</p>

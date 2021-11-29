@@ -20,8 +20,10 @@ class SolicitudController extends Controller
      */
     public function index(Request $request)
     {
-        $solicitudesAlumno = Auth::user()->solicitudes;
-        return view('solicitud.index')->with('solicitudes', $solicitudesAlumno);
+
+            $solicitudesAlumno = Auth::user()->solicitudes;
+            return view('solicitud.index')->with('solicitudes', $solicitudesAlumno);
+
     }
 
     /**
@@ -182,7 +184,6 @@ class SolicitudController extends Controller
                     //error
                     $Error="No se ha adjuntado ningun archivo";
                     return redirect('/solicitud')->with('Error',$Error);
-
                 }
 
 
@@ -243,9 +244,9 @@ class SolicitudController extends Controller
                 if($request->id == '1' or $request->id == '2' or $request->id == '3' or $request->id == '4'){
 
                     $request->validate([
-                        'telefono' => ['regex:/[0-9]*/','required'],
-                        'nrc' => ['required'],
-                        'nombre' => ['required'],
+                        'telefono' => ['required','regex:/[0-9]*/','min:8','max:8'],
+                        'nrc' => ['required','regex:/[0-9]/','regex:/(^[1-9])/'],
+                        'nombre' => ['required','regex:/[a-zA-Z]/'],
                         'detalle' => ['required']
                     ]);
 
@@ -259,11 +260,11 @@ class SolicitudController extends Controller
                 if($request->id == '5'){
 
                     $request->validate([
-                        'telefono' => ['regex:/[0-9]*/','required'],
-                        'nombre' => ['required'],
+                        'telefono' => ['required','regex:/[0-9]*/','min:8','max:8'],
+                        'nombre' => ['required','regex:/[a-zA-Z]/'],
                         'detalle' => ['required'],
                         'calificacion'=>['required','numeric','between:4.0,7.0'],
-                        'cantidad'=>['regex:/[0-9]*/','required']
+                        'cantidad'=>['required','regex:/[0-9]*/']
                     ]);
 
                     $solicitud->pivot->telefono = $request->telefono;
@@ -276,27 +277,37 @@ class SolicitudController extends Controller
                 }
                 if($request->id == '6'){
 
+                    $request->validate([
+                        'telefono' => ['regex:/[0-9]*/','required','min:8','max:8'],
+                        'nombre' => ['required','regex:/[a-zA-Z]*/'],
+                        'detalle' => ['required'],
+                        'facilidad' => ['required'],
+                        'profesor' => ['required','regex:/[a-zA-Z]*/'],
+                        'adjunto.*' => ['mimes:pdf,jpg,jpeg,doc,docx'],
+                    ]);
+
                     $findUser = Auth::user();
 
                     $aux=0;
+                    if($request->hasFile('adjunto')){
+                        foreach ($request->adjunto as $file) {
 
-                    foreach ($request->adjunto as $file) {
+                            $name = $aux.time().'-'.$findUser->name.'.pdf';
+                            $file->move(public_path('\storage\docs'), $name);
+                            $datos[] = $name;
+                            $aux++;
+                        }
 
-                        $name = $aux.time().'-'.$findUser->name.'.pdf';
-                        $file->move(public_path('\storage\docs'), $name);
-                        $datos[] = $name;
-                        $aux++;
+
+                        $solicitud->pivot->telefono = $request->telefono;
+                        $solicitud->pivot->nombre_asignatura = $request->nombre;
+                        $solicitud->pivot->detalles = $request->detalle;
+                        $solicitud->pivot->tipo_facilidad = $request->facilidad;
+                        $solicitud->pivot->nombre_profesor = $request->profesor;
+                        $solicitud->pivot->archivos= json_encode($datos);
+
+                        $solicitud->pivot->save();
                     }
-
-
-                    $solicitud->pivot->telefono = $request->telefono;
-                    $solicitud->pivot->nombre_asignatura = $request->nombre;
-                    $solicitud->pivot->detalles = $request->detalle;
-                    $solicitud->pivot->tipo_facilidad = $request->facilidad;
-                    $solicitud->pivot->nombre_profesor = $request->profesor;
-                    $solicitud->pivot->archivos= json_encode($datos);
-
-                    $solicitud->pivot->save();
 
                 }
 

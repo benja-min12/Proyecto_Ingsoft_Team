@@ -14,6 +14,10 @@
     </script>
 @endif
 
+
+<div onload="fechaActual">
+
+</div>
     <header class=" text-center mb-5 mt-5">
         <h1>
             Bienvenido {{Auth::user()->name }}
@@ -22,6 +26,7 @@
 
 
 <div class="container">
+
     <div class="row justify-content-center">
         @if (Auth::user()->tipo_usuario == "Administrador")
         <div class="card-deck mt-5">
@@ -67,25 +72,29 @@
             </div>
         </div>
         @elseif (Auth::user()->tipo_usuario == "Jefe Carrera")
+
         <div class="card-deck">
 
             <div class="card border-primary">
                 <i class="fas fa-search fa-10x text-center"></i>
                 <div class="card-body">
-                    <h5 class="card-title text-center">Buscar estudiante</h5>
+                    <h4 class="card-title text-center">Buscar estudiante</h4>
+                    <div class="text-center">
+                        <img style="height: 200px" src="{{asset('images/BucarUsuario.png')}}" alt="Carreras">
+                    </div>
                     <small class="text-muted">Permite buscar un estudiante mediante su RUT.</small>
                 </div>
-                <div class="card-footer">
-                    <a href="" class="btn btn-block btn-primary">IR</a>
+                <div class="card-footer border-primary">
+                    <a href="/buscar-estudiante " class="btn btn-block btn-primary">IR</a>
                 </div>
             </div>
             <div class="card border-primary">
                 <i class="fas fa-check-double fa-10x text-center"></i>
                 <div class="card-body">
-                    <h5 class="card-title text-center">Resolver solicitudes</h5>
+                    <h4 class="card-title text-center">Resolver solicitudes</h4>
                     <small class="text-muted">Permite visualizar todas las solicitudes recibidas con estado "Pendiente".</small>
                 </div>
-                <div class="card-footer">
+                <div class="card-footer border-primary">
                     <a href="" class="btn btn-block btn-primary">IR</a>
                 </div>
             </div>
@@ -93,7 +102,7 @@
             <div class="card border-primary">
                 <i class="fas fa-info fa-10x text-center"></i>
                 <div class="card-body">
-                    <h5 class="card-title text-center">Estadísticas del sistema</h5>
+                    <h4 class="card-title text-center">Estadísticas del sistema</h4>
                     <small class="text-muted">Permite visualizar mediante gráficos las distintas solicitudes del sistema.</small>
                 </div>
                 <div class="card-footer">
@@ -113,14 +122,17 @@
                     <small class="text-muted">Permite o crear/editar o anular solicitudes especiales.</small>
 
                 </div>
-                <div class="card-footer">
+
+                <div class="card-footer border-primary">
                     <a href="/solicitud" class="btn btn-block btn-primary">IR</a>
                 </div>
+
             </div>
         </div>
         @endif
     </div>
 </div>
+
 
 @endsection
 

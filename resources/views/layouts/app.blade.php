@@ -31,7 +31,7 @@
                 <img class="img-fluid mr-5" src="http://www.ucn.cl/wp-content/uploads/2016/03/Isologo-UCN-2018-Blanco.png"
                     style="width: 25%;" alt="insignia">
                 <a style="color: white; font-size:25px ;font-family: Myriad Pro;" class="navbar-brand ml-5"  href="{{ url('/home') }}">
-                    {{__('Gestión de Solicitudes') }}
+                    <h3>{{__('Gestión de Solicitudes') }}</h3>
                 </a>
                 <button style="color: white" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -88,13 +88,25 @@
     <footer class="page-footer font-small blue">
 
         <!-- Copyright -->
+        <div class="text-center">
+            <h6 id="fecha"></h6>
+        </div>
         <div class="footer-copyright text-center py-3">© 2021 Copyright:
             <a href="https://www.ucn.cl/home/"> ucn.cl</a>
         </div>
+
         <!-- Copyright -->
 
     </footer>
     <!-- Footer -->
 </div>
-
+<script type="text/javascript">
+    const FechaHoy=document.getElementById('fecha');
+    this.addEventListener('load', function() {
+        var meses = new Array ("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
+        var diasSemana = new Array("Domingo","Lunes","Martes","Miércoles","Jueves","Viernes","Sábado");
+        var f=new Date();
+        FechaHoy.innerHTML=diasSemana[f.getDay()] + ", " + f.getDate() + " de " + meses[f.getMonth()] + " de " + f.getFullYear();
+    })
+</script>
 </html>

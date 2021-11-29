@@ -29,7 +29,7 @@
 
         </div>
     </div>
-    <table class=" table table-bordered">
+    <table class="table table-bordered">
         <thead>
             <tr class="table-primary">
                 <th class="border-primary" style="width: 10% ;font-size:18px" scope="col">Código</th>

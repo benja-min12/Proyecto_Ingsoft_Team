@@ -4,6 +4,8 @@ namespace App\Imports;
 
 use App\Models\Carrera;
 use App\Models\User;
+use App\Rules\ValidadorRut;
+use Dotenv\Validator;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Hash;
@@ -45,7 +47,16 @@ class UsersImport implements
         $hasSuccess = array();
 
 
+
         foreach ($rows as $key=>$row) {
+            //use validador rut para validar el rut
+            $validadorRut = new ValidadorRut();
+
+            if (!$validadorRut->valida_rut($row['rut'])) {
+                $msj="Formato Incorrecto";
+                array_push($hasFailure, $this->generateDetail($key, "rut", $msj, $row["rut"]));
+                continue;
+            }
 
             if(!strlen($row["name"])){
                 $msj="El campo esta vacio";
@@ -73,12 +84,6 @@ class UsersImport implements
                 array_push($hasFailure, $this->generateDetail($key, "id_carrera", $msj, $row["id_carrera"]));
                 continue;
             }
-            if(!preg_match("/^\d{8}[A-z0-9]{1}$/", $row["rut"])){
-                $msj="Formato Incorrecto";
-
-                array_push($hasFailure, $this->generateDetail($key, "rut", $msj, $row["rut"]));
-                continue;
-            }
 
             if (!filter_var($row["email"], FILTER_VALIDATE_EMAIL)) {
                 $msj="Formato Incorrecto";
@@ -93,6 +98,8 @@ class UsersImport implements
                 array_push($hasFailure, $this->generateDetail($key, $index, $msj, $row[$index]));
                 continue;
             }
+
+
             $validatecodigo=Carrera::where("codigo", $row["id_carrera"])->get();
             if(sizeof($validatecodigo)<=0){
                 $msj="El codigo de la carrera no esta en el sistema";
@@ -108,7 +115,7 @@ class UsersImport implements
                 array_push($hasFailure, $this->generateDetail($key, $index, $msj, $row[$index]));
                 continue;
             }
-            
+
             $carrera=Carrera::where("codigo", $row["id_carrera"])->first();
 
 
@@ -157,7 +164,7 @@ class UsersImport implements
         return [
             'name' => 'required',
             'email' => 'required:users,email | unique:users,email',
-            'rut' => ['required', 'regex:/^\d{8}[A-z0-9]{1}$/'],
+            'rut' => ['required', 'regex:/^\d{8}[A-z0-9]{1}$/'],new ValidadorRut(),
             'id_carrera' => 'required',
         ];
     }

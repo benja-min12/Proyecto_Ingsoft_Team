@@ -26,7 +26,7 @@ class ValidadorRut implements Rule
      */
     public function message()
     {
-        return 'Formato del rut no valido ';
+        return 'Formato del rut no valido';
     }
     public function valida_rut($rut)
     {
@@ -34,6 +34,7 @@ class ValidadorRut implements Rule
             return false;
         }
         if (str_contains($rut, '.') || str_contains($rut, '-')){
+
             return false;
         }
 
@@ -57,7 +58,9 @@ class ValidadorRut implements Rule
         if ($dvr == strtoupper($dv))
             return true;
         else
+
             return false;
+
     }
 }
 

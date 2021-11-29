@@ -1,5 +1,5 @@
 <?php
-
+use App\Http\Controllers\BuscarEstudianteController;
 use App\Http\Controllers\CarreraController;
 use App\Http\Controllers\UsersImportController;
 use Illuminate\Support\Facades\Auth;
@@ -43,5 +43,8 @@ Route::get('/status-user-change', [DisabledUserController::class, 'disabledUser'
 Route::get('/status-solicitud-change', [DisabledSolicitudController::class, 'disabledSolicitud'])->name('changeStatusSolicitud');
 Route::get('users/import', [UsersImportController::class, 'show']);
 Route::post('users/import', [UsersImportController::class, 'store']);
-
+Route::get('buscar-estudiante', function(){return view('buscar-estudiante.index');})->name('buscarEstudiante');
+Route::post('alumno',[BuscarEstudianteController::class, 'devolverEstudiante'])->name('postBuscarEstudiante');
+Route::get('alumno/{id}', [BuscarEstudianteController::class,'mostrarEstudiante'])->name('mostrarEstudiante');
+Route::get('alumno/{alumno_id}/solicitud/{id}', [BuscarEstudianteController::class, 'verDatosSolicitud'])->name('verSolicitudAlumno');
 

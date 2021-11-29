@@ -141,7 +141,7 @@
                                 showConfirmButton: false,
                                 timer: 1500
                             })
-                            rolSelect.disabled=true;
+                            rolSelect.value=null;
                         }
                     }
                 });
@@ -161,7 +161,7 @@
                                 showConfirmButton: false,
                                 timer: 1500
                             })
-                            rolSelect.disabled=true;
+                            rolSelect.value=null;
                         }
                     }
                 });

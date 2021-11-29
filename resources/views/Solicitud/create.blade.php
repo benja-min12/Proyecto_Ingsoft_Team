@@ -111,7 +111,7 @@
                                     <option value="Inasistencia Fuerza Mayor">Inasistencia por Fuerza Mayor</option>
                                     <option value="Representacion">Representación de la Universidad</option>
                                     <option value="Inasistencia Motivo Personal">Inasistencia a Clases por Motivos
-                                        Familiares</option>
+                                        Familiares o Personales</option>
                                 </select>
                             </div>
 
@@ -185,6 +185,7 @@
     selectSolicitud.addEventListener('change', () => {
         switch (selectSolicitud.value) {
             case "1":
+                label.innerHTML = "DETALLES";
                 inputTelefono.hidden = false;
                 inputNrc.hidden = false;
                 inputNombre.hidden = false;
@@ -197,6 +198,7 @@
                 button.hidden = false
                 break;
             case "2":
+                label.innerHTML = "DETALLES";
                 inputTelefono.hidden = false;
                 inputNrc.hidden = false;
                 inputNombre.hidden = false;
@@ -209,6 +211,7 @@
                 button.hidden = false
                 break;
             case "3":
+                label.innerHTML = "DETALLES";
                 inputTelefono.hidden = false;
                 inputNrc.hidden = false;
                 inputNombre.hidden = false;
@@ -221,6 +224,7 @@
                 button.hidden = false
                 break;
             case "4":
+                label.innerHTML = "DETALLES";
                 inputTelefono.hidden = false;
                 inputNrc.hidden = false;
                 inputNombre.hidden = false;
@@ -246,6 +250,7 @@
                 button.hidden = false
                 break;
             case "6":
+                label.innerHTML = "DETALLES";
                 inputTelefono.hidden = false;
                 inputNrc.hidden = true;
                 inputNombre.hidden = false;
