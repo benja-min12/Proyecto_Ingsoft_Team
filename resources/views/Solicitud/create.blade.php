@@ -271,14 +271,6 @@
                 break;
         }
     })
-    Error1.addEventListener('click', () => {
-        Swal.fire({
-            title: 'Error',
-            text: 'No se pudo enviar la solicitud',
-            icon: 'error',
-            confirmButtonText: 'Aceptar'
-        })
-    })
     button.addEventListener('click', function(e){
             e.preventDefault();
             Swal.fire({
