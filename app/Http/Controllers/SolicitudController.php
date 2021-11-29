@@ -182,7 +182,7 @@ class SolicitudController extends Controller
                     return redirect('/solicitud')->with('Crear',$Mensaje);
                 }else{
                     //error
-                    $Error="No se ha adjuntado ningun archivo";
+                    $Error="No se ha adjuntado ningun archivo vuelva a intentar";
                     return redirect('/solicitud')->with('Error',$Error);
                 }
 
@@ -307,6 +307,11 @@ class SolicitudController extends Controller
                         $solicitud->pivot->archivos= json_encode($datos);
 
                         $solicitud->pivot->save();
+                    }else
+
+                    {
+                        $Error="No se ha adjuntado ningun archivo vuelva a intentar";
+                        return redirect('/solicitud')->with('Error',$Error);
                     }
 
                 }
