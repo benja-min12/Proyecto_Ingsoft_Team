@@ -8,6 +8,7 @@ use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\DisabledUserController;
 use App\Http\Controllers\SolicitudController;
 use App\Http\Controllers\DisabledSolicitudController;
+use App\Http\Controllers\FiltrarController;
 
 use App\Models\Solicitud;
 /*
@@ -47,4 +48,6 @@ Route::get('buscar-estudiante', function(){return view('buscar-estudiante.index'
 Route::post('alumno',[BuscarEstudianteController::class, 'devolverEstudiante'])->name('postBuscarEstudiante');
 Route::get('alumno/{id}', [BuscarEstudianteController::class,'mostrarEstudiante'])->name('mostrarEstudiante');
 Route::get('alumno/{alumno_id}/solicitud/{id}', [BuscarEstudianteController::class, 'verDatosSolicitud'])->name('verSolicitudAlumno');
+Route::resource('Filtrar-solicitud', FiltrarController::class);
+
 
