@@ -13,6 +13,17 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+
+        \App\Models\Carrera::create([
+            'codigo' => 1234,
+            'nombre' => 'Carrera Prueba 1',
+        ]);
+
+        \App\Models\Carrera::create([
+            'codigo' => 4321,
+            'nombre' => 'Carrera Prueba 2',
+        ]);
+
         \App\Models\User::create([
             'name' => 'Administrador',
             'rut' => '207303690',
@@ -22,10 +33,6 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt('207303')
         ]);
 
-        \App\Models\Carrera::create([
-            'codigo' => 1234,
-            'nombre' => 'Carrera Prueba 1',
-        ]);
         \App\Models\Solicitud::create([
             'tipo' => 'Sobrecupo'
         ]);
