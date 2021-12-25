@@ -18,17 +18,23 @@ class FiltrarController extends Controller
      */
     public function index(Request $request)
     {
-        $id=$request->searchID;
-        $JefeCarrera=Auth::user()->carrera_id;
-        if ($request->searchID==null) {
+        $id = $request->searchID;
+        $tipo=$request->searchTipo;
+        $JefeCarrera = Auth::user()->carrera_id;
+        if (!$request->searchID && !$request->searchTipo) {
             $usuarios = User::where('carrera_id', $JefeCarrera)->where('id', '!=', $JefeCarrera)->with('solicitudes')->get();
             return view('/Filtrar-solicitud.index')->with('usuarios', $usuarios);
-        }elseif ($request->searchID  != 'null') {
-            $usuarios = User::where('carrera_id', $JefeCarrera)->where('id', '!=', $JefeCarrera)->firstOrFail();
-            dd($usuarios);
-            return view('/Filtrar-solicitud.index')->with('solicitud', $usuarios);
+        }elseif($request->searchID) {
+            $usuarios = User::where('carrera_id', $JefeCarrera)->where('id', '!=', $JefeCarrera)->with(array('solicitudes' => function ($query) use ($id) {
+                $query->wherePivot('id', $id);
+            }))->get();
+            return view('/Filtrar-solicitud.index')->with('usuarios', $usuarios);
+        }elseif($request->searchTipo!=null) {
+            $usuarios = User::where('carrera_id', $JefeCarrera)->where('id', '!=', $JefeCarrera)->with(array('solicitudes' => function ($query) use ($tipo) {
+                $query->wherePivot('solicitud_id', $tipo);
+            }))->get();
+            return view('/Filtrar-solicitud.index')->with('usuarios', $usuarios);
         }
-
     }
 
     /**

@@ -54,6 +54,7 @@ class User extends Authenticatable
 
     public function getSolicitudId(String $id){
         return $this->solicitudes()->wherePivot('id', $id)->get();
+        
     }
 
     public function getSolicitudnumero(String $id){

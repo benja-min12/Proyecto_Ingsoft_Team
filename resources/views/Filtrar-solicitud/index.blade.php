@@ -87,71 +87,7 @@
             </tr>
         </thead>
         <tbody>
-@if ( request()->searchID =! null)
-<tr>
-    <th class="border-primary" scope="row">{{ $solicitud->getOriginal()['pivot_updated_at'] }}</th>
-    <td class="border-primary text-center"  style="font-size:20px">{{ $solicitud->getOriginal()['pivot_id'] }}</td>
-    <td class="border-primary"  style="font-size:20px">{{$solicitud->tipo}}</td>
-    @switch($solicitud->getOriginal()['pivot_estado'])
-    @case(0)
-    <td class="border-primary ">
-        <div class="alert alert-warning d-flex align-items-center border-warning" role="alert">
-            <img class="mr-3" style="height: 20px" src="{{asset('images/pendiente.png')}}" alt="pendiente">
-            Pendiente
-        </div>
-    </td>
-    @break
-    @case(1)
-    <td class="border-primary">
-        <div class="alert alert-success d-flex align-items-center border-success" role="alert">
-            <img class="mr-3" style="height: 20px" src="{{asset('images/aceptar.png')}}" alt="aceptado">
-            Aceptada
-        </div>
-    </td>
-    @break
-    @case(2)
-    <td class="border-primary">
-        <div class="alert alert-success d-flex align-items-center border-success" role="alert">
-            <img class="mr-3" style="height: 20px" src="{{asset('images/Observacion.png')}}" alt="aceptado_observacion">
-            Aceptada con observaciones
-        </div>
-    </td>
-    @break
-    @case(3)
-    <td class="border-primary">
-        <div class="alert alert-danger d-flex align-items-center border-danger" role="alert">
-            <img class="mr-3" style="height: 20px" src="{{asset('images/Rechazada.png')}}" alt="Rechazada">
-            Rechazada
-        </div>
-    </td>
-    @break
-    @case(4)
-    <td class="border-primary">
-        <div class="alert alert-secondary d-flex align-items-center border-secondary" role="alert">
-            <img class="mr-3" style="height: 20px" src="{{asset('images/alert.png')}}" alt="Anulado">
-            Anulada
-        </div>
-    </td>
-    @break
 
-    @default
-
-    @endswitch
-@if ($solicitud->getOriginal() ['pivot_estado'] === 0)
-    <td class="border-primary"><a class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="editar" href={{
-            route('solicitud.edit',$solicitud->getOriginal() ['pivot_id']) }}>Editar</a></td>
-@else
-    <td class="border-primary"><a class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="editar">Editar</a></td>
-@endif
-
-    @if ($solicitud->getOriginal() ['pivot_estado'] === 0)
-    <td class="border-primary"><a class="btn btn-warning" href={{ route('changeStatusSolicitud', ['id' => $solicitud->getOriginal() ['pivot_id']]) }}>Anular</a></td>
-@else
-    <td class="border-primary"><a class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="anular">Anular</a></td>
-@endif
-
-</tr>
-@else
             @forelse ($usuarios as $usuario)
                 @forelse ($usuario->solicitudes as $solicitud )
                 <tr>
@@ -221,7 +157,7 @@
                 @endforelse
                 @empty
                 @endforelse
-@endif
+
 
         </tbody>
     </table>
