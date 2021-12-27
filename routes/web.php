@@ -8,7 +8,7 @@ use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\DisabledUserController;
 use App\Http\Controllers\SolicitudController;
 use App\Http\Controllers\DisabledSolicitudController;
-
+use App\Http\Controllers\EstadisticasController;
 use App\Models\Solicitud;
 /*
 |--------------------------------------------------------------------------
@@ -32,6 +32,7 @@ Route::middleware(['auth'])->group(function () {
 });
 Route::resource('carrera', CarreraController::class, ['middleware' => 'auth']);
 Route::resource('solicitud', SolicitudController::class);
+Route::resource('estadisticas', EstadisticasController::class);
 Auth::routes();
 Route::resource('usuario', UsuarioController::class,['middleware' => 'auth']);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -41,6 +42,7 @@ Route::get('/ResetContrasenia',[App\Http\Controllers\ChangePasswordController::c
 Route::post('/ResetPassword', [App\Http\Controllers\ChangePasswordController::class, 'ResetPassword'])->name('ResetPassword');
 Route::get('/status-user-change', [DisabledUserController::class, 'disabledUser'])->name('changeStatus');
 Route::get('/status-solicitud-change', [DisabledSolicitudController::class, 'disabledSolicitud'])->name('changeStatusSolicitud');
+Route::get('/eliminar-archivo', [DisabledSolicitudController::class, 'eliminarArchivo'])->name('eliminarArchivo');
 Route::get('users/import', [UsersImportController::class, 'show']);
 Route::post('users/import', [UsersImportController::class, 'store']);
 Route::get('buscar-estudiante', function(){return view('buscar-estudiante.index');})->name('buscarEstudiante');

@@ -23,8 +23,32 @@ class DatabaseSeeder extends Seeder
         ]);
 
         \App\Models\Carrera::create([
-            'codigo' => 1234,
+            'codigo' => 1000,
             'nombre' => 'Carrera Prueba 1',
+        ]);
+        \App\Models\Carrera::create([
+            'codigo' => 2000,
+            'nombre' => 'Carrera Prueba 2',
+        ]);
+        \App\Models\Carrera::create([
+            'codigo' => 3000,
+            'nombre' => 'Carrera Prueba 3',
+        ]);
+        \App\Models\Carrera::create([
+            'codigo' => 4000,
+            'nombre' => 'Carrera Prueba 4',
+        ]);
+        \App\Models\Carrera::create([
+            'codigo' => 5000,
+            'nombre' => 'Carrera Prueba 5',
+        ]);
+        \App\Models\Carrera::create([
+            'codigo' => 6000,
+            'nombre' => 'Carrera Prueba 6',
+        ]);
+        \App\Models\Carrera::create([
+            'codigo' => 7000,
+            'nombre' => 'Carrera Prueba 7',
         ]);
         \App\Models\Solicitud::create([
             'tipo' => 'Sobrecupo'

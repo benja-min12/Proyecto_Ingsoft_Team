@@ -44,4 +44,24 @@ class DisabledSolicitudController extends Controller
             return redirect('/solicitud');
         }*/
     }
+    public function eliminarArchivo(Request $request){
+
+        $solicitudesAlumno = Auth::user()->solicitudes;
+        foreach ($solicitudesAlumno as $solicitud){
+            if ($solicitud->getOriginal()['pivot_id'] == $request->id){
+                foreach (json_decode($solicitud->getOriginal()['pivot_archivos']) as $file)
+                {
+                    if ($file == $request->idArchivo){
+                        $solicitud->pivot->archivos = json_decode($solicitud->getOriginal()['pivot_archivos'], true);
+                        $solicitud->pivot->archivos = array_diff($solicitud->pivot->archivos, [$request->idArchivo]);
+                        $solicitud->pivot->archivos = json_encode($solicitud->pivot->archivos);
+                        $solicitud->pivot->save();
+                        return redirect(route('solicitud.edit',$solicitud->getOriginal() ['pivot_id']));
+                    }
+                }
+
+            }
+        }
+
+    }
 }

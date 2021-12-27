@@ -166,8 +166,13 @@ class SolicitudController extends Controller
                     foreach ($request->adjunto as $file) {
                         $name = $aux.time().'-'.$findUser->name.'.pdf';
                         $file->move(public_path('\storage\docs'), $name);
+                        storage_path('/app/public/docs/'.$name);
                         $datos[] = $name;
                         $aux++;
+                        if($aux > 3){
+                            $Error="No se pueden adjuntar más de 3 archivos";
+                            return redirect('/solicitud')->with('Error',$Error);
+                        }
                     }
                     $findUser->solicitudes()->attach($request->tipo, [
                         'telefono' => $request->telefono,
@@ -185,12 +190,7 @@ class SolicitudController extends Controller
                     $Error="No se ha adjuntado ningun archivo vuelva a intentar";
                     return redirect('/solicitud')->with('Error',$Error);
                 }
-
-
-
-
                 break;
-
             default:
                 return redirect('/solicitud')->with('Error',"No se pudo crear la solicitud");
                 break;
@@ -216,13 +216,11 @@ class SolicitudController extends Controller
      */
     public function edit(int $id)
     {
-        //echo($id);
         $solicitudesAlumno = Auth::user()->solicitudes;
         foreach ($solicitudesAlumno as $solicitud){
             if ($solicitud->getOriginal()['pivot_id'] == $id){
                 $solicitudGuardada = $solicitud;
             }
-
         }
         return view('solicitud.edit')->with('solicitud',$solicitudGuardada);
     }
@@ -289,23 +287,22 @@ class SolicitudController extends Controller
                     $findUser = Auth::user();
 
                     $aux=0;
+                    //archivos ya en la base de datos
+                    
                     if($request->hasFile('adjunto')){
                         foreach ($request->adjunto as $file) {
-
                             $name = $aux.time().'-'.$findUser->name.'.pdf';
                             $file->move(public_path('\storage\docs'), $name);
                             $datos[] = $name;
                             $aux++;
                         }
-
-
                         $solicitud->pivot->telefono = $request->telefono;
                         $solicitud->pivot->nombre_asignatura = $request->nombre;
                         $solicitud->pivot->detalles = $request->detalle;
                         $solicitud->pivot->tipo_facilidad = $request->facilidad;
                         $solicitud->pivot->nombre_profesor = $request->profesor;
-                        $solicitud->pivot->archivos= json_encode($datos);
 
+                        $solicitud->pivot->archivos = json_encode($datos);
                         $solicitud->pivot->save();
                     }else
 

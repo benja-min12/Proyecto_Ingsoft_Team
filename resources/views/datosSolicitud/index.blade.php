@@ -82,10 +82,10 @@
                                 <td class="border-primary" id="groupTipoFacilidad" >{{$solicitud->getOriginal()['pivot_tipo_facilidad']}}</td>
                                 <td class="border-primary" id="groupAdjunto" >
                                     @if ($solicitud->getOriginal()['pivot_archivos'])
-                                        @foreach (json_decode($solicitud->getOriginal()['pivot_archivos']) as $file)
-                                            <a href={{"/storage/docs/".$file}}>Archivo</a>
-                                        @endforeach
-                                    @endif
+                                    @foreach (json_decode($solicitud->getOriginal()['pivot_archivos']) as $file)
+                                        <a href="{{asset('storage/docs/'.$file)}}">Archivo</a>
+                                    @endforeach
+                                @endif
                                 </td>
                                 <td class="border-primary" id="groupCantidad" >{{$solicitud->getOriginal()['pivot_cant_ayudantias']}}</td>
                                 <td class="border-primary" id="groupDetalles" >{{$solicitud->getOriginal()['pivot_detalles']}}</td>

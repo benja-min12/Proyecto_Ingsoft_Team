@@ -1,6 +1,17 @@
 @extends('layouts.app')
 
 @section('content')
+@if (session('Error'))
+    <script>
+        Swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: '{{ session('Error') }}',
+        showConfirmButton: false,
+        timer: 1500
+        })
+    </script>
+@endif
 <div class="container">
     <div class="row">
         <div class="col-lg-3 col-md-2"></div>
@@ -40,7 +51,7 @@
                                 <input id="telefono" type="text"
                                     class="form-control @error('telefono') is-invalid @enderror" name="telefono"
                                     value="{{ old('telefono') }}"
-                                    placeholder="Ej. 21436578"
+                                    placeholder="Ej. Se debe ingresar un numero de telefono de 8 digitos ej:12345678"
                                     autocomplete="telefono" autofocus>
 
                                 @error('telefono')
@@ -130,7 +141,7 @@
 
                             <div class="form-group" id="groupAdjunto" hidden>
                                 <label class="form-control-label">ADJUNTAR ARCHIVO</label>
-                                <input id="adjunto" type="file" class="form-control @error('adjunto') is-invalid @enderror"
+                                <input id="adjunto" type="file"  @error('adjunto') is-invalid @enderror"
                                     name="adjunto[]" multiple>
 
                                 @error('adjunto')
@@ -182,6 +193,7 @@
     const inputProfesor = document.getElementById('groupProfesor');
     const inputAdjunto = document.getElementById('groupAdjunto');
     const button = document.getElementById('groupButton');
+    //guardar el valor del selectSolicitud con un sessionStorage
     selectSolicitud.addEventListener('change', () => {
         switch (selectSolicitud.value) {
             case "1":
@@ -275,7 +287,101 @@
                 button.hidden = true
                 break;
         }
-    })
+    });
+    switch (sessionStorage.getItem("selectSolicitud")){
+        case "1":
+            label.innerHTML = "DETALLES";
+            inputTelefono.hidden = false;
+            inputNrc.hidden = false;
+            inputNombre.hidden = false;
+            inputDetalles.hidden = false;
+            inputCalificacion.hidden = true;
+            inputCantidad.hidden = true;
+            inputTipoFacilidad.hidden = true;
+            inputProfesor.hidden = true;
+            inputAdjunto.hidden = true;
+            button.hidden = false
+            break;
+        case "2":
+
+            label.innerHTML = "DETALLES";
+            inputTelefono.hidden = false;
+            inputNrc.hidden = false;
+            inputNombre.hidden = false;
+            inputDetalles.hidden = false;
+            inputCalificacion.hidden = true;
+            inputCantidad.hidden = true;
+            inputTipoFacilidad.hidden = true;
+            inputProfesor.hidden = true;
+            inputAdjunto.hidden = true;
+            button.hidden = false
+            break;
+        case "3":
+            label.innerHTML = "DETALLES";
+            inputTelefono.hidden = false;
+            inputNrc.hidden = false;
+            inputNombre.hidden = false;
+            inputDetalles.hidden = false;
+            inputCalificacion.hidden = true;
+            inputCantidad.hidden = true;
+            inputTipoFacilidad.hidden = true;
+            inputProfesor.hidden = true;
+            inputAdjunto.hidden = true;
+            button.hidden = false
+            break;
+        case "4":
+            label.innerHTML = "DETALLES";
+            inputTelefono.hidden = false;
+            inputNrc.hidden = false;
+            inputNombre.hidden = false;
+            inputDetalles.hidden = false;
+            inputCalificacion.hidden = true;
+            inputCantidad.hidden = true;
+            inputTipoFacilidad.hidden = true;
+            inputProfesor.hidden = true;
+            inputAdjunto.hidden = true;
+            button.hidden = false
+            break;
+        case "5":
+            label.innerHTML = "MOTIVOS PARA SER AYUDANTE";
+            inputTelefono.hidden = false;
+            inputNrc.hidden = true;
+            inputNombre.hidden = false;
+            inputDetalles.hidden = false;
+            inputCalificacion.hidden = false;
+            inputCantidad.hidden = false;
+            inputTipoFacilidad.hidden = true;
+            inputProfesor.hidden = true;
+            inputAdjunto.hidden = true;
+            button.hidden = false
+            break;
+        case "6":
+            label.innerHTML = "DETALLES";
+            inputTelefono.hidden = false;
+            inputNrc.hidden = true;
+            inputNombre.hidden = false;
+            inputDetalles.hidden = false;
+            inputCalificacion.hidden = true;
+            inputCantidad.hidden = true;
+            inputTipoFacilidad.hidden = false;
+            inputProfesor.hidden = false;
+            inputAdjunto.hidden = false;
+            button.hidden = false
+            break;
+        default:
+            inputTelefono.hidden = true;
+            inputNrc.hidden = true;
+            inputNombre.hidden = true;
+            inputDetalles.hidden = true;
+            inputCalificacion.hidden = true;
+            inputCantidad.hidden = true;
+            inputTipoFacilidad.hidden = true;
+            inputProfesor.hidden = true;
+            inputAdjunto.hidden = true;
+            button.hidden = true
+            break;
+    }
+
     button.addEventListener('click', function(e){
             e.preventDefault();
             Swal.fire({
@@ -287,7 +393,8 @@
                 confirmButtonText: 'Si, deseo continuar'
             }).then((result) => {
                 if (result.isConfirmed) {
-                form.submit();
+                    sessionStorage.setItem('selectSolicitud', selectSolicitud.value);
+                    form.submit();
                 }
             })
     })
