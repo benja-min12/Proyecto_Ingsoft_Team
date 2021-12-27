@@ -109,7 +109,7 @@
             @endif
 
                 @if ($solicitud->getOriginal() ['pivot_estado'] === 0)
-                <td class="border-primary"><a class="btn btn-warning" href={{ route('changeStatusSolicitud', ['id' => $solicitud->getOriginal() ['pivot_id']]) }}>Anular</a></td>
+                <td class="border-primary"><a class="btn btn-warning" id="anular" href={{ route('changeStatusSolicitud', ['id' => $solicitud->getOriginal() ['pivot_id']]) }}>Anular</a></td>
             @else
                 <td class="border-primary"><a class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="anular">Anular</a></td>
             @endif
@@ -126,5 +126,29 @@
     </table>
 
 </div>
+<script>
+    const anular = document.getElementById('anular');
+    anular.addEventListener('click', function(e) {
+        e.preventDefault();
+        Swal.fire({
+            title: '¿Esta seguro de anular la solicitud?',
+            text: "No podra revertir esta accion!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#48A24C',
+            cancelButtonColor: '#C4312C',
+            confirmButtonText: 'Si, anular!'
+        }).then((result) => {
+            if (result.value) {
+                Swal.fire(
+                    'Anulado!',
+                    'La solicitud ha sido anulada.',
+                    'success'
+                )
+                window.location.href = anular.href;
+            }
+        })
+    });
+</script>
 
 @endsection

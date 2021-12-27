@@ -109,7 +109,11 @@
                     <small class="text-muted">Permite visualizar mediante gráficos las distintas solicitudes del sistema.</small>
                 </div>
                 <div class="card-footer">
-                    <a href="" class="btn btn-block btn-primary">IR</a>
+<<<<<<< HEAD
+                    <a href="/estadisticas" class="btn btn-block btn-primary">IR</a>
+=======
+                    <a href="/Filtrar-solicitud" class="btn btn-block btn-primary">IR</a>
+>>>>>>> d70c91ec0cb1848e62f65aaaac39d2f0b748a9cf
                 </div>
             </div>
         </div>

@@ -57,8 +57,15 @@
                                     <label for="form-control-label" >Tipo usuario</label>
                                     <select class="form-control @error('tipo_usuario') is-invalid @enderror" name="tipo_usuario" id="tipo_usuario"required>
                                         <option  value={{ $usuario->tipo_usuario }}>{{ $usuario->tipo_usuario }}</option>
-                                        <option  value="Jefe Carrera">Jefe de Carrera</option>
-                                        <option  value="Alumno">Alumno</option>
+                                        @if($usuario->tipo_usuario =='Jefe Carrera'){
+                                            <option  value="Alumno">Alumno</option>
+                                        }
+                                        @endif
+                                        @if ($usuario->tipo_usuario=='Alumno'){
+                                            <option  value="Jefe Carrera">Jefe Carrera</option>
+                                        }
+                                        @endif
+
                                     </select>
                                 </div>
                                 @if($usuario->tipo_usuario !='Administrador')

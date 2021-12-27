@@ -18,7 +18,7 @@ class UsuarioController extends Controller
      */
     public function index(Request $request)
     {
-        
+
         $carreras = Carrera::all();
         if ($request->search == null) {
             $usuarios = User::simplePaginate(7);
@@ -28,7 +28,7 @@ class UsuarioController extends Controller
             $usuarios = User::where('rut', $request->search)->simplePaginate(1);
             return view('usuario.index')->with('usuarios',$usuarios)->with('carreras',$carreras);
         }
-        //
+
     }
 
 

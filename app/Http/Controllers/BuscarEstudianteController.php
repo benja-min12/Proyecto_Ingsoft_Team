@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Solcitud;
+use App\Models\Solicitud;
 use App\Models\User;
 use Illuminate\Auth\Events\Validated;
 use Illuminate\Http\Request;
@@ -25,7 +25,7 @@ class BuscarEstudianteController extends Controller
                 return redirect('buscar-estudiante')->with('error', 'El rut ingresado no es Alumno.');
             }
         }else {
-            return redirect('buscar-estudiante')->with('error', 'Alumno no encontrado.');
+            return redirect('buscar-estudiante')->with('error', 'El rut ingresado no existe.');
         }
     }
 

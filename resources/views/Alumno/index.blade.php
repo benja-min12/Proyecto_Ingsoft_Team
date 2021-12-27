@@ -15,7 +15,7 @@
             </div>
             <div class="col-lg-12 login-form">
                 <div class="col-lg-12 login-form">
-                    <div class="card">
+                    <div class="card border-primary">
                         <div class="card-body">
                             <div class="row">
                                 <div class=" col-md-2"></div>
