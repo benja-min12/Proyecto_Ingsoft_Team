@@ -20,21 +20,40 @@ class FiltrarController extends Controller
     {
         $id = $request->searchID;
         $tipo=$request->searchTipo;
+        $cantSolicitudes=0;
         $JefeCarrera = Auth::user()->carrera_id;
         if (!$request->searchID && !$request->searchTipo) {
-            $usuarios = User::where('carrera_id', $JefeCarrera)->where('id', '!=', $JefeCarrera)->with('solicitudes')->get();
-            return view('/Filtrar-solicitud.index')->with('usuarios', $usuarios);
+            $usuarios = User::where('carrera_id', $JefeCarrera)->where('id', '!=', $JefeCarrera)->with(array('solicitudes' => function ($query){
+                $query->where('estado', '=', 0);
+            }))->get();
+            foreach ($usuarios as $usuario) {
+                foreach ($usuario->solicitudes as $solicitud) {
+                    $cantSolicitudes++;
+                }
+            }
+            return view('/Filtrar-solicitud.index')->with('usuarios', $usuarios)->with('cantSolicitudes', $cantSolicitudes);
         }elseif($request->searchID) {
             $usuarios = User::where('carrera_id', $JefeCarrera)->where('id', '!=', $JefeCarrera)->with(array('solicitudes' => function ($query) use ($id) {
-                $query->wherePivot('id', $id);
+                $query->wherePivot('id', $id)->where('estado', '=', 0);
             }))->get();
-            return view('/Filtrar-solicitud.index')->with('usuarios', $usuarios);
+            foreach ($usuarios as $usuario) {
+                foreach ($usuario->solicitudes as $solicitud) {
+                    $cantSolicitudes++;
+                }
+            }
+            return view('/Filtrar-solicitud.index')->with('usuarios', $usuarios)->with('cantSolicitudes', $cantSolicitudes);
         }elseif($request->searchTipo!=null) {
             $usuarios = User::where('carrera_id', $JefeCarrera)->where('id', '!=', $JefeCarrera)->with(array('solicitudes' => function ($query) use ($tipo) {
-                $query->wherePivot('solicitud_id', $tipo);
+                $query->wherePivot('solicitud_id', $tipo)->where('estado', '=', 0);
             }))->get();
-            return view('/Filtrar-solicitud.index')->with('usuarios', $usuarios);
+            foreach ($usuarios as $usuario) {
+                foreach ($usuario->solicitudes as $solicitud) {
+                    $cantSolicitudes++;
+                }
+            }
+            return view('/Filtrar-solicitud.index')->with('usuarios', $usuarios)->with('cantSolicitudes', $cantSolicitudes);
         }
+
     }
 
     /**
@@ -75,9 +94,10 @@ class FiltrarController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(int $id)
     {
-        //
+
+
     }
 
     /**
@@ -89,7 +109,7 @@ class FiltrarController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        
     }
 
     /**

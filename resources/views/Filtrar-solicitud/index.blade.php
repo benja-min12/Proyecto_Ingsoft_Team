@@ -26,15 +26,12 @@
 @endif
 
 <div class="container">
-
+    <div class="text-center">
+        <p class="text-center" style="font-size: x-large">Solicitudes disponibles</p>
+    </div>
     <div class="row mb-4">
-        <div class="col col-2 ">
-        </div>
-        <div class="col col-7">
-            <p class="text-center" style="font-size: x-large">Solicitudes disponibles</p>
-        </div>
-        <div class="px-4 ml-3">
-            <div class="card border-primary ">
+        <div class="col">
+            <div class="card border-primary " style="width:50%">
                 <div class="card-body">
                     <form action="">
                         <label for="form-control-label" >TIPO SOLICITUD</label>
@@ -54,25 +51,21 @@
                                 </div>
                     </form>
                 </div>
-
             </div>
         </div>
-        <div class="px-4 ml-3">
-                <div class="card border-primary">
+        <div class="px-4 ml-5 align-items-center">
+                <div class="card border-primary" style='width:60%'>
                     <div class="card-body">
-                        <div class="col col-2 ml-5">
-                            <form method="GET" action="{{ route('Filtrar-solicitud.index') }}">
-                                <label for="form-control-label" >Numero Solicitud</label>
-                                <input class="border-primary mr-sm-2 mb-2" type="text" name="searchID" id="searchID"
-                                placeholder="Buscar por numero">
-                                <button class="btn btn-primary mb-2">Buscar</button>
-                            </form>
-                        </div>
+                        <form method="GET" action="{{ route('Filtrar-solicitud.index') }}">
+                            <label for="form-control-label" >Numero Solicitud</label>
+                            <input class="border-primary mr-sm-2 mb-2" type="text" name="searchID" id="searchID"
+                            placeholder="Buscar por numero">
+                            <button class="btn btn-primary mb-2">Buscar</button>
+                        </form>
+
                     </div>
                 </div>
         </div>
-
-
     </div>
 
     <table class="table table-bordered">
@@ -81,9 +74,13 @@
                 <th class="border-primary" style="width: 15% ; font-size:18px" scope="col">Fecha Solicitud</th>
                 <th class="border-primary" style="width: 10% ; font-size:16px" scope="col">Numero Solicitud</th>
                 <th class="border-primary" style="width: 20% ; font-size:18px" scope="col">Tipo Solicitud</th>
-                <th class="border-primary" style="width: 10% ; font-size:18px" scope="col">Estado</th>
-                <th class="border-primary" style="width: 10% ; font-size:18px" scope="col">Editar</th>
-                <th class="border-primary" style="width: 10% ; font-size:18px" scope="col">Anular</th>
+                <th class="border-primary" style="width: 10% ; font-size:18px" scope="col">Rut estudiante</th>
+                <th class="border-primary" style="width: 10% ; font-size:18px" scope="col">Nombre estudiante</th>
+                <th class="border-primary" style="width: 10% ; font-size:18px" scope="col">Correo estudiante</th>
+                <th class="border-primary" style="width: 10% ; font-size:18px" scope="col">Telefono</th>
+                <th class="border-primary" style="width: 50% ; font-size:20px" scope="col">Ver detalles</th>
+                <th class="border-primary" style="width: 10% ; font-size:18px" scope="col">Resolver</th>
+
             </tr>
         </thead>
         <tbody>
@@ -94,71 +91,70 @@
                     <th class="border-primary" scope="row">{{ $solicitud->getOriginal()['pivot_updated_at'] }}</th>
                     <td class="border-primary text-center"  style="font-size:20px">{{ $solicitud->getOriginal()['pivot_id'] }}</td>
                     <td class="border-primary"  style="font-size:20px">{{$solicitud->tipo}}</td>
-                    @switch($solicitud->getOriginal()['pivot_estado'])
-                    @case(0)
-                    <td class="border-primary ">
-                        <div class="alert alert-warning d-flex align-items-center border-warning" role="alert">
-                            <img class="mr-3" style="height: 20px" src="{{asset('images/pendiente.png')}}" alt="pendiente">
-                            Pendiente
-                        </div>
-                    </td>
-                    @break
-                    @case(1)
+                    <td class="border-primary"  style="font-size:20px">{{$usuario->rut}}</td>
+                    <td class="border-primary"  style="font-size:20px">{{$usuario->name}}</td>
+                    <td class="border-primary"  style="font-size:20px">{{$usuario->email}}</td>
+                    <td class="border-primary"  style="font-size:20px">{{$solicitud->getOriginal()['pivot_telefono']}}</td>
+                    @if ($solicitud->id == 1 || $solicitud->id == 2 || $solicitud->id == 3 || $solicitud->id == 4)
+                        <td class="border-primary">
+                            <div class="dropdown" style="width: 200px ">
+                                <button class="btn btn-primary dropdown-toggle" style="width: 200px " type="button" id="menu1" data-toggle="dropdown">Detalles
+                                <span class="caret"></span></button>
+                                <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+                                    <li role="presentation">NRC asignatura: {{$solicitud->getOriginal()['pivot_NRC']}}</li>
+                                    <li role="presentation">Nombre singatura: {{$solicitud->getOriginal()['pivot_nombre_asignatura']}}</li>
+                                    <li role="presentation">Detalles solicitud: {{$solicitud->getOriginal()['pivot_detalles']}}</li>
+                                </ul>
+                            </div>
+                        </td>
+                    @endif
+                    @if ($solicitud->id == 6)
                     <td class="border-primary">
-                        <div class="alert alert-success d-flex align-items-center border-success" role="alert">
-                            <img class="mr-3" style="height: 20px" src="{{asset('images/aceptar.png')}}" alt="aceptado">
-                            Aceptada
+                        <div class="dropdown" style="width: 200px ">
+                            <button class="btn btn-primary dropdown-toggle" style="width: 200px " type="button" id="menu1" data-toggle="dropdown">Detalles
+                            <span class="caret"></span></button>
+                            <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+                                <li role="presentation">Nombre asingatura: {{$solicitud->getOriginal()['pivot_nombre_asignatura']}}</li>
+                                <li role="presentation">Tipo facilidad : {{$solicitud->getOriginal()['pivot_tipo_facilidad']}}</li>
+                                <li role="presentation">Nombre profesor: {{$solicitud->getOriginal()['pivot_nombre_profesor']}}</li>
+                                <li role="presentation">Archivos Adjuntos:</li>
+                                @if ($solicitud->getOriginal()['pivot_archivos'])
+                                @foreach (json_decode($solicitud->getOriginal()['pivot_archivos']) as $file)
+                                    <a href="{{asset('storage/docs/'.$file)}}">Archivo</a>
+                                @endforeach
+                                <li role="presentation">Detalles solicitud: {{$solicitud->getOriginal()['pivot_detalles']}}</li>
+                                @endif
+                            </ul>
                         </div>
                     </td>
-                    @break
-                    @case(2)
-                    <td class="border-primary">
-                        <div class="alert alert-success d-flex align-items-center border-success" role="alert">
-                            <img class="mr-3" style="height: 20px" src="{{asset('images/Observacion.png')}}" alt="aceptado_observacion">
-                            Aceptada con observaciones
-                        </div>
-                    </td>
-                    @break
-                    @case(3)
-                    <td class="border-primary">
-                        <div class="alert alert-danger d-flex align-items-center border-danger" role="alert">
-                            <img class="mr-3" style="height: 20px" src="{{asset('images/Rechazada.png')}}" alt="Rechazada">
-                            Rechazada
-                        </div>
-                    </td>
-                    @break
-                    @case(4)
-                    <td class="border-primary">
-                        <div class="alert alert-secondary d-flex align-items-center border-secondary" role="alert">
-                            <img class="mr-3" style="height: 20px" src="{{asset('images/alert.png')}}" alt="Anulado">
-                            Anulada
-                        </div>
-                    </td>
-                    @break
 
-                    @default
-
-                    @endswitch
-                @if ($solicitud->getOriginal() ['pivot_estado'] === 0)
-                    <td class="border-primary"><a class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="editar" href={{
-                            route('solicitud.edit',$solicitud->getOriginal() ['pivot_id']) }}>Editar</a></td>
-                @else
-                    <td class="border-primary"><a class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="editar">Editar</a></td>
+                    @endif
+                    @if ($solicitud->id == 5)
+                    <td class="border-primary" >
+                        <div class="dropdown" style="width: 200px ">
+                            <button class="btn btn-primary dropdown-toggle" style="width: 200px " type="button" id="menu1" data-toggle="dropdown">Detalles
+                            <span class="caret"></span></button>
+                            <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+                                <li role="presentation">Nombre asingatura: {{$solicitud->getOriginal()['pivot_nombre_asignatura']}}</li>
+                                <li role="presentation">Calificacion : {{$solicitud->getOriginal()['pivot_calificacion_aprob']}}</li>
+                                <li role="presentation">Cantidad ayudantias: {{$solicitud->getOriginal()['pivot_cant_ayudantias']}}</li>
+                                <li role="presentation">Motivos: {{$solicitud->getOriginal()['pivot_detalles']}}</li>
+                            </ul>
+                        </div>
+                    </td>
                 @endif
-
-                    @if ($solicitud->getOriginal() ['pivot_estado'] === 0)
-                    <td class="border-primary"><a class="btn btn-warning" href={{ route('changeStatusSolicitud', ['id' => $solicitud->getOriginal() ['pivot_id']]) }}>Anular</a></td>
-                @else
-                    <td class="border-primary"><a class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="anular">Anular</a></td>
-                @endif
+                <td class="border-primary"><a class="btn btn-warning" href={{ route('resolver-solicitud.edit',$solicitud->getOriginal() ['pivot_id']) }}>Resolver</a></td>
 
                 </tr>
                 @empty
                 @endforelse
                 @empty
                 @endforelse
-
-
+                @if ($cantSolicitudes==0)
+                    <tr>
+                        <td colspan="9" class="text-center">No hay solicitudes por resolver</td>
+                    </tr>
+                @endif
         </tbody>
     </table>
 

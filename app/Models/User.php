@@ -54,7 +54,10 @@ class User extends Authenticatable
 
     public function getSolicitudId(String $id){
         return $this->solicitudes()->wherePivot('id', $id)->get();
-        
+
+    }
+    public function solicitudesActivas(){
+        return $this->belongsToMany(Solicitud::class)->withTimestamps()->withPivot('id','telefono' ,'estado', 'NRC', 'nombre_asignatura', 'detalles', 'calificacion_aprob', 'cant_ayudantias', 'tipo_facilidad', 'nombre_profesor', 'archivos')->wherePivot('estado', "=" ,0)->orderByPivot('updated_at', 'asc');
     }
 
     public function getSolicitudnumero(String $id){
