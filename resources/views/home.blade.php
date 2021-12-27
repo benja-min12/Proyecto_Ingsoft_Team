@@ -92,10 +92,13 @@
                 <i class="fas fa-check-double fa-10x text-center"></i>
                 <div class="card-body">
                     <h4 class="card-title text-center">Resolver solicitudes</h4>
+                    <div class="text-center">
+                        <img style="height: 200px" src="{{asset('images/BucarUsuario.png')}}" alt="Carreras">
+                    </div>
                     <small class="text-muted">Permite visualizar todas las solicitudes recibidas con estado "Pendiente".</small>
                 </div>
                 <div class="card-footer border-primary">
-                    <a href="" class="btn btn-block btn-primary">IR</a>
+                    <a href="/resolver-solicitud" class="btn btn-block btn-primary">IR</a>
                 </div>
             </div>
 
