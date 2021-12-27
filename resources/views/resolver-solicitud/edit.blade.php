@@ -159,14 +159,12 @@
                                 </div>
 
                                 <div class="form-group" id="groupAdjunto" hidden>
-                                    <label class="form-control-label">ADJUNTAR ARCHIVO</label>
-                                    <input id="adjunto" type="file" readonly class="form-control @error('adjunto') is-invalid @enderror"
-                                        name="adjunto[]" multiple value="{{$solicitud->getOriginal()['pivot_archivos']}}" autocomplete="adjunto" autofocus>
-                                    @error('adjunto')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
+                                    <label class="form-control-label">ARCHIVOS ADJUNTADOS</label>
+                                    @if ($solicitud->getOriginal()['pivot_archivos'])
+                                        @foreach (json_decode($solicitud->getOriginal()['pivot_archivos']) as $file)
+                                            <a href="{{asset('storage/docs/'.$file)}}">Archivo</a>
+                                        @endforeach
+                                    @endif
                                 </div>
                                 <div class="form-group" id="groupDetalles" hidden>
                                     <label class="form-control-label">DETALLES DE LA SOLICITUD</label>

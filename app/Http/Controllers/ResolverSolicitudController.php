@@ -18,31 +18,30 @@ class ResolverSolicitudController extends Controller
      */
     public function index(Request $request)
     {
+        $cantSolicitudes=0;
         $jefeCarrera = Auth::user()->carrera_id;
+        if (!$request->resolverSolicitud) {
+            $idEstado = 0;
+        }else{
+            $idEstado = $request->resolverSolicitud;
+        }
 
-
-
-        if ($request->resolverSolicitud == 0) {
+        //dd($idEstado);
+        //$usuarios =User::where('carrera_id', $jefeCarrera)->where('id', '!=', Auth::user()->id)->with(array('solicitudes' => function ($query) use ($idEstado) {
+            //$query->wherePivot('estado', '==', $idEstado)->orderBy('create_at', 'desc');
+        //}))->get();
             //$user= User::where('carrera_id', $jefeCarrera)->where('id', '!=', Auth::user()->id)->with('solicitudesActivas')->get();
-            $user= User::where('carrera_id', $jefeCarrera)->where('id', '!=', Auth::user()->id)->with('solicitudesActivas')->orderBy('updated_at', 'desc')->get();
-            return view('resolver-solicitud.index')->with('alumnos', $user);
+            //$user= User::where('carrera_id', $jefeCarrera)->where('id', '!=', Auth::user()->id)->with('solicitudesActivas')->orderBy('updated_at', 'desc')->get();
+        $user =User::where('carrera_id', $jefeCarrera)->where('id', '!=', Auth::user()->id)->with(array('solicitudes' => function ($query) use ($idEstado) {
+            $query->wherePivot('estado',$idEstado);
+            }))->get();
+
+        foreach ($user as $usuario) {
+            foreach ($usuario->solicitudes as $solicitud) {
+                $cantSolicitudes++;
+            }
         }
-        elseif ($request->resolverSolicitud == 1) {
-            $user= User::where('carrera_id', $jefeCarrera)->where('id', '!=', Auth::user()->id)->with('solicitudesAceptadas')->get();
-            return view('resolver-solicitud.index')->with('alumnos', $user);
-        }
-        elseif ($request->resolverSolicitud == 2) {
-            $user= User::where('carrera_id', $jefeCarrera)->where('id', '!=', Auth::user()->id)->with('solicitudesAceptadasObservaciones')->get();
-            return view('resolver-solicitud.index')->with('alumnos', $user);
-        }
-        elseif ($request->resolverSolicitud == 3) {
-            $user= User::where('carrera_id', $jefeCarrera)->where('id', '!=', Auth::user()->id)->with('solicitudesRechazadas')->get();
-            return view('resolver-solicitud.index')->with('alumnos', $user);
-        }
-        elseif ($request->resolverSolicitud == 4) {
-            $user= User::where('carrera_id', $jefeCarrera)->where('id', '!=', Auth::user()->id)->with('solicitudesAnuladas')->get();
-            return view('resolver-solicitud.index')->with('alumnos', $user);
-        }
+        return view('resolver-solicitud.index')->with('alumnos', $user)->with('cantSolicitudes', $cantSolicitudes);
     }
     /**
      * Display a listing of the resource.
@@ -54,16 +53,16 @@ class ResolverSolicitudController extends Controller
         $jefeCarrera = Auth::user()->carrera_id;
 
         if($request == 1){
-            $user= User::where('carrera_id', $jefeCarrera)->where('id', '!=', Auth::user()->id)->with('solicitudesAceptadas')->get();
+            $user= User::where('carrera_id', $jefeCarrera)->where('id', '!=', Auth::user()->id)->with('solicitudesAceptadas')->get()->simplePaginate(1);;
             return view('resolver-solicitud.index')->with('alumnos', $user);
         }
         elseif($request == 2){
-            $user= User::where('carrera_id', $jefeCarrera)->where('id', '!=', Auth::user()->id)->with('solicitudesRechazadas')->get();
+            $user= User::where('carrera_id', $jefeCarrera)->where('id', '!=', Auth::user()->id)->with('solicitudesRechazadas')->get()->simplePaginate(1);;
             return view('resolver-solicitud.index')->with('alumnos', $user);
 
         }
         else{
-            $user= User::where('carrera_id', $jefeCarrera)->where('id', '!=', Auth::user()->id)->with('solicitudesAceptadasObservaciones')->get();
+            $user= User::where('carrera_id', $jefeCarrera)->where('id', '!=', Auth::user()->id)->with('solicitudesAceptadasObservaciones')->get()->simplePaginate(1);;
             return view('resolver-solicitud.index')->with('alumnos', $user);
         }
 

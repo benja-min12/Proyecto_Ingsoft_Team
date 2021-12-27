@@ -37,9 +37,8 @@
             </tr>
         </thead>
         <tbody>
-            @if (request()->resolverSolicitud == 0)
             @foreach ($alumnos as $alumno)
-            @forelse ($alumno->solicitudesActivas as $solicitud)
+            @forelse ($alumno->solicitudes as $solicitud)
             <tr>
                 <td class="border-primary" style="font-size:16px">{{$solicitud->getOriginal()['pivot_updated_at'] }}</td>
                 <td class="border-primary" style="font-size:16px">{{$solicitud->getOriginal()['pivot_id'] }}</td>
@@ -47,110 +46,38 @@
                 <td class="border-primary" style="font-size:16px">{{$alumno->name }}</td>
                 <td class="border-primary" style="font-size:16px">{{$solicitud->tipo}}</td>
                 <td class="border-primary" style="font-size:16px">
-
+                @if (request()->resolverSolicitud == 0)
                 <a class="btn btn-warning btn-block" title="editar" href={{
                     route('resolver-solicitud.edit',$solicitud->getOriginal() ['pivot_id']) }}><img style="height: 20px" src="{{asset('images/pendiente.png')}}" alt="pendiente"> <i class="fas fa-eye"></i> Resolver</a></td>
+                @elseif (request()->resolverSolicitud == 1)
+                        <div class="alert alert-success d-flex align-items-center border-success" role="alert">
+                            <img class="mr-3" style="height: 20px" src="{{asset('images/aceptar.png')}}" alt="aceptado">
+                            Aceptada
+                        </div>
+                @elseif (request()->resolverSolicitud == 2)
+                        <div class="alert alert-success d-flex align-items-center border-success" role="alert">
+                            <img class="mr-3" style="height: 20px" src="{{asset('images/Observacion.png')}}" alt="aceptado_observacion">
+                            Aceptada con observaciones
+                        </div>
+                @elseif (request()->resolverSolicitud == 3)
+                        <div class="alert alert-danger d-flex align-items-center border-danger" role="alert">
+                            <img class="mr-3" style="height: 20px" src="{{asset('images/Rechazada.png')}}" alt="rechazado">
+                            Rechazada
+                        </div>
+                @elseif (request()->resolverSolicitud == 4)
+                        <div class="alert alert-danger d-flex align-items-center border-danger" role="alert">
+                            <img class="mr-3" style="height: 20px" src="{{asset('images/alert.png')}}" alt="anulado">
+                            Anulada
+                        </div>
+                @endif
             </tr>
             @empty
+            @endforelse
+            @endforeach
+            @if ($cantSolicitudes==0)
             <tr>
                 <td colspan="6" class="text-center">No hay solicitudes pendientes</td>
             </tr>
-            @endforelse
-            @endforeach
-            @endif
-            @if (request()->resolverSolicitud == 1)
-            @foreach ($alumnos as $alumno)
-            @forelse ($alumno->solicitudesAceptadas as $solicitud)
-            <tr>
-                <td class="border-primary" style="font-size:16px">{{$solicitud->getOriginal()['pivot_updated_at'] }}</td>
-                <td class="border-primary" style="font-size:16px">{{$solicitud->getOriginal()['pivot_id'] }}</td>
-                <td class="border-primary" style="font-size:16px">{{$alumno->rut }}</td>
-                <td class="border-primary" style="font-size:16px">{{$alumno->name }}</td>
-                <td class="border-primary" style="font-size:16px">{{$solicitud->tipo}}</td>
-                <td class="border-primary" style="font-size:16px">
-                    <div class="alert alert-success d-flex align-items-center border-success" role="alert">
-                        <img class="mr-3" style="height: 20px" src="{{asset('images/aceptar.png')}}" alt="aceptado">
-                        Aceptada
-                    </div>
-                </td>
-            </tr>
-            @empty
-            <tr>
-                <td colspan="6" class="text-center">No hay solicitudes aceptadas</td>
-            </tr>
-            @endforelse
-            @endforeach
-            @endif
-            @if (request()->resolverSolicitud == 2)
-            @foreach ($alumnos as $alumno)
-            @forelse ($alumno->solicitudesAceptadasObservaciones as $solicitud)
-            <tr>
-                <td class="border-primary" style="font-size:16px">{{$solicitud->getOriginal()['pivot_updated_at'] }}</td>
-                <td class="border-primary" style="font-size:16px">{{$solicitud->getOriginal()['pivot_id'] }}</td>
-                <td class="border-primary" style="font-size:16px">{{$alumno->rut }}</td>
-                <td class="border-primary" style="font-size:16px">{{$alumno->name }}</td>
-                <td class="border-primary" style="font-size:16px">{{$solicitud->tipo}}</td>
-                <td class="border-primary" style="font-size:16px">
-                    <div class="alert alert-success d-flex align-items-center border-success" role="alert">
-                        <img class="mr-3" style="height: 20px" src="{{asset('images/Observacion.png')}}" alt="aceptado_observacion">
-                        Aceptada con observaciones
-                    </div>
-                </td>
-            </tr>
-            @empty
-            <tr>
-                <td colspan="6" class="text-center">No hay solicitudes aceptadas con observaciones</td>
-            </tr>
-            @endforelse
-            @endforeach
-            @endif
-
-            @if (request()->resolverSolicitud == 3)
-            @foreach ($alumnos as $alumno)
-            @forelse ($alumno->solicitudesRechazadas as $solicitud)
-            <tr>
-                <td class="border-primary" style="font-size:16px">{{$solicitud->getOriginal()['pivot_updated_at'] }}</td>
-                <td class="border-primary" style="font-size:16px">{{$solicitud->getOriginal()['pivot_id'] }}</td>
-                <td class="border-primary" style="font-size:16px">{{$alumno->rut }}</td>
-                <td class="border-primary" style="font-size:16px">{{$alumno->name }}</td>
-                <td class="border-primary" style="font-size:16px">{{$solicitud->tipo}}</td>
-                <td class="border-primary" style="font-size:16px">
-                    <div class="alert alert-danger d-flex align-items-center border-danger" role="alert">
-                        <img class="mr-3" style="height: 20px" src="{{asset('images/Rechazada.png')}}" alt="Rechazada">
-                        Rechazada
-                    </div>
-                </td>
-            </tr>
-            @empty
-            <tr>
-                <td colspan="6" class="text-center">No hay solicitudes rechazadas</td>
-            </tr>
-            @endforelse
-            @endforeach
-            @endif
-            @if (request()->resolverSolicitud == 4)
-                @forelse ($alumnos as $alumno)
-                @forelse($alumno->solicitudesAnuladas as $solicitud)
-                <tr>
-                    <td class="border-primary" style="font-size:16px">{{$solicitud->getOriginal()['pivot_updated_at'] }}</td>
-                    <td class="border-primary" style="font-size:16px">{{$solicitud->getOriginal()['pivot_id'] }}</td>
-                    <td class="border-primary" style="font-size:16px">{{$alumno->rut }}</td>
-                    <td class="border-primary" style="font-size:16px">{{$alumno->name }}</td>
-                    <td class="border-primary" style="font-size:16px">{{$solicitud->tipo}}</td>
-                    <td class="border-primary" style="font-size:16px">
-                        <div class="alert alert-secondary d-flex align-items-center border-secondary" role="alert">
-                            <img class="mr-3" style="height: 20px" src="{{asset('images/alert.png')}}" alt="Anulado">
-                            Anulada
-                        </div>
-                    </td>
-                </tr>
-                @empty
-                <tr>
-                    <td colspan="6" class="text-center">No hay solicitudes anuladas</td>
-                </tr>
-                @endforelse
-                @empty
-                @endforelse
             @endif
         </tbody>
     </table>
