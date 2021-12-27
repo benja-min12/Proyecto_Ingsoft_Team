@@ -71,13 +71,13 @@
     <table class="table table-bordered">
         <thead>
             <tr class="table-primary">
-                <th class="border-primary" style="width: 15% ; font-size:18px" scope="col">Fecha Solicitud</th>
+                <th class="border-primary" style="width: 20% ; font-size:18px" scope="col">Fecha Solicitud</th>
                 <th class="border-primary" style="width: 10% ; font-size:16px" scope="col">Numero Solicitud</th>
                 <th class="border-primary" style="width: 20% ; font-size:18px" scope="col">Tipo Solicitud</th>
                 <th class="border-primary" style="width: 10% ; font-size:18px" scope="col">Rut estudiante</th>
                 <th class="border-primary" style="width: 10% ; font-size:18px" scope="col">Nombre estudiante</th>
                 <th class="border-primary" style="width: 10% ; font-size:18px" scope="col">Correo estudiante</th>
-                <th class="border-primary" style="width: 10% ; font-size:18px" scope="col">Telefono</th>
+                <th class="border-primary" style="width: 10% ; font-size:18px" scope="col">Teléfono</th>
                 <th class="border-primary" style="width: 50% ; font-size:20px" scope="col">Ver detalles</th>
                 <th class="border-primary" style="width: 10% ; font-size:18px" scope="col">Resolver</th>
 
@@ -88,7 +88,7 @@
             @forelse ($usuarios as $usuario)
                 @forelse ($usuario->solicitudes as $solicitud )
                 <tr>
-                    <th class="border-primary" scope="row">{{ $solicitud->getOriginal()['pivot_updated_at'] }}</th>
+                    <th class="border-primary" style="font-size:20px" scope="row">{{ $solicitud->getOriginal()['pivot_updated_at'] }}</th>
                     <td class="border-primary text-center"  style="font-size:20px">{{ $solicitud->getOriginal()['pivot_id'] }}</td>
                     <td class="border-primary"  style="font-size:20px">{{$solicitud->tipo}}</td>
                     <td class="border-primary"  style="font-size:20px">{{$usuario->rut}}</td>
@@ -102,7 +102,7 @@
                                 <span class="caret"></span></button>
                                 <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
                                     <li role="presentation">NRC asignatura: {{$solicitud->getOriginal()['pivot_NRC']}}</li>
-                                    <li role="presentation">Nombre singatura: {{$solicitud->getOriginal()['pivot_nombre_asignatura']}}</li>
+                                    <li role="presentation">Nombre Asignatura: {{$solicitud->getOriginal()['pivot_nombre_asignatura']}}</li>
                                     <li role="presentation">Detalles solicitud: {{$solicitud->getOriginal()['pivot_detalles']}}</li>
                                 </ul>
                             </div>
@@ -114,7 +114,7 @@
                             <button class="btn btn-primary dropdown-toggle" style="width: 200px " type="button" id="menu1" data-toggle="dropdown">Detalles
                             <span class="caret"></span></button>
                             <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-                                <li role="presentation">Nombre asingatura: {{$solicitud->getOriginal()['pivot_nombre_asignatura']}}</li>
+                                <li role="presentation">Nombre Asignatura: {{$solicitud->getOriginal()['pivot_nombre_asignatura']}}</li>
                                 <li role="presentation">Tipo facilidad : {{$solicitud->getOriginal()['pivot_tipo_facilidad']}}</li>
                                 <li role="presentation">Nombre profesor: {{$solicitud->getOriginal()['pivot_nombre_profesor']}}</li>
                                 <li role="presentation">Archivos Adjuntos:</li>
@@ -135,9 +135,9 @@
                             <button class="btn btn-primary dropdown-toggle" style="width: 200px " type="button" id="menu1" data-toggle="dropdown">Detalles
                             <span class="caret"></span></button>
                             <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-                                <li role="presentation">Nombre asingatura: {{$solicitud->getOriginal()['pivot_nombre_asignatura']}}</li>
+                                <li role="presentation">Nombre Asignatura: {{$solicitud->getOriginal()['pivot_nombre_asignatura']}}</li>
                                 <li role="presentation">Calificacion : {{$solicitud->getOriginal()['pivot_calificacion_aprob']}}</li>
-                                <li role="presentation">Cantidad ayudantias: {{$solicitud->getOriginal()['pivot_cant_ayudantias']}}</li>
+                                <li role="presentation">Cantidad ayudantías: {{$solicitud->getOriginal()['pivot_cant_ayudantias']}}</li>
                                 <li role="presentation">Motivos: {{$solicitud->getOriginal()['pivot_detalles']}}</li>
                             </ul>
                         </div>

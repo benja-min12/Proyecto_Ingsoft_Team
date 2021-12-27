@@ -8,13 +8,9 @@ use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\DisabledUserController;
 use App\Http\Controllers\SolicitudController;
 use App\Http\Controllers\DisabledSolicitudController;
-<<<<<<< HEAD
-use App\Http\Controllers\EstadisticasController;
-=======
 use App\Http\Controllers\FiltrarController;
 use App\Http\Controllers\ResolverSolicitudController;
-
->>>>>>> d70c91ec0cb1848e62f65aaaac39d2f0b748a9cf
+use App\Http\Controllers\EstadisticasController;
 use App\Models\Solicitud;
 /*
 |--------------------------------------------------------------------------
@@ -38,11 +34,8 @@ Route::middleware(['auth'])->group(function () {
 });
 Route::resource('carrera', CarreraController::class, ['middleware' => 'auth']);
 Route::resource('solicitud', SolicitudController::class);
-<<<<<<< HEAD
 Route::resource('estadisticas', EstadisticasController::class);
-=======
 Route::resource('resolver-solicitud', ResolverSolicitudController::class);
->>>>>>> d70c91ec0cb1848e62f65aaaac39d2f0b748a9cf
 Auth::routes();
 Route::resource('usuario', UsuarioController::class,['middleware' => 'auth']);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

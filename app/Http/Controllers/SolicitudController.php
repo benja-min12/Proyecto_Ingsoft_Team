@@ -187,7 +187,7 @@ class SolicitudController extends Controller
                     return redirect('/solicitud')->with('Crear',$Mensaje);
                 }else{
                     //error
-                    $Error="No se ha adjuntado ningun archivo vuelva a intentar";
+                    $Error="No se ha adjuntado ningún archivo vuelva a intentar";
                     return redirect('/solicitud')->with('Error',$Error);
                 }
                 break;
@@ -287,8 +287,8 @@ class SolicitudController extends Controller
                     $findUser = Auth::user();
 
                     $aux=0;
-                    //archivos ya en la base de datos
-                    
+                    $datos=[];
+
                     if($request->hasFile('adjunto')){
                         foreach ($request->adjunto as $file) {
                             $name = $aux.time().'-'.$findUser->name.'.pdf';
@@ -301,13 +301,12 @@ class SolicitudController extends Controller
                         $solicitud->pivot->detalles = $request->detalle;
                         $solicitud->pivot->tipo_facilidad = $request->facilidad;
                         $solicitud->pivot->nombre_profesor = $request->profesor;
-
                         $solicitud->pivot->archivos = json_encode($datos);
                         $solicitud->pivot->save();
                     }else
 
                     {
-                        $Error="No se ha adjuntado ningun archivo vuelva a intentar";
+                        $Error="No se ha adjuntado ningún archivo vuelva a intentar";
                         return redirect('/solicitud')->with('Error',$Error);
                     }
 

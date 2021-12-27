@@ -80,7 +80,7 @@
                 <div class="card-body">
                     <h4 class="card-title text-center">Buscar estudiante</h4>
                     <div class="text-center">
-                        <img style="height: 200px" src="{{asset('images/BucarUsuario.png')}}" alt="Carreras">
+                        <img class= "mb-3" style="height: 190px" src="{{asset('images/Buscar_usuario.png')}}" alt="Carreras">
                     </div>
                     <small class="text-muted">Permite buscar un estudiante mediante su RUT.</small>
                 </div>
@@ -92,25 +92,41 @@
                 <i class="fas fa-check-double fa-10x text-center"></i>
                 <div class="card-body">
                     <h4 class="card-title text-center">Resolver solicitudes</h4>
+                    <div class="text-center">
+                        <img class= "mb-3"style="height: 190px" src="{{asset('images/Resolver.png')}}" alt="Resolver">
+                    </div>
                     <small class="text-muted">Permite visualizar todas las solicitudes recibidas con estado "Pendiente".</small>
                 </div>
                 <div class="card-footer border-primary">
-                    <a href="" class="btn btn-block btn-primary">IR</a>
+                    <a href="/resolver-solicitud" class="btn btn-block btn-primary">IR</a>
                 </div>
             </div>
 
             <div class="card border-primary">
                 <i class="fas fa-info fa-10x text-center"></i>
                 <div class="card-body">
+                    <h4 class="card-title text-center">Filtrar solicitudes</h4>
+                    <div class="text-center">
+                        <img class= "mb-3" style="height: 190px" src="{{asset('images/Filtrar1.png')}}" alt="Filtrar">
+                    </div>
+                    <small class="text-muted">Permite filtrar de dos formas las solicitudes que siguen sin resolver.</small>
+                </div>
+                <div class="card-footer">
+
+                    <a href="/Filtrar-solicitud" class="btn btn-block btn-primary">IR</a>
+                </div>
+            </div>
+            <div class="card border-primary">
+                <i class="fas fa-info fa-10x text-center"></i>
+                <div class="card-body">
                     <h4 class="card-title text-center">Estadísticas del sistema</h4>
+                    <div class="text-center">
+                        <img class= "mb-3" style="height: 180px" src="{{asset('images/Estadisticas.png')}}" alt="Estadisticas">
+                    </div>
                     <small class="text-muted">Permite visualizar mediante gráficos las distintas solicitudes del sistema.</small>
                 </div>
                 <div class="card-footer">
-<<<<<<< HEAD
                     <a href="/estadisticas" class="btn btn-block btn-primary">IR</a>
-=======
-                    <a href="/Filtrar-solicitud" class="btn btn-block btn-primary">IR</a>
->>>>>>> d70c91ec0cb1848e62f65aaaac39d2f0b748a9cf
                 </div>
             </div>
         </div>
