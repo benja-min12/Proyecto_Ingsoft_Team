@@ -11,7 +11,7 @@ class ResolucionSolicitudMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $subject = 'Resoluvcion de Solicitud';
+    public $subject = 'Resolución de Solicitud';
     public $info;
     public $observacion;
 
@@ -34,6 +34,6 @@ class ResolucionSolicitudMail extends Mailable
      */
     public function build()
     {
-        return $this->subject('prueba de correo')->view('email.solicitudResolucion');
+        return $this->subject('Resolución de Solicitud')->view('email.solicitudResolucion');
     }
 }

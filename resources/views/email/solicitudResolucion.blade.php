@@ -10,17 +10,25 @@
     @if ($info->pivot->estado == 1)
     <div class="card-header border-primary" style="height: 100px">
         <h5 class="mt-3">
-            Su solicitud de numero {{$info->pivot->id}} de tipo {{$info->tipo}} ha sido aceptada
+            <p>Estimado Alumno,</p>
+            <p>Le informamos que la solicitud enviada, de numero {{$info->pivot->id}} y de tipo {{$info->tipo}} ha sido aceptada.</p>
+            <p>Por favor no respoder a este correo.</p>
+            Atte. Jefe de la Carrera.
         </h5>
     </div>
     @endif
     @if ($info->pivot->estado == 2)
     <div class="card-header border-primary" style="height: 100px">
         <h5 class="mt-3">
-            Su solicitud de numero {{$info->pivot->id}} de tipo {{$info->tipo}} ha sido aceptada con observaciones
+            <p>Estimado Alumno,</p>
+            <p>Le informamos que la solicitud enviada, de numero {{$info->pivot->id}} y de tipo {{$info->tipo}} ha sido aceptada con observaciones.</p>
+            <p>Con la siguientes observaciones:</p>
             <div>
                 {{$observacion}}
             <div>
+            <p>Por favor no respoder a este correo.</p>
+            Atte. Jefe de la Carrera.
+
         </h5>
     </div>
     @endif
@@ -28,10 +36,14 @@
     @if ($info->pivot->estado == 3 )
     <div class="card-header border-primary" style="height: 100px">
         <h5 class="mt-3">
-            Su solicitud de numero {{$info->pivot->id}} de tipo {{$info->tipo}} ha sido rechazada
+            <p>Estimado Alumno,</p>
+            <p>Le informamos que la solicitud enviada, de numero {{$info->pivot->id}} y de tipo {{$info->tipo}} ha sido rechazada.</p>
+            <p>Con la siguientes observaciones:</p>
             <div>
                 {{$observacion}}
             <div>
+            <p>Por favor no respoder a este correo.</p>
+            Atte. Jefe de la Carrera.
         </h5>
     </div>
     @endif
