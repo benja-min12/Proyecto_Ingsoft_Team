@@ -8,9 +8,9 @@ use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\DisabledUserController;
 use App\Http\Controllers\SolicitudController;
 use App\Http\Controllers\DisabledSolicitudController;
+use App\Http\Controllers\EstadisticasController;
 use App\Http\Controllers\FiltrarController;
 use App\Http\Controllers\ResolverSolicitudController;
-use App\Http\Controllers\EstadisticasController;
 use App\Models\Solicitud;
 /*
 |--------------------------------------------------------------------------
@@ -34,8 +34,11 @@ Route::middleware(['auth'])->group(function () {
 });
 Route::resource('carrera', CarreraController::class, ['middleware' => 'auth']);
 Route::resource('solicitud', SolicitudController::class);
+
 Route::resource('estadisticas', EstadisticasController::class);
+
 Route::resource('resolver-solicitud', ResolverSolicitudController::class);
+
 Auth::routes();
 Route::resource('usuario', UsuarioController::class,['middleware' => 'auth']);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

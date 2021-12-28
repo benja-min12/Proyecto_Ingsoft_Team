@@ -59,7 +59,7 @@
                 <th class="border-primary" style="width: 25%" scope="col">Email</th>
                 <th class="border-primary" style="width: 20%" scope="col">Rol</th>
                 <th class="border-primary" style="width: 20%" scope="col">Carrera</th>
-                <th class="border-primary" style="width: 20%" scope="col" colspan="3">Accion</th>
+                <th class="border-primary" style="width: 20%" scope="col" colspan="3">Acción</th>
             </tr>
         </thead>
         <tbody>

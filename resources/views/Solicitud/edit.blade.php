@@ -47,7 +47,7 @@
                                 </div>
 
                                 <div class="form-group" id="groupTelefono" hidden>
-                                    <label class="form-control-label">TELEFONO CONTACTO</label>
+                                    <label class="form-control-label">TELÉFONO CONTACTO</label>
                                     <input id="telefono" type="text"
                                         class="form-control @error('telefono') is-invalid @enderror" name="telefono"
                                         value="{{$solicitud->getOriginal()['pivot_telefono']}}" autocomplete="telefono" autofocus>
@@ -96,7 +96,7 @@
                                 </div>
 
                                 <div class="form-group" id="groupCantidad" hidden>
-                                    <label class="form-control-label">CANTIDAD DE AYUDANTIAS REALIZADAS</label>
+                                    <label class="form-control-label">CANTIDAD DE AYUDANTÍAS REALIZADAS</label>
                                     <input id="cantidad" type="text"
                                         class="form-control @error('cantidad') is-invalid @enderror" name="cantidad"
                                         value="{{$solicitud->getOriginal()['pivot_cant_ayudantias']}}"
@@ -147,8 +147,12 @@
                                     @if ($solicitud->getOriginal()['pivot_archivos'])
                                         @foreach (json_decode($solicitud->getOriginal()['pivot_archivos']) as $file)
                                             <a href="{{asset('storage/docs/'.$file)}}">Archivo</a>
-                                            <!-- boton para eliminar el archivo -->
-                                            <a class="btn btn-danger" id="eliminar" href={{ route('eliminarArchivo', ['id' => $solicitud->getOriginal() ['pivot_id'],'idArchivo'=>$file]) }}>Eliminar</a>
+                                            <!--si hay un solo file no mostrar el boton  -->
+
+
+                                            <a class="btn btn-danger "style="width:65px;height:30px;font-size:10px" id="eliminar" href={{ route('eliminarArchivo', ['id' => $solicitud->getOriginal() ['pivot_id'],'idArchivo'=>$file]) }}>Eliminar</a>
+
+
                                         @endforeach
                                     @endif
                                 </div>
@@ -156,7 +160,6 @@
                                     <label class="form-control-label">DETALLES DE LA SOLICITUD</label>
                                     <textarea input id="detalle" type="text"
                                         class="form-control @error('detalle') is-invalid @enderror" name="detalle" >{{$solicitud->getOriginal()['pivot_detalles']}}</textarea>
-
                                     @error('detalle')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

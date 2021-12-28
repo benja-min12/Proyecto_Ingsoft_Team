@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col col-3"></div>
         <div class="col col-7">
-            <p class="text-center" style="font-size: x-large">Solicitud Nº {{$solicitud->getOriginal()['pivot_id']}} </p>
+            <p class="text-center" style="font-size: x-large">Solicitud N.º {{$solicitud->getOriginal()['pivot_id']}} </p>
             <p class="text-center" style="font-size: x-large">Tipo: {{ $solicitud->getOriginal()['tipo'] }}</p>
         </div>
     </div>
@@ -18,15 +18,15 @@
                 <div class="row">
                     <table class="table table-bordered table-sm mt-5">
                         <thead>
-                            <th id="telefono" class="table-primary border-primary" style="width: 10%">Telefono:</th>
+                            <th id="telefono" class="table-primary border-primary" style="width: 10%">Teléfono:</th>
                             <th class="table-primary border-primary" style="width: 7%">Estado:</th>
                             <th  id="NRC"class="table-primary border-primary" style="width: 5%">NRC:</th>
                             <th  id="Asignatura" class="table-primary border-primary" style="width: 10%">Asignatura:</th>
                             <th  id="calificacion"class="table-primary border-primary" style="width: 5%">calificación Aprobación:</th >
                             <th  id="nombre"class="table-primary border-primary" style="width: 10%">Nombre Profesor</th>
-                            <th  id="facilidad"class="table-primary border-primary" style="width: 10%">Facilidad Academica</th>
+                            <th  id="facilidad"class="table-primary border-primary" style="width: 10%">Facilidad Académica</th>
                             <th  id="archivos"class="table-primary border-primary" style="width: 15%">Archivos:</th>
-                            <th  id="ayudantia"class="table-primary border-primary" style="width: 5%">Cantidad ayudantias:</th>
+                            <th  id="ayudantia"class="table-primary border-primary" style="width: 5%">Cantidad ayudantías:</th>
                             <th  id="detalles"class="table-primary border-primary" style="width: 30%">Detalles:</th>
                         </thead>
                         <tbody>

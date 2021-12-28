@@ -47,11 +47,11 @@
                             </div>
                             <br>
                             <div class="form-group" id="groupTelefono" hidden>
-                                <label class="form-control-label">TELEFONO CONTACTO</label>
+                                <label class="form-control-label">TELÉFONO CONTACTO</label>
                                 <input id="telefono" type="text"
                                     class="form-control @error('telefono') is-invalid @enderror" name="telefono"
                                     value="{{ old('telefono') }}"
-                                    placeholder="Ej. Se debe ingresar un numero de telefono de 8 digitos ej:12345678"
+                                    placeholder="Ej. Se debe ingresar un numero de telefono de 8 dígitos ej:12345678"
                                     autocomplete="telefono" autofocus>
 
                                 @error('telefono')
@@ -98,7 +98,7 @@
                             </div>
 
                             <div class="form-group" id="groupCantidad" hidden>
-                                <label class="form-control-label">CANTIDAD DE AYUDANTIAS REALIZADAS</label>
+                                <label class="form-control-label">CANTIDAD DE AYUDANTÍAS REALIZADAS</label>
                                 <input id="cantidad" type="text"
                                     class="form-control @error('cantidad') is-invalid @enderror" name="cantidad"
                                     value="{{ old('cantidad') }}"

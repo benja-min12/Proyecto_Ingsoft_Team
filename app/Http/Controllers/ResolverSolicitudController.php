@@ -43,30 +43,7 @@ class ResolverSolicitudController extends Controller
         }
         return view('resolver-solicitud.index')->with('alumnos', $user)->with('cantSolicitudes', $cantSolicitudes);
     }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function indexResueltas(Request $request)
-    {
-        $jefeCarrera = Auth::user()->carrera_id;
 
-        if($request == 1){
-            $user= User::where('carrera_id', $jefeCarrera)->where('id', '!=', Auth::user()->id)->with('solicitudesAceptadas')->get()->simplePaginate(1);;
-            return view('resolver-solicitud.index')->with('alumnos', $user);
-        }
-        elseif($request == 2){
-            $user= User::where('carrera_id', $jefeCarrera)->where('id', '!=', Auth::user()->id)->with('solicitudesRechazadas')->get()->simplePaginate(1);;
-            return view('resolver-solicitud.index')->with('alumnos', $user);
-
-        }
-        else{
-            $user= User::where('carrera_id', $jefeCarrera)->where('id', '!=', Auth::user()->id)->with('solicitudesAceptadasObservaciones')->get()->simplePaginate(1);;
-            return view('resolver-solicitud.index')->with('alumnos', $user);
-        }
-
-    }
         /**
      * Show the form for editing the specified resource.
      *
@@ -95,16 +72,24 @@ class ResolverSolicitudController extends Controller
     {
         $jefeCarrera = Auth::user()->carrera_id;
         $user= User::where('carrera_id', $jefeCarrera)->where('id', '!=', Auth::user()->id)->with('solicitudesActivas')->get();
-        //dd($request->estado);
-        //dd($request->observacionSolicitud);
 
+        //dd($request->observacionSolicitud);
+        if($request->resolverSolicitud == '2' || $request->resolverSolicitud == '3'){
+            $request->validate([
+                'observacionSolicitud' => ['required'],
+            ]);
+        }
         foreach ($user as $usuario){
             foreach ($usuario->solicitudesActivas as $solicitud){
                 if ($solicitud->getOriginal()['pivot_id'] == $request->id_solicitud) {
                     $solicitud->pivot->estado = $request->resolverSolicitud;
                     $solicitud->pivot->save();
-                    $observacion = $request->observacionSolicitud;
-
+                    if($request->resolverSolicitud == '2' || $request->resolverSolicitud == '3'){
+                        $observacion = $request->observacionSolicitud;
+                    }
+                    else{
+                        $observacion = null;
+                    }
                     if ($request->estado ==1){
                         Mail::to($usuario->email)->send(new ResolucionSolicitudMail ($observacion,$solicitud));
                     }
@@ -117,7 +102,6 @@ class ResolverSolicitudController extends Controller
                 }
             }
         }
-
-        return redirect('/resolver-solicitud')->with('success','Solicitud editada correctamente');
+        return redirect('/resolver-solicitud')->with('Resuelta','Solicitud resuelta correctamente');
     }
 }

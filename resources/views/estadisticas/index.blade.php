@@ -32,7 +32,7 @@
         </form>
     </div>
     <h1 style="font-size: 50px" class="text-center">Estadísticas del sistema</h1>
-    <div><h3 class="text-center">Cantidad se solicitudes recibidas: {{$cantEnRango}}</h3></div>
+    <div><h3 class="text-center">Cantidad de solicitudes recibidas: {{$cantEnRango}}</h3></div>
     <div class="container">
         <div class="row">
             <div class="col">

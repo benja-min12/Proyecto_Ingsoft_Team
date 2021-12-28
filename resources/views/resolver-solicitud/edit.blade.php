@@ -31,23 +31,23 @@
                                 @csrf
                                 @method('PUT')
                                 <div class="form-group">
-                                    <label class="form-control-label">Fecha de solicitud</label>
+                                    <label class="form-control-label">FECHA DE SOLICITUD</label>
                                     <input value={{$solicitud->getOriginal()['pivot_updated_at']}} id="fecha_solicitud" type="text" readonly class="form-control" name="fecha_solicitud" required>
                                 </div>
                                 <div class="form-group">
-                                    <label class="form-control-label">Numero de solicitud</label>
+                                    <label class="form-control-label">NÚMERO DE LA SOLICITUD</label>
                                     <input value={{$solicitud->getOriginal()['pivot_id']}} id="id_solicitud" type="text" readonly class="form-control" name="id_solicitud" required>
                                 </div>
                                 <div class="form-group">
-                                    <label class="form-control-label">Rut del estudiante</label>
+                                    <label class="form-control-label">RUT DEL ESTUDIANTE</label>
                                     <input value={{$alumno->rut}} id="rut" type="text" readonly class="form-control" name="rut" required>
                                 </div>
                                 <div class="form-group">
-                                    <label class="form-control-label">Nombre del estudiante</label>
+                                    <label class="form-control-label">NOMBRE DEL ESTUDIANTE</label>
                                     <input value={{$alumno->name}} id="nombre" type="text" readonly class="form-control" name="nombre" required>
                                 </div>
                                 <div class="form-group">
-                                    <label class="form-control-label">Correo del estudiante</label>
+                                    <label class="form-control-label">CORREO DEL ESTUDIANTE</label>
                                     <input value={{$alumno->email}} id="nombre" type="text" readonly class="form-control" name="nombre" required>
                                 </div>
 
@@ -74,7 +74,7 @@
                                 </div>
 
                                 <div class="form-group" id="groupTelefono" hidden>
-                                    <label class="form-control-label">TELEFONO CONTACTO</label>
+                                    <label class="form-control-label">TELÉFONO CONTACTO</label>
                                     <input id="telefono" type="text" readonly
                                         class="form-control @error('telefono') is-invalid @enderror" name="telefono"
                                         value="{{$solicitud->getOriginal()['pivot_telefono']}}" autocomplete="telefono" autofocus>
@@ -123,7 +123,7 @@
                                 </div>
 
                                 <div class="form-group" id="groupCantidad" hidden>
-                                    <label class="form-control-label">CANTIDAD DE AYUDANTIAS REALIZADAS</label>
+                                    <label class="form-control-label">CANTIDAD DE AYUDANTÍAS REALIZADAS</label>
                                     <input id="cantidad" type="text"
                                         readonly class="form-control @error('cantidad') is-invalid @enderror" name="cantidad"
                                         value="{{$solicitud->getOriginal()['pivot_cant_ayudantias']}}"
@@ -178,7 +178,7 @@
                                     @enderror
                                 </div>
                                 <div class="form-group">
-                                    <label class="form-control-label text-center"  >Resolver Solicitud</label>
+                                    <label class="form-control-label text-center"  >RESOLVER SOLICITUD</label>
                                     <select class="form-control" name="resolverSolicitud" id="resolverSolicitud">
                                         <option value={{$solicitud->getOriginal()['pivot_estado']}}{{$solicitud->getOriginal()['pivot_estado']}}>Seleccione..</option>
                                         <option value="1">Aceptar solicitud</option>
@@ -186,12 +186,12 @@
                                         <option value="3">Rechazar la solicitud</option>
                                     </select>
                                     <div class="form-group" id="groupObservacionSolicitud" hidden>
-                                        <label id="labelobservacionSolicitud" class="form-control-label">OBSERVACION DE SOLICITUD</label>
+                                        <label id="labelobservacionSolicitud" class="form-control-label">OBSERVACIÓN DE SOLICITUD</label>
                                         <textarea id="observacionSolicitud" type="text"
                                             class="form-control @error('observacionSolicitud') is-invalid @enderror" name="observacionSolicitud"
                                             value="{{ old('observacionSolicitud') }}" autocomplete="observacionSolicitud" autofocus></textarea>
 
-                                        @error('detalleResolver')
+                                        @error('observacionSolicitud')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
@@ -199,7 +199,7 @@
                                     </div>
                                     <div class="col-lg-12 py-3" id="groupButton" hidden>
                                         <div class="col-lg-12 text-center">
-                                            <button type="submit" class="btn btn-primary">{{ __('Resolver') }}</button>
+                                            <button id="button" class="btn btn-primary">{{ __('Resolver') }}</button>
                                         </div>
                                     </div>
                                 </div>
@@ -313,12 +313,30 @@
                             inputAdjunto.hidden = true;
                             break;
                     }
+                button.addEventListener('click', function(e){
+                e.preventDefault();
+                Swal.fire({
+                    title: '¿Estas seguro de resolver la solicitud?',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#48A24C',
+                    cancelButtonColor: '#C4312C',
+                    confirmButtonText: 'Si, resolver',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        form.submit();
+                        sessionStorage.setItem('selectAccion', selectAccion.value);
+                    }
+                })
+                });
             </script>
 
             <script type="text/javascript">
+
                 const selectAccion = document.getElementById('resolverSolicitud');
                 const Observaciones = document.getElementById('groupObservacionSolicitud');
                 const button = document.getElementById('groupButton');
+
                 selectAccion.addEventListener('change', () => {
                     switch (selectAccion.value) {
                         case "1":
@@ -339,8 +357,24 @@
                             break;
                     }
                 });
-
-
+                switch (sessionStorage.getItem('selectAccion')) {
+                        case "1":
+                            Observaciones.hidden = true;
+                            button.hidden = false;
+                            break;
+                        case "2":
+                            Observaciones.hidden = false;
+                            button.hidden = false;
+                            break;
+                        case "3":
+                            Observaciones.hidden = false;
+                            button.hidden = false;
+                            break;
+                        default:
+                            Observaciones.hidden = true;
+                            button.hidden = true;
+                            break;
+                    }
             </script>
 @endsection
 

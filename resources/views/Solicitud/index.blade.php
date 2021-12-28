@@ -24,7 +24,18 @@
         })
     </script>
 @endif
+@if (session('edit'))
+    <script>
+        Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: '{{ session('edit') }}',
+        showConfirmButton: false,
+        timer: 1500
+        })
+    </script>
 
+@endif
 <div class="container">
 
     <div class="row mb-4">
@@ -43,7 +54,7 @@
         <thead>
             <tr class="table-primary">
                 <th class="border-primary" style="width: 15% ; font-size:18px" scope="col">Fecha Solicitud</th>
-                <th class="border-primary" style="width: 10% ; font-size:16px" scope="col">Numero Solicitud</th>
+                <th class="border-primary" style="width: 10% ; font-size:16px" scope="col">Número Solicitud</th>
                 <th class="border-primary" style="width: 20% ; font-size:18px" scope="col">Tipo Solicitud</th>
                 <th class="border-primary" style="width: 10% ; font-size:18px" scope="col">Estado</th>
                 <th class="border-primary" style="width: 10% ; font-size:18px" scope="col">Editar</th>
@@ -132,16 +143,16 @@
         e.preventDefault();
         Swal.fire({
             title: '¿Esta seguro de anular la solicitud?',
-            text: "No podra revertir esta accion!",
+            text: "!No podrá revertir esta acción!",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#48A24C',
             cancelButtonColor: '#C4312C',
-            confirmButtonText: 'Si, anular!'
+            confirmButtonText: 'Si, anular'
         }).then((result) => {
             if (result.value) {
                 Swal.fire(
-                    'Anulado!',
+                    'Anulado',
                     'La solicitud ha sido anulada.',
                     'success'
                 )

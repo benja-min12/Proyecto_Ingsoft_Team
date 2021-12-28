@@ -235,12 +235,10 @@ class SolicitudController extends Controller
     public function update(Request $request,Solicitud $solicitud)
     {
         $solicitudesAlumno = Auth::user()->solicitudes;
-        foreach ($solicitudesAlumno as $solicitud){
-
-            if ($solicitud->getOriginal()['pivot_id'] == $request->id_solicitud){
+        foreach ($solicitudesAlumno as $solicitud) {
+            if ($solicitud->getOriginal()['pivot_id'] == $request->id_solicitud) {
                 //echo($request->id);
-                if($request->id == '1' or $request->id == '2' or $request->id == '3' or $request->id == '4'){
-
+                if ($request->id == '1' or $request->id == '2' or $request->id == '3' or $request->id == '4') {
                     $request->validate([
                         'telefono' => ['required','regex:/[0-9]*/','min:8','max:8'],
                         'nrc' => ['required','regex:/[0-9]/','regex:/(^[1-9])/'],
@@ -253,10 +251,8 @@ class SolicitudController extends Controller
                     $solicitud->pivot->nombre_asignatura = $request->nombre;
                     $solicitud->pivot->detalles = $request->detalle;
                     $solicitud->pivot->save();
-
                 }
-                if($request->id == '5'){
-
+                if ($request->id == '5') {
                     $request->validate([
                         'telefono' => ['required','regex:/[0-9]*/','min:8','max:8'],
                         'nombre' => ['required','regex:/[a-zA-Z]/'],
@@ -271,10 +267,8 @@ class SolicitudController extends Controller
                     $solicitud->pivot->calificacion_aprob = $request->calificacion;
                     $solicitud->pivot->cant_ayudantias= $request->cantidad;
                     $solicitud->pivot->save();
-
                 }
-                if($request->id == '6'){
-
+                if ($request->id == '6') {
                     $request->validate([
                         'telefono' => ['regex:/[0-9]*/','required','min:8','max:8'],
                         'nombre' => ['required','regex:/[a-zA-Z]*/'],
@@ -287,14 +281,22 @@ class SolicitudController extends Controller
                     $findUser = Auth::user();
 
                     $aux=0;
-                    $datos=[];
 
-                    if($request->hasFile('adjunto')){
+                    $datos=[];
+                    foreach (json_decode($solicitud->getOriginal()['pivot_archivos']) as $file) {
+                        $datos[] = $file;
+                        $aux++;
+                    }
+                    if ($request->hasFile('adjunto')) {
                         foreach ($request->adjunto as $file) {
                             $name = $aux.time().'-'.$findUser->name.'.pdf';
                             $file->move(public_path('\storage\docs'), $name);
                             $datos[] = $name;
                             $aux++;
+                            if ($aux > 3) {
+                                $Error="No se pueden adjuntar más de 3 archivos por favor elimine uno para adjuntar otro";
+                                return redirect('/solicitud')->with('Error', $Error);
+                            }
                         }
                         $solicitud->pivot->telefono = $request->telefono;
                         $solicitud->pivot->nombre_asignatura = $request->nombre;
@@ -303,20 +305,11 @@ class SolicitudController extends Controller
                         $solicitud->pivot->nombre_profesor = $request->profesor;
                         $solicitud->pivot->archivos = json_encode($datos);
                         $solicitud->pivot->save();
-                    }else
-
-                    {
-                        $Error="No se ha adjuntado ningún archivo vuelva a intentar";
-                        return redirect('/solicitud')->with('Error',$Error);
                     }
-
                 }
-
             }
-
         }
-
-        return redirect('/solicitud')->with('success','Solicitud editada correctamente');
+        return redirect('/solicitud')->with('edit','Solicitud editada correctamente');
     }
 
     /**

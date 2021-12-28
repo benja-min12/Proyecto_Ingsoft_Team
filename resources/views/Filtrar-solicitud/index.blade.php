@@ -53,18 +53,19 @@
                 </div>
             </div>
         </div>
-        <div class="px-4 ml-5 align-items-center">
+        <div>
+            <div class="col mb-3">
                 <div class="card border-primary" style='width:60%'>
                     <div class="card-body">
                         <form method="GET" action="{{ route('Filtrar-solicitud.index') }}">
-                            <label for="form-control-label" >Numero Solicitud</label>
+                            <label for="form-control-label" >Número Solicitud</label>
                             <input class="border-primary mr-sm-2 mb-2" type="text" name="searchID" id="searchID"
                             placeholder="Buscar por numero">
                             <button class="btn btn-primary mb-2">Buscar</button>
                         </form>
-
                     </div>
                 </div>
+            </div>
         </div>
     </div>
 
@@ -72,7 +73,7 @@
         <thead>
             <tr class="table-primary">
                 <th class="border-primary" style="width: 20% ; font-size:18px" scope="col">Fecha Solicitud</th>
-                <th class="border-primary" style="width: 10% ; font-size:16px" scope="col">Numero Solicitud</th>
+                <th class="border-primary" style="width: 10% ; font-size:16px" scope="col">Número Solicitud</th>
                 <th class="border-primary" style="width: 20% ; font-size:18px" scope="col">Tipo Solicitud</th>
                 <th class="border-primary" style="width: 10% ; font-size:18px" scope="col">Rut estudiante</th>
                 <th class="border-primary" style="width: 10% ; font-size:18px" scope="col">Nombre estudiante</th>
@@ -136,7 +137,7 @@
                             <span class="caret"></span></button>
                             <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
                                 <li role="presentation">Nombre Asignatura: {{$solicitud->getOriginal()['pivot_nombre_asignatura']}}</li>
-                                <li role="presentation">Calificacion : {{$solicitud->getOriginal()['pivot_calificacion_aprob']}}</li>
+                                <li role="presentation">Calificación : {{$solicitud->getOriginal()['pivot_calificacion_aprob']}}</li>
                                 <li role="presentation">Cantidad ayudantías: {{$solicitud->getOriginal()['pivot_cant_ayudantias']}}</li>
                                 <li role="presentation">Motivos: {{$solicitud->getOriginal()['pivot_detalles']}}</li>
                             </ul>

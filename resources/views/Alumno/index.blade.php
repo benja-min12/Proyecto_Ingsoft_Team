@@ -60,7 +60,7 @@
                                         <div class="login-title text-center"><h3>SOLICITUDES</h3> </div>
                                         <table class="table table-bordered table-hover table-sm">
                                             <thead class="table-primary">
-                                                <th class="border-primary" scope="col">Numero</th>
+                                                <th class="border-primary" scope="col">Número</th>
                                                 <th class="border-primary" scope="col">Fecha</th>
                                                 <th class="border-primary" scope="col">Tipo</th>
                                                 <th class="border-primary" scope="col">Ver</th>

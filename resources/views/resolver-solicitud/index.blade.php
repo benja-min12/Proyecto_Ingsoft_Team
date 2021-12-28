@@ -1,6 +1,17 @@
 @extends('layouts.app')
 
 @section('content')
+@if (session('Resuelta'))
+    <script>
+        Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: '{{session('Resuelta')}}',
+        showConfirmButton: false,
+        timer: 1500
+        })
+    </script>
+@endif
 <div class="container">
 
     <div class="row mb-4">
@@ -29,11 +40,11 @@
         <thead>
             <tr class="table-primary">
                 <th class="border-primary" style="width: 15% ; font-size:18px" scope="col">Fecha Solicitud</th>
-                <th class="border-primary" style="width: 10% ; font-size:16px" scope="col">Numero Solicitud</th>
+                <th class="border-primary" style="width: 10% ; font-size:16px" scope="col">Número Solicitud</th>
                 <th class="border-primary" style="width: 10% ; font-size:18px" scope="col">Rut Estudiante</th>
                 <th class="border-primary" style="width: 10% ; font-size:18px" scope="col">Nombre Estudiante</th>
                 <th class="border-primary" style="width: 10% ; font-size:18px" scope="col">Tipo Solicitud</th>
-                <th class="border-primary" style="width: 10% ; font-size:18px" scope="col">Ver</th>
+                <th id="ver" class="border-primary" style="width: 10% ; font-size:18px" scope="col">Resolver</th>
             </tr>
         </thead>
         <tbody>
@@ -54,21 +65,37 @@
                             <img class="mr-3" style="height: 20px" src="{{asset('images/aceptar.png')}}" alt="aceptado">
                             Aceptada
                         </div>
+                        <script>
+                            const element = document.getElementById('ver');
+                            element.innerHTML = 'Estado';
+                        </script>
                 @elseif (request()->resolverSolicitud == 2)
                         <div class="alert alert-success d-flex align-items-center border-success" role="alert">
                             <img class="mr-3" style="height: 20px" src="{{asset('images/Observacion.png')}}" alt="aceptado_observacion">
                             Aceptada con observaciones
                         </div>
+                        <script>
+                            const element = document.getElementById('ver');
+                            element.innerHTML = 'Estado';
+                        </script>
                 @elseif (request()->resolverSolicitud == 3)
                         <div class="alert alert-danger d-flex align-items-center border-danger" role="alert">
                             <img class="mr-3" style="height: 20px" src="{{asset('images/Rechazada.png')}}" alt="rechazado">
                             Rechazada
                         </div>
+                        <script>
+                            const element = document.getElementById('ver');
+                            element.innerHTML = 'Estado';
+                        </script>
                 @elseif (request()->resolverSolicitud == 4)
                         <div class="alert alert-danger d-flex align-items-center border-danger" role="alert">
                             <img class="mr-3" style="height: 20px" src="{{asset('images/alert.png')}}" alt="anulado">
                             Anulada
                         </div>
+                        <script>
+                            const element = document.getElementById('ver');
+                            element.innerHTML = 'Estado';
+                        </script>
                 @endif
             </tr>
             @empty

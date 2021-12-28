@@ -7,7 +7,7 @@
         Swal.fire({
         position: 'center',
         icon: 'success',
-        title: 'Contraseña actualizada con exito',
+        title: 'Contraseña actualizada con éxito',
         showConfirmButton: false,
         timer: 1500
         })
